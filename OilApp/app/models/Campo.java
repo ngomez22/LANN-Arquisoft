@@ -15,10 +15,18 @@ public class Campo extends Model{
 
     private String region;
 
-    private String tipoSensor;
+    private int cantidadBarriles;
 
-    public Campo(String regionN){
+    private int consumoEnergia;
+
+    private Usuario jefeDeCampo;
+
+
+    public Campo(String regionN, Usuario jefe){
         region = regionN;
+        cantidadBarriles = 0;
+        consumoEnergia = 0;
+        jefeDeCampo = jefe;
     }
 
     public String getRegion(){
@@ -27,5 +35,30 @@ public class Campo extends Model{
 
     public void setRegion(String regionN){
         region=regionN;
+    }
+
+    public int getCaudal(){
+        return cantidadBarriles;
+    }
+
+    public void setCantidadBarriles(int caudal)
+    {
+        cantidadBarriles = caudal;
+    }
+
+    public int getConsumoEnergia(){
+        return  consumoEnergia;
+    }
+
+    public void setConsumoEnergia(int consumo){
+        consumoEnergia = consumo;
+    }
+
+    public Usuario getJefeDeCampo(){
+        return jefeDeCampo;
+    }
+
+    public void setJefeDeCampo(Usuario jefe){
+        jefeDeCampo=jefe;
     }
 }
