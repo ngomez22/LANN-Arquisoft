@@ -1,6 +1,6 @@
 # LANN-Arquisoft
 
-Integrantes:
+##Integrantes:
  - Laura Castro
  - Nicolás Gómez G.
  - Andrés Sandoval
