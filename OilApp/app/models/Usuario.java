@@ -5,6 +5,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+/**
+ * Nicolás Gómez
+ */
 @Entity
 @Table(name = "usuarios")
 public class Usuario {
