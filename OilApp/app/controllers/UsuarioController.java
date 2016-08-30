@@ -28,8 +28,8 @@ public class UsuarioController extends Controller {
                         }
                         ,jdbcDispatcher)
                 .thenApply(
-                        usuarios1 -> {
-                            return ok(toJson(usuarios1));
+                        usuarios -> {
+                            return ok(toJson(usuarios));
                         }
                 );
     }
