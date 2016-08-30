@@ -1,7 +1,12 @@
 package models;
 
-/**
- * Created by l.castro12 on 29/08/2016.
- */
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+
+@Entity
 public class Sensor {
+    @Id
+    @GeneratedValue
+    private Long id;
 }
