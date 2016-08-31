@@ -2,26 +2,67 @@ package models;
 
 import com.avaje.ebean.Model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
-@Entity
+/**
+ * Nicolás Gómez
+ */
 public class Sensor extends Model{
+
     @Id
-    @GeneratedValue
     private Long id;
-    private String tipoSensor;
 
-    public Sensor(String tipo){
-        tipoSensor = tipo;
+    private Campo campo;
+
+    private String tipo;
+
+    public  Sensor() {
+        id = null;
+        campo = null;
+        tipo = null;
     }
 
-    public String getTipo(){
-        return tipoSensor;
+    public Sensor(Long id) {
+        this();
+        this.id = id;
     }
 
-    public void setTipo(String tipo){
-        tipoSensor=tipo;
+    public Sensor(Long id, Campo campo, String tipo) {
+        this.id = id;
+        this.campo = campo;
+        this.tipo = tipo;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public Campo getCampo() {
+        return campo;
+    }
+
+    public void setCampo(Campo campo) {
+        this.campo = campo;
+    }
+
+    public String getTipo() {
+        return tipo;
+    }
+
+    public void setTipo(String tipo) {
+        this.tipo = tipo;
+    }
+
+    @Override
+    public String toString() {
+        return "Sensor{" +
+                "id=" + id +
+                ", campo=" + campo +
+                ", tipo='" + tipo + '\'' +
+                '}';
     }
 }
