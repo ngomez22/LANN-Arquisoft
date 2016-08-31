@@ -122,15 +122,16 @@ public class Pozo extends Model{
         }
     }
 
-    public String generarReporte()
+    public boolean generarReporte()
     {
-        if(this.estado!=Pozo.ENPRODUCCION)
+        boolean puede=false;
+        if(this.estado==Pozo.ENPRODUCCION)
         {
-            return null;        }
-        else
-        {
-            return "";
+            return puede;
         }
+
+            return puede;
+
     }
 
     @Override
