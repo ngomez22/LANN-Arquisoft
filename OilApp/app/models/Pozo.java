@@ -8,6 +8,9 @@ import javax.persistence.*;
 import models.*;
 @Entity
 public class Pozo extends Model{
+
+    public static Finder<Long,Pozo> FINDER = new Finder<>(Pozo.class);
+
     @Id
     @GeneratedValue
     private Long id;
@@ -103,6 +106,20 @@ public class Pozo extends Model{
     {
         this.estado = Pozo.CLAUSURADO;
     }
+
+    public void detenerPozoEmergencia()
+    {
+        this.setEstado(Pozo.PARADO);
+    }
+
+    public void reabrirPozo()
+    {
+        if(this.estado==Pozo.PARADO)
+        {
+            this.setEstado(Pozo.ENPRODUCCION);
+        }
+    }
+
     public String generarReporte()
     {
         if(this.estado!=Pozo.ENPRODUCCION)
@@ -112,7 +129,6 @@ public class Pozo extends Model{
         {
             return "";
         }
-
     }
 
     @Override
@@ -123,7 +139,8 @@ public class Pozo extends Model{
                 "sensores[sensorEmergencia:"+sensorEmergencia.toString()+", " +
                 "sensorEnergia: "+sensorEnergia.toString()+", " +
                 "sensorTemperatura:"+ sensorTemperatura.toString()+", " +
-                "sensorCaudal:" +sensorCaudal.toString()+"}";
+                "sensorCaudal:" +sensorCaudal.toString()+", " +
+                "campo:"+campo.toString()+"}";
     }
 
 
