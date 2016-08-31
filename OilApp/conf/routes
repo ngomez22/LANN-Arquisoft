@@ -15,3 +15,10 @@ GET     /assets/*file               controllers.Assets.versioned(path="/public",
 # Usuario routes
 GET     /usuarios                   controllers.UsuarioController.getUsuarios
 POST    /usuario                    controllers.UsuarioController.createUsuario
+
+
+#Pozo routes
+GET     /pozos                      controllers.PozoController.getPozos
+POST    /pozo                       controllers.PozoController.createPozo
+DELETE  /pozo                       controllers.PozoController.deletePozo
+PUT     /pozo                       controllers.PozoController.updatePozo
