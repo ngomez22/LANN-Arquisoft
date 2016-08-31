@@ -55,7 +55,7 @@ public class PozoController extends Controller{
         return CompletableFuture.supplyAsync(
                 ()->{
                     Pozo pozo1 = Pozo.FINDER.byId(idPozo);
-                   pozo1.clausurarPozo();
+                    pozo1.clausurarPozo();
                     pozo1.save();
                     return pozo1;
                 }
