@@ -11,7 +11,7 @@ import javax.persistence.*;
 @Table(name = "usuarios")
 public class Usuario extends Model{
 
-    public static Finder<Long,Usuario> FINDER = new Finder<>(Usuario.class);
+    public static Model.Finder<Long,Usuario> FINDER = new Model.Finder<>(Usuario.class);
 
     @Id
     @GeneratedValue(strategy= GenerationType.SEQUENCE,generator = "usuariosId")
