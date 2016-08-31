@@ -12,13 +12,13 @@ public class Sensor extends Model{
     @Id
     private Long id;
 
-    private Campo campo;
+    private Pozo pozo;
 
     private String tipo;
 
     public  Sensor() {
         id = null;
-        campo = null;
+        pozo = null;
         tipo = null;
     }
 
@@ -27,9 +27,9 @@ public class Sensor extends Model{
         this.id = id;
     }
 
-    public Sensor(Long id, Campo campo, String tipo) {
+    public Sensor(Long id, Pozo pozo, String tipo) {
         this.id = id;
-        this.campo = campo;
+        this.pozo = pozo;
         this.tipo = tipo;
     }
 
@@ -41,12 +41,12 @@ public class Sensor extends Model{
         this.id = id;
     }
 
-    public Campo getCampo() {
-        return campo;
+    public Pozo getPozo() {
+        return pozo;
     }
 
-    public void setCampo(Campo campo) {
-        this.campo = campo;
+    public void setPozo(Pozo pozo) {
+        this.pozo = pozo;
     }
 
     public String getTipo() {
@@ -61,7 +61,7 @@ public class Sensor extends Model{
     public String toString() {
         return "Sensor{" +
                 "id=" + id +
-                ", campo=" + campo +
+                ", pozo=" + pozo.toString() +
                 ", tipo='" + tipo + '\'' +
                 '}';
     }
