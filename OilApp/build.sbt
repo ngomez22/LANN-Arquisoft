@@ -1,4 +1,4 @@
-name := """OilCol-LANN"""
+name := """OilApp"""
 
 version := "1.0-SNAPSHOT"
 
@@ -7,6 +7,7 @@ lazy val root = (project in file(".")).enablePlugins(PlayJava, PlayEbean, Launch
 scalaVersion := "2.11.7"
 
 libraryDependencies ++= Seq(
+  evolutions,
   javaJdbc,
   cache,
   javaWs,
@@ -14,4 +15,3 @@ libraryDependencies ++= Seq(
 )
 
 
-fork in run := true
