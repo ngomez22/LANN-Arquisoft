@@ -8,13 +8,13 @@ import javax.persistence.*;
  * Nicolás Gómez
  */
 @Entity
-//@Table(name = "usuarios")
+@Table(name = "usuarios")
 public class Usuario extends Model{
 
     public static Finder<Long,Usuario> FINDER = new Finder<>(Usuario.class);
 
     @Id
-    @GeneratedValue//(strategy= GenerationType.SEQUENCE,generator = "usuariosId")
+    @GeneratedValue(strategy= GenerationType.SEQUENCE,generator = "usuariosId")
     private Long id;
 
     private String nombre;
