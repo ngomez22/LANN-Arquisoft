@@ -2,10 +2,7 @@ package models;
 
 import com.avaje.ebean.Model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.util.Date;
 
 /**
@@ -16,6 +13,9 @@ import java.util.Date;
 public class MensajeEnergia extends Model {
 
     public static Finder<Long,MensajeEnergia> FINDER = new Finder<>(MensajeEnergia.class);
+
+    @ManyToOne
+    private Pozo pozo;
 
     @Id
     @GeneratedValue

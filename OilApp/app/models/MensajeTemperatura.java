@@ -2,10 +2,7 @@ package models;
 
 import com.avaje.ebean.Model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.util.Date;
 
 /**
@@ -18,9 +15,13 @@ public class MensajeTemperatura extends Model{
 
     public static Model.Finder<Long,MensajeTemperatura> FINDER = new Model.Finder<>(MensajeTemperatura.class);
 
+
     @Id
     @GeneratedValue
     private Long id;
+
+    @ManyToOne
+    private Pozo pozo;
 
     //TODO: Relacion sensor-mensaje
     private Sensor sensor;

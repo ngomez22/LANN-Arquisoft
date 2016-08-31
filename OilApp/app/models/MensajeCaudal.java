@@ -18,6 +18,9 @@ public class MensajeCaudal extends Model {
     @GeneratedValue
     private Long id;
 
+    @ManyToOne
+    private Pozo pozo;
+
     //TODO: Relacion sensor-mensaje
     private Sensor sensor;
 

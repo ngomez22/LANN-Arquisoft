@@ -2,10 +2,7 @@ package models;
 
 import com.avaje.ebean.Model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.util.Date;
 
 /**
@@ -24,6 +21,9 @@ public class MensajeEmergencia extends Model {
     private Sensor sensor;
 
     private Date fechaEnvio;
+
+    @ManyToOne
+    private Pozo pozo;
 
     //TODO: Relacion sensor-mensaje
     private String emergencia;

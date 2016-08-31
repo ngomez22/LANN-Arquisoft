@@ -4,6 +4,8 @@ package models;
 import com.avaje.ebean.Model;
 
 import javax.persistence.*;
+import java.util.List;
+
 @Entity
 @Table(name="pozos")
 public class Pozo extends Model{
@@ -14,17 +16,17 @@ public class Pozo extends Model{
     @GeneratedValue
     private Long id;
 
-    @OneToOne
-    private Sensor sensorCaudal;
+    @OneToMany(mappedBy ="pozo")
+    private List<MensajeEmergencia> sensorEmergencia;
 
-    @OneToOne
-    private Sensor sensorEnergia;
+    @OneToMany(mappedBy ="pozo")
+    private List<MensajeCaudal> sensorCaudal;
 
-    @OneToOne
-    private Sensor sensorTemperatura;
+    @OneToMany(mappedBy ="pozo")
+    private List<MensajeEnergia> sensorEnergia;
 
-    @OneToOne
-    private Sensor sensorEmergencia;
+    @OneToMany(mappedBy ="pozo")
+    private List<MensajeTemperatura> sensorTemperatura;
 
     private String estado;
 
@@ -36,14 +38,15 @@ public class Pozo extends Model{
     private static final String PARADO ="Parado";
     private static final String ABIERTO ="Abierto";
 
-    public Pozo(Sensor sensorCaudal, Sensor sensorEnergia, Sensor sensorTemperatura, Sensor sensorEmergencia, String estado, Campo campo) {
+    public Pozo(List<MensajeEmergencia> sensorEmergencia, List<MensajeCaudal> sensorCaudal, List<MensajeEnergia> sensorEnergia, List<MensajeTemperatura> sensorTemperatura, String estado, Campo campo) {
+        this.sensorEmergencia = sensorEmergencia;
         this.sensorCaudal = sensorCaudal;
         this.sensorEnergia = sensorEnergia;
         this.sensorTemperatura = sensorTemperatura;
-        this.sensorEmergencia = sensorEmergencia;
         this.estado = estado;
         this.campo = campo;
     }
+
 
     public Long getId() {
         return id;
@@ -53,36 +56,36 @@ public class Pozo extends Model{
         this.id = id;
     }
 
-    public Sensor getSensorCaudal() {
-        return sensorCaudal;
-    }
-
-    public void setSensorCaudal(Sensor sensorCaudal) {
-        this.sensorCaudal = sensorCaudal;
-    }
-
-    public Sensor getSensorEnergia() {
-        return sensorEnergia;
-    }
-
-    public void setSensorEnergia(Sensor sensorEnergia) {
-        this.sensorEnergia = sensorEnergia;
-    }
-
-    public Sensor getSensorTemperatura() {
-        return sensorTemperatura;
-    }
-
-    public void setSensorTemperatura(Sensor sensorTemperatura) {
-        this.sensorTemperatura = sensorTemperatura;
-    }
-
-    public Sensor getSensorEmergencia() {
+    public List<MensajeEmergencia> getSensorEmergencia() {
         return sensorEmergencia;
     }
 
-    public void setSensorEmergencia(Sensor sensorEmergencia) {
+    public void setSensorEmergencia(List<MensajeEmergencia> sensorEmergencia) {
         this.sensorEmergencia = sensorEmergencia;
+    }
+
+    public List<MensajeCaudal> getSensorCaudal() {
+        return sensorCaudal;
+    }
+
+    public void setSensorCaudal(List<MensajeCaudal> sensorCaudal) {
+        this.sensorCaudal = sensorCaudal;
+    }
+
+    public List<MensajeEnergia> getSensorEnergia() {
+        return sensorEnergia;
+    }
+
+    public void setSensorEnergia(List<MensajeEnergia> sensorEnergia) {
+        this.sensorEnergia = sensorEnergia;
+    }
+
+    public List<MensajeTemperatura> getSensorTemperatura() {
+        return sensorTemperatura;
+    }
+
+    public void setSensorTemperatura(List<MensajeTemperatura> sensorTemperatura) {
+        this.sensorTemperatura = sensorTemperatura;
     }
 
     public String getEstado() {
