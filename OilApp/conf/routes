@@ -14,7 +14,20 @@ GET     /assets/*file               controllers.Assets.versioned(path="/public",
 
 # Usuario routes
 GET     /usuarios                   controllers.UsuarioController.getUsuarios
+GET     /usuario/:idUsuario         controllers.UsuarioController.getUsuario(idUsuario: Long)
 POST    /usuario                    controllers.UsuarioController.createUsuario
+PUT     /usuario/:idUsuario         controllers.UsuarioController.updateUsuario(idUsuario: Long)
+DELETE  /usuario/:idUsuario         controllers.UsuarioController.deleteUsuario(idUsuario: Long)
+
+# Mensaje routes
+GET     /caudal                     controllers.MensajeController.getMensajesCaudal
+POST    /caudal                     controllers.MensajeController.createMensajeCaudal
+GET     /emergencia                 controllers.MensajeController.getMensajesEmergencia
+POST    /emergencia                 controllers.MensajeController.createMensajeEmergencia
+GET     /energia                    controllers.MensajeController.getMensajesEnergia
+POST    /energia                    controllers.MensajeController.createMensajeEnergia
+GET     /temperatura                controllers.MensajeController.getMensajesTemperatura
+POST    /temperatura                controllers.MensajeController.createMensajeTemperatura
 
 
 #Pozo routes
@@ -22,3 +35,10 @@ GET     /pozos                      controllers.PozoController.getPozos
 POST    /pozo                       controllers.PozoController.createPozo
 DELETE  /pozo/:idPozo               controllers.PozoController.deletePozo(idPozo: Long)
 PUT     /pozo/:idPozo               controllers.PozoController.updatePozo(idPozo: Long)
+
+
+#Campo routes
+GET     /campos                     controllers.PozoController.getPozos
+POST    /campo                      controllers.PozoController.createPozo
+DELETE  /campo/:idCampo             controllers.PozoController.deletePozo(idPozo: Long)
+PUT     /campo/:idCampo             controllers.PozoController.updatePozo(idPozo: Long)

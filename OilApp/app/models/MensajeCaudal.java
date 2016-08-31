@@ -13,6 +13,8 @@ import java.util.Date;
 @Entity
 public class MensajeCaudal extends Model {
 
+    public static Finder<Long,MensajeCaudal> FINDER = new Finder<>(MensajeCaudal.class);
+
     @Id
     @GeneratedValue
     private Long id;
