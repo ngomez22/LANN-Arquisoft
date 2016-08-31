@@ -4,9 +4,8 @@ package models;
 import com.avaje.ebean.Model;
 
 import javax.persistence.*;
-
-import models.*;
 @Entity
+@Table(name="pozos")
 public class Pozo extends Model{
 
     public static Finder<Long,Pozo> FINDER = new Finder<>(Pozo.class);

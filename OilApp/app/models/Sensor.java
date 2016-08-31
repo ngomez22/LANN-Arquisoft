@@ -2,16 +2,21 @@ package models;
 
 import com.avaje.ebean.Model;
 
-import javax.persistence.Id;
+import javax.persistence.*;
 
 /**
  * Nicolás Gómez
  */
+@Entity
+@Table(name="sensores")
 public class Sensor extends Model{
 
     @Id
+    @GeneratedValue
     private Long id;
 
+    //TODO: Revisar esta relación.
+    @OneToOne
     private Pozo pozo;
 
     private String tipo;

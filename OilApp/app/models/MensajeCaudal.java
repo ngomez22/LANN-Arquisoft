@@ -2,15 +2,14 @@ package models;
 
 import com.avaje.ebean.Model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.util.Date;
 
 /**
  * Nicolás Gómez
  */
 @Entity
+@Table(name = "reportes_caudal")
 public class MensajeCaudal extends Model {
 
     public static Finder<Long,MensajeCaudal> FINDER = new Finder<>(MensajeCaudal.class);
@@ -19,6 +18,7 @@ public class MensajeCaudal extends Model {
     @GeneratedValue
     private Long id;
 
+    //TODO: Relacion sensor-mensaje
     private Sensor sensor;
 
     private Date fechaEnvio;

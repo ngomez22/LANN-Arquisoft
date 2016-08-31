@@ -3,8 +3,10 @@ package models;
 import com.avaje.ebean.Model;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
+@Table(name = "campos")
 public class Campo extends Model{
 
     public static Finder<Long,Campo> FINDER = new Finder<>(Campo.class);
@@ -16,8 +18,10 @@ public class Campo extends Model{
     @OneToOne
     private Usuario jefeDeCampo;
 
-    @ManyToOne
-    private Zona region;
+    private String region;
+
+    @OneToMany(mappedBy = "campo")
+    private List<Pozo> pozos;
 
     public Campo() {
         this.id = null;
@@ -30,16 +34,16 @@ public class Campo extends Model{
         this.id = id;
     };
 
-    public Campo(Usuario jefe, Zona regionN){
+    public Campo(Usuario jefe, String regionN){
         jefeDeCampo = jefe;
         region = regionN;
     }
 
-    public Zona getRegion(){
+    public String getRegion(){
         return region;
     }
 
-    public void setRegion(Zona regionN){
+    public void setRegion(String regionN){
         region=regionN;
     }
 

@@ -5,12 +5,14 @@ import com.avaje.ebean.Model;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.Table;
 import java.util.Date;
 
 /**
  * Nicolás Gómez
  */
 @Entity
+@Table(name = "reportes_Energia")
 public class MensajeEnergia extends Model {
 
     public static Finder<Long,MensajeEnergia> FINDER = new Finder<>(MensajeEnergia.class);
@@ -19,6 +21,7 @@ public class MensajeEnergia extends Model {
     @GeneratedValue
     private Long id;
 
+    //TODO: Relacion sensor-mensaje
     private Sensor sensor;
 
     private Date fechaEnvio;

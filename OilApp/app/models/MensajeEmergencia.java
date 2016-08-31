@@ -5,12 +5,14 @@ import com.avaje.ebean.Model;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.Table;
 import java.util.Date;
 
 /**
  * Nicolás Gómez
  */
 @Entity
+@Table(name = "reportes_Emergencia")
 public class MensajeEmergencia extends Model {
 
     public static Finder<Long,MensajeEmergencia> FINDER = new Finder<>(MensajeEmergencia.class);
@@ -23,6 +25,7 @@ public class MensajeEmergencia extends Model {
 
     private Date fechaEnvio;
 
+    //TODO: Relacion sensor-mensaje
     private String emergencia;
 
     public MensajeEmergencia() {
