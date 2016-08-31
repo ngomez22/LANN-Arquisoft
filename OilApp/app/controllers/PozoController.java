@@ -49,6 +49,23 @@ public class PozoController extends Controller{
         );
     }
 
+    public CompletionStage<Result> clausurarPozo(Long idPozo){
+        MessageDispatcher jdbcDispatcher = AkkaDispatcher.jdbcDispatcher;
+
+        return CompletableFuture.supplyAsync(
+                ()->{
+                    Pozo pozo1 = Pozo.FINDER.byId(idPozo);
+                   pozo1.clausurarPozo();
+                    pozo1.save();
+                    return pozo1;
+                }
+        ).thenApply(
+                ppozo-> {
+                    return ok(Json.toJson(ppozo));
+                }
+        );
+    }
+
     public CompletionStage<Result> updatePozo(Long idPozo){
         MessageDispatcher jdbcDispatcher = AkkaDispatcher.jdbcDispatcher;
         JsonNode nPozo= request().body().asJson();
