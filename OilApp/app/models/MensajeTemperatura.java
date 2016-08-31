@@ -1,5 +1,7 @@
 package models;
 
+import com.avaje.ebean.Model;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -10,7 +12,9 @@ import java.util.Date;
  */
 
 @Entity
-public class MensajeTemperatura {
+public class MensajeTemperatura extends Model{
+
+    public static Model.Finder<Long,MensajeTemperatura> FINDER = new Model.Finder<>(MensajeTemperatura.class);
 
     @Id
     @GeneratedValue

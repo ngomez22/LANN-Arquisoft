@@ -13,6 +13,8 @@ import java.util.Date;
 @Entity
 public class MensajeEnergia extends Model {
 
+    public static Finder<Long,MensajeEnergia> FINDER = new Finder<>(MensajeEnergia.class);
+
     @Id
     @GeneratedValue
     private Long id;

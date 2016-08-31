@@ -49,14 +49,14 @@ public class CampoController extends Controller{
         );
     }
 
-    public CompletionStage<Result> updateCampo(Long iCampo){
+    public CompletionStage<Result> updateCampo(Long idCampo){
         MessageDispatcher jdbcDispatcher = AkkaDispatcher.jdbcDispatcher;
         JsonNode nCampo= request().body().asJson();
         Campo campo = Json.fromJson( nCampo , Campo.class ) ;
         return CompletableFuture.supplyAsync(
                 ()->{
                     Campo campo1 = Campo.FINDER.byId(idCampo);
-                    campo1.setCantidadBarriles(campo.getCaudal();
+                    campo1.setCantidadBarriles(campo.getCaudal());
                     campo1.setConsumoEnergia(campo.getConsumoEnergia());
                     campo1.setJefeDeCampo(campo.getJefeDeCampo());
                     campo1.setRegion(campo.getRegion());

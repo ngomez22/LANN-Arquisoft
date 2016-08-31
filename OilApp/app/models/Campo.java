@@ -9,6 +9,8 @@ import javax.persistence.Id;
 @Entity
 public class Campo extends Model{
 
+    public static Finder<Long,Campo> FINDER = new Finder<>(Campo.class);
+
     @Id
     @GeneratedValue
     private Long id;
