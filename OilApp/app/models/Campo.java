@@ -61,4 +61,9 @@ public class Campo extends Model{
     public void setJefeDeCampo(Usuario jefe){
         jefeDeCampo=jefe;
     }
+
+    public String toString()
+    {
+        return "Campo{ id:"+id+"}";
+    }
 }
