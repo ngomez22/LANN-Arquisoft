@@ -18,8 +18,9 @@ import static play.libs.Json.toJson;
 public class UsuarioController extends Controller {
 
     public CompletionStage<Result> getUsuarios() {
+        System.out.println("HOLAHOLA ENTRO AL METODO!");
         MessageDispatcher jdbcDispatcher = AkkaDispatcher.jdbcDispatcher;
-
+        System.out.println("HOLAHOLA CREÓ EL DISPATCHER!");
         return CompletableFuture.
                 supplyAsync(
                         () -> {
