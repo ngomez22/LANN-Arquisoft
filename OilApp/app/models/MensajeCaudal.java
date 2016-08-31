@@ -44,6 +44,16 @@ public class MensajeCaudal extends Model {
         this.caudal = caudal;
     }
 
+    @PrePersist
+    void creado() {
+        this.fechaEnvio = new Date();
+    }
+
+    @Override
+    public void save() {
+        creado();
+        super.save();
+    }
     public Long getId() {
         return id;
     }
