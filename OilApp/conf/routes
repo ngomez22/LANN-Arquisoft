@@ -14,7 +14,10 @@ GET     /assets/*file               controllers.Assets.versioned(path="/public",
 
 # Usuario routes
 GET     /usuarios                   controllers.UsuarioController.getUsuarios
+GET     /usuario/:idUsuario         controllers.UsuarioController.getUsuario(idUsuario: Long)
 POST    /usuario                    controllers.UsuarioController.createUsuario
+PUT     /usuario/:idUsuario         controllers.UsuarioController.updateUsuario(idUsuario: Long)
+DELETE  /usuario/:idUsuario         controllers.UsuarioController.deleteUsuario(idUsuario: Long)
 
 
 #Pozo routes

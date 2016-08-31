@@ -18,9 +18,7 @@ import static play.libs.Json.toJson;
 public class UsuarioController extends Controller {
 
     public CompletionStage<Result> getUsuarios() {
-        System.out.println("HOLAHOLA ENTRO AL METODO!");
         MessageDispatcher jdbcDispatcher = AkkaDispatcher.jdbcDispatcher;
-        System.out.println("HOLAHOLA CREÓ EL DISPATCHER!");
         return CompletableFuture.
                 supplyAsync(
                         () -> {
@@ -28,8 +26,8 @@ public class UsuarioController extends Controller {
                         }
                         ,jdbcDispatcher)
                 .thenApply(
-                        usuarios -> {
-                            return ok(toJson(usuarios));
+                        usuarioEntities -> {
+                            return ok(toJson(usuarioEntities));
                         }
                 );
     }
@@ -48,6 +46,53 @@ public class UsuarioController extends Controller {
                     return ok(Json.toJson(usuario1));
                 }
         );
+    }
+
+    public CompletionStage<Result> getUsuario(Long id) {
+        MessageDispatcher jdbcDispatcher = AkkaDispatcher.jdbcDispatcher;
+        return CompletableFuture.supplyAsync(
+                ()->{
+                    return Usuario.FINDER.byId(id);
+                }
+                ,jdbcDispatcher
+        ).thenApply(
+                usuarioEntity -> {
+                    return ok(Json.toJson(usuarioEntity));
+                }
+        );
+    }
+
+    public CompletionStage<Result> updateUsuario(Long id) {
+        MessageDispatcher jdbcDispatcher = AkkaDispatcher.jdbcDispatcher;
+        JsonNode nUsuario = request().body().asJson();
+        Usuario usuario = Json.fromJson( nUsuario , Usuario.class ) ;
+        return CompletableFuture.supplyAsync(
+                ()->{
+                    usuario.update();
+                    return usuario;
+                }
+        ).thenApply(
+                usuario1 -> {
+                    return ok(Json.toJson(usuario1));
+                }
+        );
+    }
+
+    public CompletionStage<Result> deleteUsuario(Long id) {
+        MessageDispatcher jdbcDispatcher = AkkaDispatcher.jdbcDispatcher;
+        return CompletableFuture.
+                supplyAsync(
+                        () -> {
+                            Usuario.FINDER.ref(id).delete();
+                            return Usuario.FINDER.byId(id);
+                        }
+                        , jdbcDispatcher)
+                .thenApply(
+                        usuarioEntity -> {
+                            if (usuarioEntity == null) return ok();
+                            else return badRequest();
+                        }
+                );
     }
 
 }
