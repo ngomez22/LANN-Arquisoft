@@ -20,5 +20,5 @@ POST    /usuario                    controllers.UsuarioController.createUsuario
 #Pozo routes
 GET     /pozos                      controllers.PozoController.getPozos
 POST    /pozo                       controllers.PozoController.createPozo
-DELETE  /pozo                       controllers.PozoController.deletePozo
-PUT     /pozo                       controllers.PozoController.updatePozo
+DELETE  /pozo/:idPozo               controllers.PozoController.deletePozo(idPozo: Long)
+PUT     /pozo/:idPozo               controllers.PozoController.updatePozo(idPozo: Long)

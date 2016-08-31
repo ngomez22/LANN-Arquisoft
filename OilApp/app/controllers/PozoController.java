@@ -49,34 +49,41 @@ public class PozoController extends Controller{
         );
     }
 
-    public CompletionStage<Result> updatePozo(){
+    public CompletionStage<Result> updatePozo(Long idPozo){
         MessageDispatcher jdbcDispatcher = AkkaDispatcher.jdbcDispatcher;
-        JsonNode nPozo = request().body().asJson();
+        JsonNode nPozo= request().body().asJson();
         Pozo pozo = Json.fromJson( nPozo , Pozo.class ) ;
         return CompletableFuture.supplyAsync(
                 ()->{
-                    pozo.save();
-                    return pozo;
+                    Pozo pozo1 = Pozo.FINDER.byId(idPozo);
+                    pozo1.setCampo(pozo.getCampo());
+                    pozo1.setEstado(pozo.getEstado());
+                    pozo1.setSensorCaudal(pozo.getSensorCaudal());
+                    pozo1.setSensorEmergencia(pozo.getSensorEmergencia());
+                    pozo1.setSensorEnergia(pozo.getSensorEnergia());
+                    pozo1.setSensorTemperatura(pozo.getSensorTemperatura());
+                    pozo1.save();
+                    return pozo1;
+
                 }
         ).thenApply(
-                pozo1 -> {
-                    return ok(Json.toJson(pozo1));
+                ppozo-> {
+                    return ok(Json.toJson(ppozo));
                 }
         );
     }
 
-    public CompletionStage<Result> deletePozo(){
+    public CompletionStage<Result> deletePozo(Long idPozo){
         MessageDispatcher jdbcDispatcher = AkkaDispatcher.jdbcDispatcher;
-        JsonNode nPozo = request().body().asJson();
-        Pozo pozo = Json.fromJson( nPozo , Pozo.class ) ;
+
         return CompletableFuture.supplyAsync(
-                ()->{
-                    pozo.save();
-                    return pozo;
+                ()-> {
+                    Pozo.FINDER.deleteById(idPozo);
+                    return idPozo;
                 }
         ).thenApply(
-                pozo1 -> {
-                    return ok(Json.toJson(pozo1));
+                pozo -> {
+                    return ok(Json.toJson(pozo));
                 }
         );
     }
