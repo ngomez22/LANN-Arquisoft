@@ -35,3 +35,10 @@ GET     /pozos                      controllers.PozoController.getPozos
 POST    /pozo                       controllers.PozoController.createPozo
 DELETE  /pozo/:idPozo               controllers.PozoController.deletePozo(idPozo: Long)
 PUT     /pozo/:idPozo               controllers.PozoController.updatePozo(idPozo: Long)
+
+
+#Campo routes
+GET     /campos                     controllers.PozoController.getPozos
+POST    /campo                      controllers.PozoController.createPozo
+DELETE  /campo/:idCampo             controllers.PozoController.deletePozo(idPozo: Long)
+PUT     /campo/:idCampo             controllers.PozoController.updatePozo(idPozo: Long)

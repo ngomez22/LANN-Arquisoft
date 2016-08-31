@@ -33,7 +33,7 @@ public class CampoController extends Controller{
                 );
     }
 
-    public CompletionStage<Result> createCamp(){
+    public CompletionStage<Result> createCampo(){
         MessageDispatcher jdbcDispatcher = AkkaDispatcher.jdbcDispatcher;
         JsonNode nCampo = request().body().asJson();
         Campo campo = Json.fromJson( nCampo , Campo.class ) ;
