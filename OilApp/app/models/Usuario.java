@@ -26,7 +26,6 @@ public class Usuario extends Model{
         this.nombre = "NO NAME";
         this.nivelAcceso = -1;
     }
-
     public Usuario(Long id) {
         this();
         this.id = id;
@@ -36,6 +35,7 @@ public class Usuario extends Model{
         this.id = id;
         this.nombre = nombre;
         this.nivelAcceso = nivelAcceso;
+
     }
 
     public Long getId() {

@@ -2,9 +2,7 @@ package models;
 
 import com.avaje.ebean.Model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
 public class Campo extends Model{
@@ -15,45 +13,34 @@ public class Campo extends Model{
     @GeneratedValue
     private Long id;
 
-    private String region;
-
-    private int cantidadBarriles;
-
-    private int consumoEnergia;
-
+    @OneToOne
     private Usuario jefeDeCampo;
 
+    @ManyToOne
+    private Zona region;
 
-    public Campo(String regionN, Usuario jefe){
-        region = regionN;
-        cantidadBarriles = 0;
-        consumoEnergia = 0;
-        jefeDeCampo = jefe;
+    public Campo() {
+        this.id = null;
+        this.jefeDeCampo = null;
+        this.region = null;
     }
 
-    public String getRegion(){
+    public Campo(Long id) {
+        this();
+        this.id = id;
+    };
+
+    public Campo(Usuario jefe, Zona regionN){
+        jefeDeCampo = jefe;
+        region = regionN;
+    }
+
+    public Zona getRegion(){
         return region;
     }
 
-    public void setRegion(String regionN){
+    public void setRegion(Zona regionN){
         region=regionN;
-    }
-
-    public int getCaudal(){
-        return cantidadBarriles;
-    }
-
-    public void setCantidadBarriles(int caudal)
-    {
-        cantidadBarriles = caudal;
-    }
-
-    public int getConsumoEnergia(){
-        return  consumoEnergia;
-    }
-
-    public void setConsumoEnergia(int consumo){
-        consumoEnergia = consumo;
     }
 
     public Usuario getJefeDeCampo(){

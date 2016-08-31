@@ -56,8 +56,6 @@ public class CampoController extends Controller{
         return CompletableFuture.supplyAsync(
                 ()->{
                     Campo campo1 = Campo.FINDER.byId(idCampo);
-                    campo1.setCantidadBarriles(campo.getCaudal());
-                    campo1.setConsumoEnergia(campo.getConsumoEnergia());
                     campo1.setJefeDeCampo(campo.getJefeDeCampo());
                     campo1.setRegion(campo.getRegion());
                     campo1.save();
