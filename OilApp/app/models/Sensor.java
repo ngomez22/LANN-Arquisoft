@@ -14,6 +14,7 @@ public class Sensor extends Model{
     @Id
     @GeneratedValue
     private Long id;
+    public static Finder<Long,Pozo> FINDER = new Finder<>(Pozo.class);
 
     //TODO: Revisar esta relación.
     @OneToOne

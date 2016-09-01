@@ -129,6 +129,7 @@ public class PozoController extends Controller{
 
         return CompletableFuture.supplyAsync(
                 ()-> {
+
                     List<MensajeEnergia> mensaje = MensajeEnergia.FINDER.where().eq("pozo_id",idPozo).findList();
                     return mensaje;
                 }

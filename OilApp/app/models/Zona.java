@@ -19,6 +19,7 @@ public class Zona extends Model {
     private String nombre;
 
     private Double area;
+    public static Finder<Long,Zona> FINDER = new Finder<>(Zona.class);
 
     public Zona() {
         id = null;
