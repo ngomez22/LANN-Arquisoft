@@ -43,7 +43,6 @@ public class MensajeCaudal extends Model {
     public MensajeCaudal(Long id, Sensor sensor, Date fechaEnvio, Double caudal) {
         this.id = id;
         this.sensor = sensor;
-        this.fechaEnvio = fechaEnvio;
         this.caudal = caudal;
     }
 
@@ -57,6 +56,7 @@ public class MensajeCaudal extends Model {
         creado();
         super.save();
     }
+
     public Long getId() {
         return id;
     }

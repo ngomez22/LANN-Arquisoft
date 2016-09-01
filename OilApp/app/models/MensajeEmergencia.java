@@ -18,6 +18,7 @@ public class MensajeEmergencia extends Model {
     @GeneratedValue
     private Long id;
 
+    //TODO: Relacion sensor-mensaje
     private Sensor sensor;
 
     private Date fechaEnvio;
@@ -25,7 +26,6 @@ public class MensajeEmergencia extends Model {
     @ManyToOne
     private Pozo pozo;
 
-    //TODO: Relacion sensor-mensaje
     private String emergencia;
 
     public MensajeEmergencia() {
@@ -45,6 +45,17 @@ public class MensajeEmergencia extends Model {
         this.sensor = sensor;
         this.fechaEnvio = fechaEnvio;
         this.emergencia= emergencia;
+    }
+
+    @PrePersist
+    void creado() {
+        this.fechaEnvio = new Date();
+    }
+
+    @Override
+    public void save() {
+        creado();
+        super.save();
     }
 
     public Long getId() {
