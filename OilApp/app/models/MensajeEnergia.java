@@ -21,16 +21,12 @@ public class MensajeEnergia extends Model {
     @GeneratedValue
     private Long id;
 
-    //TODO: Relacion sensor-mensaje
-    private Sensor sensor;
-
     private Date fechaEnvio;
 
     private Double consumoEnergia;
 
     public MensajeEnergia() {
         id = null;
-        sensor = null;
         fechaEnvio = null;
         consumoEnergia = -1.0;
     }
@@ -40,9 +36,8 @@ public class MensajeEnergia extends Model {
         this.id = id;
     }
 
-    public MensajeEnergia (Long id, Sensor sensor, Date fechaEnvio, Double consumoEnergia) {
+    public MensajeEnergia (Long id, Date fechaEnvio, Double consumoEnergia) {
         this.id = id;
-        this.sensor = sensor;
         this.fechaEnvio = fechaEnvio;
         this.consumoEnergia = consumoEnergia;
     }
@@ -66,14 +61,6 @@ public class MensajeEnergia extends Model {
         this.id = id;
     }
 
-    public Sensor getSensor() {
-        return sensor;
-    }
-
-    public void setSensor(Sensor sensor) {
-        this.sensor = sensor;
-    }
-
     public Date getFechaEnvio() {
         return fechaEnvio;
     }
@@ -88,5 +75,15 @@ public class MensajeEnergia extends Model {
 
     public void setConsumoEnergia(Double consumoEnergia) {
         this.consumoEnergia = consumoEnergia;
+    }
+
+    @Override
+    public String toString() {
+        return "MensajeEnergia{" +
+                "pozo=" + pozo +
+                ", id=" + id +
+                ", fechaEnvio=" + fechaEnvio +
+                ", consumoEnergia=" + consumoEnergia +
+                '}';
     }
 }

@@ -18,9 +18,6 @@ public class MensajeEmergencia extends Model {
     @GeneratedValue
     private Long id;
 
-    //TODO: Relacion sensor-mensaje
-    private Sensor sensor;
-
     private Date fechaEnvio;
 
     @ManyToOne
@@ -30,7 +27,6 @@ public class MensajeEmergencia extends Model {
 
     public MensajeEmergencia() {
         id = null;
-        sensor = null;
         fechaEnvio = null;
         emergencia = "NO MESSAGE";
     }
@@ -40,9 +36,8 @@ public class MensajeEmergencia extends Model {
         this.id = id;
     }
 
-    public MensajeEmergencia(Long id, Sensor sensor, Date fechaEnvio, String emergencia) {
+    public MensajeEmergencia(Long id, Date fechaEnvio, String emergencia) {
         this.id = id;
-        this.sensor = sensor;
         this.fechaEnvio = fechaEnvio;
         this.emergencia= emergencia;
     }
@@ -66,14 +61,6 @@ public class MensajeEmergencia extends Model {
         this.id = id;
     }
 
-    public Sensor getSensor() {
-        return sensor;
-    }
-
-    public void setSensor(Sensor sensor) {
-        this.sensor = sensor;
-    }
-
     public Date getFechaEnvio() {
         return fechaEnvio;
     }
@@ -88,5 +75,15 @@ public class MensajeEmergencia extends Model {
 
     public void setEmergencia(String emergencia) {
         this.emergencia = emergencia;
+    }
+
+    @Override
+    public String toString() {
+        return "MensajeEmergencia{" +
+                "id=" + id +
+                ", fechaEnvio=" + fechaEnvio +
+                ", pozo=" + pozo +
+                ", emergencia='" + emergencia + '\'' +
+                '}';
     }
 }

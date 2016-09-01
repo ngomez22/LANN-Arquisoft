@@ -23,16 +23,12 @@ public class MensajeTemperatura extends Model{
     @ManyToOne
     private Pozo pozo;
 
-    //TODO: Relacion sensor-mensaje
-    private Sensor sensor;
-
     private Date fechaEnvio;
 
     private Double temperatura;
 
     public MensajeTemperatura() {
         id = null;
-        sensor = null;
         fechaEnvio = null;
         temperatura = -1.0;
     }
@@ -44,7 +40,7 @@ public class MensajeTemperatura extends Model{
 
     public MensajeTemperatura(Long id, Sensor sensor, Date fechaEnvio, Double temperatura) {
         this.id = id;
-        this.sensor = sensor;
+        //this.sensor = sensor;
         this.fechaEnvio = fechaEnvio;
         this.temperatura = temperatura;
     }
@@ -68,13 +64,6 @@ public class MensajeTemperatura extends Model{
         this.id = id;
     }
 
-    public Sensor getSensor() {
-        return sensor;
-    }
-
-    public void setSensor(Sensor sensor) {
-        this.sensor = sensor;
-    }
 
     public Date getFechaEnvio() {
         return fechaEnvio;
@@ -90,5 +79,15 @@ public class MensajeTemperatura extends Model{
 
     public void setTemperatura(Double temperatura) {
         this.temperatura = temperatura;
+    }
+
+    @Override
+    public String toString() {
+        return "MensajeTemperatura{" +
+                "id=" + id +
+                ", pozo=" + pozo +
+                ", fechaEnvio=" + fechaEnvio +
+                ", temperatura=" + temperatura +
+                '}';
     }
 }
