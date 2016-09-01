@@ -36,6 +36,8 @@ POST    /pozo                       controllers.PozoController.createPozo
 DELETE  /pozo/:idPozo               controllers.PozoController.deletePozo(idPozo: Long)
 PUT     /pozo/:idPozo               controllers.PozoController.updatePozo(idPozo: Long)
 GET     /pozo/clausurar/:idPozo     controllers.PozoController.clausurarPozo(idPozo: Long)
+GET     /pozo/registroCaudal/:idPozo controllers.PozoController.registroCaudalDiario(idPozo:Long)
+GET     /pozo/registroEnergia/:idPozo controllers.PozoController.registroEnergiaDiario(idPozo:Long)
 
 
 #Campo routes
