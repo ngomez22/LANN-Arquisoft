@@ -3,10 +3,11 @@ package controllers;
 import akka.dispatch.MessageDispatcher;
 import com.fasterxml.jackson.databind.JsonNode;
 import dispatchers.AkkaDispatcher;
+import models.Campo;
 import play.libs.Json;
 import play.mvc.Controller;
 import play.mvc.Result;
-import models.Campo;
+
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.CompletionStage;
 
@@ -83,4 +84,19 @@ public class CampoController extends Controller{
                 }
         );
     }
+//    public CompletionStage<Result> registroEnergiaDiario(Long idCampo){
+//        MessageDispatcher jdbcDispatcher = AkkaDispatcher.jdbcDispatcher;
+//
+//        return CompletableFuture.supplyAsync(
+//                ()-> {
+//
+//                    List<Pozo> mensaje = Pozo.FINDER.where().eq("campo_id",idCampo);
+//                    return mensaje;
+//                }
+//        ).thenApply(
+//                mensajes->{
+//                    return ok(Json.toJson(mensajes));
+//                }
+//        );
+//    }
 }
