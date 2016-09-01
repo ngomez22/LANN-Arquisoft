@@ -39,6 +39,14 @@ public class Campo extends Model{
         region = regionN;
     }
 
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
     public String getRegion(){
         return region;
     }
@@ -55,8 +63,21 @@ public class Campo extends Model{
         jefeDeCampo=jefe;
     }
 
-    public String toString()
-    {
-        return "Campo{ id:"+id+"}";
+    public List<Pozo> getPozos() {
+        return pozos;
+    }
+
+    public void setPozos(List<Pozo> pozos) {
+        this.pozos = pozos;
+    }
+
+    @Override
+    public String toString() {
+        return "Campo{" +
+                "id=" + id +
+                ", jefeDeCampo=" + jefeDeCampo +
+                ", region='" + region + '\'' +
+                ", pozos=" + pozos +
+                '}';
     }
 }
