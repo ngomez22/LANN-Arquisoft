@@ -37,7 +37,7 @@ DELETE  /pozo/:idPozo               controllers.PozoController.deletePozo(idPozo
 PUT     /pozo/:idPozo               controllers.PozoController.updatePozo(idPozo: Long)
 GET     /pozo/clausurar/:idPozo     controllers.PozoController.clausurarPozo(idPozo: Long)
 GET     /pozo/registroCaudal/:idPozo controllers.PozoController.registroCaudalDiario(idPozo:Long)
-GET     /pozo/registroEnergia/:idPozo controllers.PozoController.registroEnergiaDiario(idPozo:Long)
+
 
 
 #Campo routes
@@ -51,4 +51,6 @@ GET     /zonas                     controllers.ZonaController.getZonas
 POST    /zona                      controllers.ZonaController.createZona
 DELETE  /zona/:idZona             controllers.ZonaController.deleteZona(idZona: Long)
 PUT     /zona/:idZona             controllers.ZonaController.updateZona(idZona: Long)
+
+GET     /registroEnergiaDiario/:idPozo/:fecha   controllers.PozoController.registroEnergiaDiario(idPozo: Long,fecha: String)
 

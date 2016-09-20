@@ -56,38 +56,6 @@ public class Pozo extends Model{
         this.id = id;
     }
 
-    public List<MensajeEmergencia> getSensorEmergencia() {
-        return sensorEmergencia;
-    }
-
-    public void setSensorEmergencia(List<MensajeEmergencia> sensorEmergencia) {
-        this.sensorEmergencia = sensorEmergencia;
-    }
-
-    public List<MensajeCaudal> getSensorCaudal() {
-        return sensorCaudal;
-    }
-
-    public void setSensorCaudal(List<MensajeCaudal> sensorCaudal) {
-        this.sensorCaudal = sensorCaudal;
-    }
-
-    public List<MensajeEnergia> getSensorEnergia() {
-        return sensorEnergia;
-    }
-
-    public void setSensorEnergia(List<MensajeEnergia> sensorEnergia) {
-        this.sensorEnergia = sensorEnergia;
-    }
-
-    public List<MensajeTemperatura> getSensorTemperatura() {
-        return sensorTemperatura;
-    }
-
-    public void setSensorTemperatura(List<MensajeTemperatura> sensorTemperatura) {
-        this.sensorTemperatura = sensorTemperatura;
-    }
-
     public String getEstado() {
         return estado;
     }
@@ -97,8 +65,7 @@ public class Pozo extends Model{
     }
 
     public Campo getCampo() {
-        return campo;
-    }
+        return null ;}
 
     public void setCampo(Campo campo) {
         this.campo = campo;

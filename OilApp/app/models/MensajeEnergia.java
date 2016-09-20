@@ -29,6 +29,7 @@ public class MensajeEnergia extends Model {
         id = null;
         fechaEnvio = null;
         consumoEnergia = -1.0;
+        pozo=null;
     }
 
     public MensajeEnergia(Long id) {
@@ -36,10 +37,11 @@ public class MensajeEnergia extends Model {
         this.id = id;
     }
 
-    public MensajeEnergia (Long id, Date fechaEnvio, Double consumoEnergia) {
+    public MensajeEnergia (Long id, Date fechaEnvio, Double consumoEnergia, Pozo pozo) {
         this.id = id;
         this.fechaEnvio = fechaEnvio;
         this.consumoEnergia = consumoEnergia;
+        this.pozo=pozo;
     }
 
     @PrePersist
@@ -76,6 +78,8 @@ public class MensajeEnergia extends Model {
     public void setConsumoEnergia(Double consumoEnergia) {
         this.consumoEnergia = consumoEnergia;
     }
+
+    public Pozo getPozo(){ return pozo;}
 
     @Override
     public String toString() {

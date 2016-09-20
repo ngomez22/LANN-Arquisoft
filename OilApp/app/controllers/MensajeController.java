@@ -3,10 +3,7 @@ package controllers;
 import akka.dispatch.MessageDispatcher;
 import com.fasterxml.jackson.databind.JsonNode;
 import dispatchers.AkkaDispatcher;
-import models.MensajeCaudal;
-import models.MensajeEmergencia;
-import models.MensajeEnergia;
-import models.MensajeTemperatura;
+import models.*;
 import play.libs.Json;
 import play.mvc.Controller;
 import play.mvc.Result;
@@ -111,6 +108,8 @@ public class MensajeController extends Controller {
         return CompletableFuture.supplyAsync(
                 ()->{
                     mensajeEnergia.save();
+//                    Long idPozo = mensajeEnergia.getPozo().getId();
+//                    Pozo buscado = Pozo.FINDER.byId(idPozo);
                     return mensajeEnergia;
                 }
         ).thenApply(

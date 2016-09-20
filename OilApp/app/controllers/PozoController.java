@@ -10,6 +10,9 @@ import play.libs.Json;
 import play.mvc.Controller;
 import play.mvc.Result;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.CompletionStage;
@@ -79,10 +82,6 @@ public class PozoController extends Controller{
                     Pozo pozo1 = Pozo.FINDER.byId(idPozo);
                     pozo1.setCampo(pozo.getCampo());
                     pozo1.setEstado(pozo.getEstado());
-                    pozo1.setSensorCaudal(pozo.getSensorCaudal());
-                    pozo1.setSensorEmergencia(pozo.getSensorEmergencia());
-                    pozo1.setSensorEnergia(pozo.getSensorEnergia());
-                    pozo1.setSensorTemperatura(pozo.getSensorTemperatura());
                     pozo1.save();
                     return pozo1;
 
@@ -124,13 +123,20 @@ public class PozoController extends Controller{
         );
     }
 
-    public CompletionStage<Result> registroEnergiaDiario(Long idPozo){
+    public CompletionStage<Result> registroEnergiaDiario(Long idPozo,String dia){
+
         MessageDispatcher jdbcDispatcher = AkkaDispatcher.jdbcDispatcher;
 
         return CompletableFuture.supplyAsync(
                 ()-> {
-
-                    List<MensajeEnergia> mensaje = MensajeEnergia.FINDER.where().eq("pozo_id",idPozo).findList();
+                    SimpleDateFormat df = new SimpleDateFormat("dd/MM/AAAA");
+                    Date fecha=null;
+                    try {
+                        fecha = df.parse(dia);
+                    } catch (ParseException e) {
+                        e.printStackTrace();
+                    }
+                    List<MensajeEnergia> mensaje = MensajeEnergia.FINDER.where().eq("pozo_id",idPozo).eq("fecha_envio",fecha).findList();
                     return mensaje;
                 }
         ).thenApply(
