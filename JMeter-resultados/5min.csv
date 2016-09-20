@@ -1,0 +1,4 @@
+Etiqueta,# Muestras,Media,Mín,Máx,Desv. Estándar,% Error,Rendimiento,Kb/sec,Media de Bytes
+Energia,1200,13,1,713,29.91,0.00%,4.0,0.80,206.0
+Caudal,1200,13,2,566,28.19,0.00%,4.0,0.77,198.0
+Total,2400,13,1,713,29.07,0.00%,8.0,1.58,202.0
