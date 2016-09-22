@@ -16,7 +16,6 @@ public class MensajeTemperatura extends Model{
 
     public static Model.Finder<Long,MensajeTemperatura> FINDER = new Model.Finder<>(MensajeTemperatura.class);
 
-
     @Id
     @GeneratedValue
     private Long id;
@@ -31,6 +30,7 @@ public class MensajeTemperatura extends Model{
 
     public MensajeTemperatura() {
         id = null;
+        pozo = null;
         fechaEnvio = null;
         temperatura = -1.0;
     }
@@ -40,9 +40,9 @@ public class MensajeTemperatura extends Model{
         this.id = id;
     }
 
-    public MensajeTemperatura(Long id, Sensor sensor, Date fechaEnvio, Double temperatura) {
+    public MensajeTemperatura(Long id, Pozo pozo, Date fechaEnvio, Double temperatura) {
         this.id = id;
-        //this.sensor = sensor;
+        this.pozo = pozo;
         this.fechaEnvio = fechaEnvio;
         this.temperatura = temperatura;
     }
@@ -66,6 +66,13 @@ public class MensajeTemperatura extends Model{
         this.id = id;
     }
 
+    public Pozo getPozo() {
+        return pozo;
+    }
+
+    public void setPozo(Pozo pozo) {
+        this.pozo = pozo;
+    }
 
     public Date getFechaEnvio() {
         return fechaEnvio;
