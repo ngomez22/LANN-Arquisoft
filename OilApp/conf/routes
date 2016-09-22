@@ -36,6 +36,8 @@ POST    /pozo                       controllers.PozoController.createPozo
 DELETE  /pozo/:idPozo               controllers.PozoController.deletePozo(idPozo: Long)
 PUT     /pozo/:idPozo               controllers.PozoController.updatePozo(idPozo: Long)
 GET     /pozo/clausurar/:idPozo     controllers.PozoController.clausurarPozo(idPozo: Long)
+GET     /pozo/detener/:idPozo     controllers.PozoController.detenerPozo(idPozo: Long)
+GET     /pozo/reabrir/:idPozo     controllers.PozoController.reabrirPozo(idPozo: Long)
 GET     /pozo/registroCaudal/:idPozo controllers.PozoController.registroCaudalDiario(idPozo:Long)
 
 

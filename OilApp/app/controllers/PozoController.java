@@ -73,6 +73,41 @@ public class PozoController extends Controller{
         );
     }
 
+    public CompletionStage<Result> detenerPozo(Long idPozo){
+        MessageDispatcher jdbcDispatcher = AkkaDispatcher.jdbcDispatcher;
+
+        return CompletableFuture.supplyAsync(
+                ()->{
+                    Pozo pozo1 = Pozo.FINDER.byId(idPozo);
+                    pozo1.detenerPozoEmergencia();
+                    pozo1.save();
+                    return pozo1;
+                }
+        ).thenApply(
+                ppozo-> {
+                    return ok(Json.toJson(ppozo));
+                }
+        );
+    }
+
+
+    public CompletionStage<Result> reabrirPozo(Long idPozo){
+        MessageDispatcher jdbcDispatcher = AkkaDispatcher.jdbcDispatcher;
+
+        return CompletableFuture.supplyAsync(
+                ()->{
+                    Pozo pozo1 = Pozo.FINDER.byId(idPozo);
+                    pozo1.reabrirPozo();
+                    pozo1.save();
+                    return pozo1;
+                }
+        ).thenApply(
+                ppozo-> {
+                    return ok(Json.toJson(ppozo));
+                }
+        );
+    }
+
     public CompletionStage<Result> updatePozo(Long idPozo){
         MessageDispatcher jdbcDispatcher = AkkaDispatcher.jdbcDispatcher;
         JsonNode nPozo= request().body().asJson();
