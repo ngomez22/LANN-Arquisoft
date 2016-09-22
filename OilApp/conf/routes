@@ -29,6 +29,10 @@ POST    /energia                    controllers.MensajeController.createMensajeE
 GET     /temperatura                controllers.MensajeController.getMensajesTemperatura
 POST    /temperatura                controllers.MensajeController.createMensajeTemperatura
 
+POST    /caudal/:idPozo                     controllers.MensajeController.createMensajeCaudal(idPozo: Long)
+POST    /emergencia/:idPozo                 controllers.MensajeController.createMensajeEmergencia(idPozo: Long)
+POST    /energia/:idPozo                    controllers.MensajeController.createMensajeEnergia(idPozo: Long)
+POST    /temperatura/:idPozo                controllers.MensajeController.createMensajeTemperatura(idPozo: Long)
 
 #Pozo routes
 GET     /pozos                      controllers.PozoController.getPozos
