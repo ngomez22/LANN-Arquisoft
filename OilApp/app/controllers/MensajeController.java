@@ -107,9 +107,10 @@ public class MensajeController extends Controller {
         MensajeEnergia mensajeEnergia = Json.fromJson( nMensaje , MensajeEnergia.class ) ;
         return CompletableFuture.supplyAsync(
                 ()->{
+                    Long idPozo = mensajeEnergia.getPozo().getId();
+                    Pozo buscado = Pozo.FINDER.byId(idPozo);
+                    buscado.getSensorEnergia().add(mensajeEnergia);
                     mensajeEnergia.save();
-//                    Long idPozo = mensajeEnergia.getPozo().getId();
-//                    Pozo buscado = Pozo.FINDER.byId(idPozo);
                     return mensajeEnergia;
                 }
         ).thenApply(

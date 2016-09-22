@@ -129,7 +129,7 @@ public class PozoController extends Controller{
 
         return CompletableFuture.supplyAsync(
                 ()-> {
-                    SimpleDateFormat df = new SimpleDateFormat("dd/MM/AAAA");
+                    SimpleDateFormat df = new SimpleDateFormat("dd-MM-YYYY");
                     Date fecha=null;
                     try {
                         fecha = df.parse(dia);

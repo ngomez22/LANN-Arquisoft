@@ -2,6 +2,7 @@ package models;
 
 
 import com.avaje.ebean.Model;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 
 import javax.persistence.*;
 import java.util.List;
@@ -31,6 +32,7 @@ public class Pozo extends Model{
     private String estado;
 
     @ManyToOne
+    @JsonBackReference
     private Campo campo;
 
     private static final String CLAUSURADO ="Clausurado";
@@ -65,7 +67,7 @@ public class Pozo extends Model{
     }
 
     public Campo getCampo() {
-        return null ;}
+        return campo ;}
 
     public void setCampo(Campo campo) {
         this.campo = campo;
@@ -79,6 +81,23 @@ public class Pozo extends Model{
     public void detenerPozoEmergencia()
     {
         this.setEstado(Pozo.PARADO);
+    }
+
+
+    public List<MensajeEmergencia> getSensorEmergencia() {
+        return sensorEmergencia;
+    }
+
+    public List<MensajeCaudal> getSensorCaudal() {
+        return sensorCaudal;
+    }
+
+    public List<MensajeEnergia> getSensorEnergia() {
+        return sensorEnergia;
+    }
+
+    public List<MensajeTemperatura> getSensorTemperatura() {
+        return sensorTemperatura;
     }
 
     public void reabrirPozo()
