@@ -44,6 +44,7 @@ public class MensajeEnergia extends Model {
         this.fechaEnvio = fechaEnvio;
         this.consumoEnergia = consumoEnergia;
         this.pozo=pozo;
+
     }
 
     @PrePersist

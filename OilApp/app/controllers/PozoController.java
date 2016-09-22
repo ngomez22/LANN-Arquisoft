@@ -3,9 +3,7 @@ package controllers;
 import akka.dispatch.MessageDispatcher;
 import com.fasterxml.jackson.databind.JsonNode;
 import dispatchers.AkkaDispatcher;
-import models.MensajeCaudal;
-import models.MensajeEnergia;
-import models.Pozo;
+import models.*;
 import play.libs.Json;
 import play.mvc.Controller;
 import play.mvc.Result;
@@ -181,6 +179,73 @@ public class PozoController extends Controller{
         );
     }
 
-
+    public CompletionStage<Result> createMensajeEnergia(Long idPozo){
+        MessageDispatcher jdbcDispatcher = AkkaDispatcher.jdbcDispatcher;
+        JsonNode nMensaje = request().body().asJson();
+        MensajeEnergia mensajeEnergia = Json.fromJson( nMensaje , MensajeEnergia.class ) ;
+        return CompletableFuture.supplyAsync(
+                ()->{
+                    Pozo pozo = Pozo.FINDER.byId(idPozo);
+                    pozo.getSensorEnergia().add(mensajeEnergia);
+                    mensajeEnergia.save();
+                    return mensajeEnergia;
+                }
+        ).thenApply(
+                mensaje -> {
+                    return ok(Json.toJson(mensaje));
+                }
+        );
+    }
+    public CompletionStage<Result> createMensajeCaudal(Long idPozo){
+        MessageDispatcher jdbcDispatcher = AkkaDispatcher.jdbcDispatcher;
+        JsonNode nMensaje = request().body().asJson();
+        MensajeCaudal mensajeCaudal = Json.fromJson( nMensaje , MensajeCaudal.class ) ;
+        return CompletableFuture.supplyAsync(
+                ()->{
+                    Pozo pozo = Pozo.FINDER.byId(idPozo);
+                    pozo.getSensorCaudal().add(mensajeCaudal);
+                    mensajeCaudal.save();
+                    return mensajeCaudal;
+                }
+        ).thenApply(
+                mensaje -> {
+                    return ok(Json.toJson(mensaje));
+                }
+        );
+    }
+    public CompletionStage<Result> createMensajeEmergencia(Long idPozo){
+        MessageDispatcher jdbcDispatcher = AkkaDispatcher.jdbcDispatcher;
+        JsonNode nMensaje = request().body().asJson();
+        MensajeEmergencia mensajeEmergencia = Json.fromJson( nMensaje , MensajeEmergencia.class ) ;
+        return CompletableFuture.supplyAsync(
+                ()->{
+                    Pozo pozo = Pozo.FINDER.byId(idPozo);
+                    pozo.getSensorEmergencia().add(mensajeEmergencia);
+                    mensajeEmergencia.save();
+                    return mensajeEmergencia;
+                }
+        ).thenApply(
+                mensaje -> {
+                    return ok(Json.toJson(mensaje));
+                }
+        );
+    }
+    public CompletionStage<Result> createMensajeTemperatura(Long idPozo){
+        MessageDispatcher jdbcDispatcher = AkkaDispatcher.jdbcDispatcher;
+        JsonNode nMensaje = request().body().asJson();
+        MensajeTemperatura mensajeTemperatura = Json.fromJson( nMensaje , MensajeTemperatura.class ) ;
+        return CompletableFuture.supplyAsync(
+                ()->{
+                    Pozo pozo = Pozo.FINDER.byId(idPozo);
+                    pozo.getSensorTemperatura().add(mensajeTemperatura);
+                    mensajeTemperatura.save();
+                    return mensajeTemperatura;
+                }
+        ).thenApply(
+                mensaje -> {
+                    return ok(Json.toJson(mensaje));
+                }
+        );
+    }
 
 }

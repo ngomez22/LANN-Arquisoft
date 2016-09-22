@@ -11,11 +11,6 @@ create table campos (
   constraint pk_campos primary key (id))
 ;
 
-create table mensaje (
-  id                        bigserial not null,
-  constraint pk_mensaje primary key (id))
-;
-
 create table reportes_caudal (
   id                        bigserial not null,
   pozo_id                   bigint,
@@ -99,8 +94,6 @@ create index ix_sensores_pozo_7 on sensores (pozo_id);
 # --- !Downs
 
 drop table if exists campos cascade;
-
-drop table if exists mensaje cascade;
 
 drop table if exists reportes_caudal cascade;
 
