@@ -16,7 +16,8 @@ public class Campo extends Model{
     @GeneratedValue
     private Long id;
 
-    @OneToOne
+    @OneToOne(mappedBy = "id")
+    @JoinColumn(name = "id")
     private Usuario jefeDeCampo;
 
     private String region;
@@ -37,8 +38,9 @@ public class Campo extends Model{
         this.id = id;
     };
 
-    public Campo(Usuario jefe, String regionN){
+    public Campo(Usuario jefe, String regionN, List<Pozo> pozos){
         jefeDeCampo = jefe;
+        this.pozos = pozos;
         region = regionN;
     }
 
@@ -73,7 +75,6 @@ public class Campo extends Model{
     public void setPozos(List<Pozo> pozos) {
         this.pozos = pozos;
     }
-
 
     @Override
     public String toString() {

@@ -54,6 +54,41 @@ public class PozoController extends Controller{
         );
     }
 
+    public CompletionStage<Result> updatePozo(Long idPozo){
+        MessageDispatcher jdbcDispatcher = AkkaDispatcher.jdbcDispatcher;
+        JsonNode nPozo= request().body().asJson();
+        Pozo pozo = Json.fromJson( nPozo , Pozo.class ) ;
+        return CompletableFuture.supplyAsync(
+                ()->{
+                    Pozo pozo1 = Pozo.FINDER.byId(idPozo);
+                    pozo1.setCampo(pozo.getCampo());
+                    pozo1.setEstado(pozo.getEstado());
+                    pozo1.save();
+                    return pozo1;
+
+                }
+        ).thenApply(
+                ppozo-> {
+                    return ok(Json.toJson(ppozo));
+                }
+        );
+    }
+
+    public CompletionStage<Result> deletePozo(Long idPozo){
+        MessageDispatcher jdbcDispatcher = AkkaDispatcher.jdbcDispatcher;
+
+        return CompletableFuture.supplyAsync(
+                ()-> {
+                    Pozo.FINDER.deleteById(idPozo);
+                    return idPozo;
+                }
+        ).thenApply(
+                pozo -> {
+                    return ok(Json.toJson(pozo));
+                }
+        );
+    }
+
     public CompletionStage<Result> clausurarPozo(Long idPozo){
         MessageDispatcher jdbcDispatcher = AkkaDispatcher.jdbcDispatcher;
 
@@ -102,41 +137,6 @@ public class PozoController extends Controller{
         ).thenApply(
                 ppozo-> {
                     return ok(Json.toJson(ppozo));
-                }
-        );
-    }
-
-    public CompletionStage<Result> updatePozo(Long idPozo){
-        MessageDispatcher jdbcDispatcher = AkkaDispatcher.jdbcDispatcher;
-        JsonNode nPozo= request().body().asJson();
-        Pozo pozo = Json.fromJson( nPozo , Pozo.class ) ;
-        return CompletableFuture.supplyAsync(
-                ()->{
-                    Pozo pozo1 = Pozo.FINDER.byId(idPozo);
-                    pozo1.setCampo(pozo.getCampo());
-                    pozo1.setEstado(pozo.getEstado());
-                    pozo1.save();
-                    return pozo1;
-
-                }
-        ).thenApply(
-                ppozo-> {
-                    return ok(Json.toJson(ppozo));
-                }
-        );
-    }
-
-    public CompletionStage<Result> deletePozo(Long idPozo){
-        MessageDispatcher jdbcDispatcher = AkkaDispatcher.jdbcDispatcher;
-
-        return CompletableFuture.supplyAsync(
-                ()-> {
-                    Pozo.FINDER.deleteById(idPozo);
-                    return idPozo;
-                }
-        ).thenApply(
-                pozo -> {
-                    return ok(Json.toJson(pozo));
                 }
         );
     }
