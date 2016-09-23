@@ -59,4 +59,4 @@ DELETE  /zona/:idZona                   controllers.ZonaController.deleteZona(id
 PUT     /zona/:idZona                   controllers.ZonaController.updateZona(idZona: Long)
 
 GET     /registroEnergiaDiario/:idPozo/:fecha   controllers.PozoController.registroEnergiaDiario(idPozo: Long,fecha: String)
-
+GET     /registroEnergiaPorFecha/:idPozo/:fecha1/:fecha2   controllers.PozoController.registroEnergiaPorFechas(idPozo: Long,fecha1: String,fecha2: String)

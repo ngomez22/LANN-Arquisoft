@@ -156,6 +156,7 @@ public class PozoController extends Controller{
         );
     }
 
+   /*
     public CompletionStage<Result> registroEnergiaDiario(Long idPozo,String dia){
 
         MessageDispatcher jdbcDispatcher = AkkaDispatcher.jdbcDispatcher;
@@ -178,6 +179,78 @@ public class PozoController extends Controller{
                 }
         );
     }
+*/
+
+    public CompletionStage<Result> registroEnergiaDiario(Long idPozo, String dia){
+
+        MessageDispatcher jdbcDispatcher = AkkaDispatcher.jdbcDispatcher;
+
+        return CompletableFuture.supplyAsync(
+                ()-> {
+                    SimpleDateFormat df = new SimpleDateFormat("dd-MM-YYYY");
+                    Date fecha=null;
+                    Date fecha3 = null;
+                    try {
+                        fecha = df.parse(dia);
+                        String[] dias = dia.split("-");
+                        int a = Integer.parseInt(dias[0]);
+                        String fe = null;
+                        if(27>=a)
+                        {
+                            a++;
+                            fe = ""+a;
+                        }
+                        else
+                        {
+                            fe= "0"+1;
+                        }
+                        String fecha2=fe+"-"+dias[1]+"-"+dias[2];
+                        fecha3 = df.parse(fecha2);
+                    } catch (ParseException e) {
+                        e.printStackTrace();
+                    }
+
+                    List<MensajeEnergia> mensaje = (List<MensajeEnergia>) MensajeEnergia.FINDER.where().eq("pozo_id",idPozo).conjunction()
+                            .where().between("fecha_envio",fecha,fecha3);
+                    //.eq("fecha_envio",fecha).findList();
+                    return mensaje;
+                }
+        ).thenApply(
+                mensajes->{
+                    return ok(Json.toJson(mensajes));
+                }
+        );
+    }
+
+    public CompletionStage<Result> registroEnergiaPorFechas(Long idPozo, String dia, String dia2){
+
+        MessageDispatcher jdbcDispatcher = AkkaDispatcher.jdbcDispatcher;
+
+        return CompletableFuture.supplyAsync(
+                ()-> {
+                    SimpleDateFormat df = new SimpleDateFormat("dd-MM-YYYY");
+                    Date fecha=null;
+                    Date fecha2 = null;
+                    try {
+                        fecha = df.parse(dia);
+                        String[] dias = dia.split("-");
+                        fecha2 = df.parse(dia2);
+                    } catch (ParseException e) {
+                        e.printStackTrace();
+                    }
+
+                    List<MensajeEnergia> mensaje = (List<MensajeEnergia>) MensajeEnergia.FINDER.where().eq("pozo_id",idPozo).conjunction()
+                            .where().between("fecha_envio",fecha,fecha2);
+                    //.eq("fecha_envio",fecha).findList();
+                    return mensaje;
+                }
+        ).thenApply(
+                mensajes->{
+                    return ok(Json.toJson(mensajes));
+                }
+        );
+    }
+
 
     public CompletionStage<Result> createMensajeEnergia(Long idPozo){
         MessageDispatcher jdbcDispatcher = AkkaDispatcher.jdbcDispatcher;
