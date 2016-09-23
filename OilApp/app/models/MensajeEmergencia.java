@@ -22,7 +22,6 @@ public class MensajeEmergencia extends Model {
     private Date fechaEnvio;
 
     @ManyToOne
-    @JoinColumn(name="id")
     private Pozo pozo;
 
     private String emergencia;

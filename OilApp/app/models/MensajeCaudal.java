@@ -20,7 +20,6 @@ public class MensajeCaudal extends Model {
     private Long id;
 
     @ManyToOne
-    @JoinColumn(name="id")
     private Pozo pozo;
 
     private Date fechaEnvio;

@@ -17,7 +17,7 @@ public class Campo extends Model{
     private Long id;
 
     @OneToOne
-    @JoinColumn(name = "id")
+    //@JoinColumn(name = "id")
     private Usuario jefeDeCampo;
 
     private String region;

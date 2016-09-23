@@ -28,11 +28,10 @@ GET     /energia                        controllers.MensajeController.getMensaje
 POST    /energia                        controllers.MensajeController.createMensajeEnergia
 GET     /temperatura                    controllers.MensajeController.getMensajesTemperatura
 POST    /temperatura                    controllers.MensajeController.createMensajeTemperatura
-
-POST    /caudal/:idPozo                 controllers.PozoController.createMensajeCaudal(idPozo: Long)
-POST    /emergencia/:idPozo             controllers.PozoController.createMensajeEmergencia(idPozo: Long)
-POST    /energia/:idPozo                controllers.PozoController.createMensajeEnergia(idPozo: Long)
-POST    /temperatura/:idPozo            controllers.PozoController.createMensajeTemperatura(idPozo: Long)
+#POST    /caudal/:idPozo                 controllers.PozoController.createMensajeCaudal(idPozo: Long)
+#POST    /emergencia/:idPozo             controllers.PozoController.createMensajeEmergencia(idPozo: Long)
+#POST    /energia/:idPozo                controllers.PozoController.createMensajeEnergia(idPozo: Long)
+#POST    /temperatura/:idPozo            controllers.PozoController.createMensajeTemperatura(idPozo: Long)
 
 #Pozo routes
 GET     /pozos                          controllers.PozoController.getPozos
@@ -43,8 +42,6 @@ GET     /pozo/clausurar/:idPozo         controllers.PozoController.clausurarPozo
 GET     /pozo/detener/:idPozo           controllers.PozoController.detenerPozo(idPozo: Long)
 GET     /pozo/reabrir/:idPozo           controllers.PozoController.reabrirPozo(idPozo: Long)
 GET     /pozo/registroCaudal/:idPozo    controllers.PozoController.registroCaudalDiario(idPozo:Long)
-
-
 
 #Campo routes
 GET     /campos                         controllers.CampoController.getCampos

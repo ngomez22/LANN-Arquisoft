@@ -17,17 +17,14 @@ public class Pozo extends Model{
     private Long id;
 
     @OneToMany(mappedBy ="pozo")
-    @JoinColumn(name="pozo_id")
     @JsonBackReference(value = "reportes_Emergencia")
     private List<MensajeEmergencia> sensorEmergencia;
 
     @OneToMany(mappedBy ="pozo")
-    @JoinColumn(name="pozo_id")
     @JsonBackReference(value = "reportes_Caudal")
     private List<MensajeCaudal> sensorCaudal;
 
     @OneToMany(mappedBy ="pozo")
-    @JoinColumn(name="pozo_id")
     @JsonBackReference(value = "reportes_Energia")
     private List<MensajeEnergia> sensorEnergia;
 
