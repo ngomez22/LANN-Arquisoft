@@ -79,6 +79,8 @@ public class MensajeEmergencia extends Model {
         this.emergencia = emergencia;
     }
 
+    public void setPozo(Pozo pozo){this.pozo=pozo;}
+
     @Override
     public String toString() {
         return "MensajeEmergencia{" +

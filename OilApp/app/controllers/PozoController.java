@@ -187,6 +187,7 @@ public class PozoController extends Controller{
                 ()->{
                     Pozo pozo = Pozo.FINDER.byId(idPozo);
                     pozo.getSensorEnergia().add(mensajeEnergia);
+                    mensajeEnergia.setPozo(pozo);
                     mensajeEnergia.save();
                     return mensajeEnergia;
                 }
@@ -204,6 +205,7 @@ public class PozoController extends Controller{
                 ()->{
                     Pozo pozo = Pozo.FINDER.byId(idPozo);
                     pozo.getSensorCaudal().add(mensajeCaudal);
+                    mensajeCaudal.setPozo(pozo);
                     mensajeCaudal.save();
                     return mensajeCaudal;
                 }
@@ -221,6 +223,7 @@ public class PozoController extends Controller{
                 ()->{
                     Pozo pozo = Pozo.FINDER.byId(idPozo);
                     pozo.getSensorEmergencia().add(mensajeEmergencia);
+                    mensajeEmergencia.setPozo(pozo);
                     mensajeEmergencia.save();
                     return mensajeEmergencia;
                 }
@@ -238,6 +241,7 @@ public class PozoController extends Controller{
                 ()->{
                     Pozo pozo = Pozo.FINDER.byId(idPozo);
                     pozo.getSensorTemperatura().add(mensajeTemperatura);
+                    mensajeTemperatura.setPozo(pozo);
                     mensajeTemperatura.save();
                     return mensajeTemperatura;
                 }

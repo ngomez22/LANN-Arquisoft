@@ -79,6 +79,8 @@ public class MensajeCaudal extends Model {
         this.caudal = caudal;
     }
 
+    public void setPozo(Pozo pozo){this.pozo=pozo;}
+
     @Override
     public String toString() {
         return "MensajeCaudal{" +

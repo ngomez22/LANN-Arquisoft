@@ -84,6 +84,8 @@ public class MensajeEnergia extends Model {
 
     public Pozo getPozo(){ return pozo;}
 
+    public void setPozo(Pozo pozo){this.pozo=pozo;}
+
     @Override
     public String toString() {
         return "MensajeEnergia{" +
