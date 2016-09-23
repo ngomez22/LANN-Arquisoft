@@ -18,19 +18,19 @@ public class Pozo extends Model{
     private Long id;
 
     @OneToMany(mappedBy ="pozo")
-    @JsonBackReference
+    @JsonBackReference(value = "reportes_Emergencia")
     private List<MensajeEmergencia> sensorEmergencia;
 
     @OneToMany(mappedBy ="pozo")
-    @JsonBackReference
+    @JsonBackReference(value = "reportes_Caudal")
     private List<MensajeCaudal> sensorCaudal;
 
     @OneToMany(mappedBy ="pozo")
-    @JsonBackReference
+    @JsonBackReference(value = "reportes_Energia")
     private List<MensajeEnergia> sensorEnergia;
 
     @OneToMany(mappedBy ="pozo")
-    @JsonBackReference
+    @JsonBackReference(value = "reportes_Temperatura")
     private List<MensajeTemperatura> sensorTemperatura;
 
     private String estado;
@@ -118,9 +118,7 @@ public class Pozo extends Model{
         {
             return puede;
         }
-
-            return puede;
-
+        return puede;
     }
 
     @Override
