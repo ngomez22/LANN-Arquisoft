@@ -49,7 +49,7 @@ GET     /pozo/registroCaudal/:idPozo    controllers.PozoController.registroCauda
 #Campo routes
 GET     /campos                         controllers.CampoController.getCampos
 POST    /campo                          controllers.CampoController.createCampo
-    DELETE  /campo/:idCampo             controllers.CampoController.deleteCampo(idCampo: Long)
+DELETE  /campo/:idCampo             controllers.CampoController.deleteCampo(idCampo: Long)
 PUT     /campo/:idCampo                 controllers.CampoController.updateCampo(idCampo: Long)
 
 #Zona routes

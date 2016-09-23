@@ -105,7 +105,7 @@ public class Pozo extends Model{
 
     public void reabrirPozo()
     {
-        if(this.estado==Pozo.PARADO)
+        if(this.estado.equals(Pozo.PARADO))
         {
             this.setEstado(Pozo.ENPRODUCCION);
         }
