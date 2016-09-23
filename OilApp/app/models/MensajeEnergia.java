@@ -16,7 +16,7 @@ public class MensajeEnergia extends Model {
     public static Finder<Long,MensajeEnergia> FINDER = new Finder<>(MensajeEnergia.class);
 
     @ManyToOne
-    @JsonBackReference
+    @JoinColumn(name="id")
     private Pozo pozo;
 
     @Id

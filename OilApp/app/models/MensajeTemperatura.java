@@ -1,7 +1,6 @@
 package models;
 
 import com.avaje.ebean.Model;
-import com.fasterxml.jackson.annotation.JsonBackReference;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -21,6 +20,7 @@ public class MensajeTemperatura extends Model{
     private Long id;
 
     @ManyToOne
+    @JoinColumn(name="id")
     private Pozo pozo;
 
     private Date fechaEnvio;

@@ -3,7 +3,6 @@ package models;
 
 import com.avaje.ebean.Model;
 import com.fasterxml.jackson.annotation.JsonBackReference;
-
 import javax.persistence.*;
 import java.util.List;
 
@@ -18,14 +17,17 @@ public class Pozo extends Model{
     private Long id;
 
     @OneToMany(mappedBy ="pozo")
+    @JoinColumn(name="pozo_id")
     @JsonBackReference(value = "reportes_Emergencia")
     private List<MensajeEmergencia> sensorEmergencia;
 
     @OneToMany(mappedBy ="pozo")
+    @JoinColumn(name="pozo_id")
     @JsonBackReference(value = "reportes_Caudal")
     private List<MensajeCaudal> sensorCaudal;
 
     @OneToMany(mappedBy ="pozo")
+    @JoinColumn(name="pozo_id")
     @JsonBackReference(value = "reportes_Energia")
     private List<MensajeEnergia> sensorEnergia;
 
@@ -70,7 +72,8 @@ public class Pozo extends Model{
     }
 
     public Campo getCampo() {
-        return campo ;}
+        return campo ;
+    }
 
     public void setCampo(Campo campo) {
         this.campo = campo;
@@ -85,7 +88,6 @@ public class Pozo extends Model{
     {
         this.setEstado(Pozo.PARADO);
     }
-
 
     public List<MensajeEmergencia> getSensorEmergencia() {
         return sensorEmergencia;
@@ -122,16 +124,13 @@ public class Pozo extends Model{
     }
 
     @Override
-    public String toString()
-    {
-        return "Pozo{"+"id:"+id+"," +
-                " estado:"+estado+", " +
-                "sensores[sensorEmergencia:"+sensorEmergencia.toString()+", " +
-                "sensorEnergia: "+sensorEnergia.toString()+", " +
-                "sensorTemperatura:"+ sensorTemperatura.toString()+", " +
-                "sensorCaudal:" +sensorCaudal.toString()+", " +
-                "campo:"+campo.toString()+"}";
+    public String toString() {
+        return "Pozo{" + "id:" + id + "," +
+                " estado:" + estado + ", " +
+                "sensores[sensorEmergencia:" + sensorEmergencia.toString() + ", " +
+                "sensorEnergia: " + sensorEnergia.toString() + ", " +
+                "sensorTemperatura:" + sensorTemperatura.toString() + ", " +
+                "sensorCaudal:" + sensorCaudal.toString() + ", " +
+                "campo:" + campo.toString() + "}";
     }
-
-
 }

@@ -22,13 +22,14 @@ public class MensajeEmergencia extends Model {
     private Date fechaEnvio;
 
     @ManyToOne
-    @JsonBackReference
+    @JoinColumn(name="id")
     private Pozo pozo;
 
     private String emergencia;
 
     public MensajeEmergencia() {
         id = null;
+        pozo = null;
         fechaEnvio = null;
         emergencia = "NO MESSAGE";
     }
@@ -38,8 +39,9 @@ public class MensajeEmergencia extends Model {
         this.id = id;
     }
 
-    public MensajeEmergencia(Long id, Date fechaEnvio, String emergencia) {
+    public MensajeEmergencia(Long id, Pozo pozo, Date fechaEnvio, String emergencia) {
         this.id = id;
+        this.pozo = pozo;
         this.fechaEnvio = fechaEnvio;
         this.emergencia= emergencia;
     }
@@ -77,6 +79,10 @@ public class MensajeEmergencia extends Model {
 
     public void setEmergencia(String emergencia) {
         this.emergencia = emergencia;
+    }
+
+    public Pozo getPozo() {
+        return pozo;
     }
 
     public void setPozo(Pozo pozo){this.pozo=pozo;}

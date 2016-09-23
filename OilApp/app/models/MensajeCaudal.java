@@ -20,7 +20,7 @@ public class MensajeCaudal extends Model {
     private Long id;
 
     @ManyToOne
-    @JsonBackReference
+    @JoinColumn(name="id")
     private Pozo pozo;
 
     private Date fechaEnvio;
@@ -29,6 +29,7 @@ public class MensajeCaudal extends Model {
 
     public MensajeCaudal() {
         id = null;
+        pozo = null;
         fechaEnvio = null;
         caudal = -1.0;
     }
@@ -38,8 +39,9 @@ public class MensajeCaudal extends Model {
         this.id = id;
     }
 
-    public MensajeCaudal(Long id, Date fechaEnvio, Double caudal) {
+    public MensajeCaudal(Long id, Pozo pozo, Date fechaEnvio, Double caudal) {
         this.id = id;
+        this.pozo = pozo;
         this.fechaEnvio = fechaEnvio;
         this.caudal = caudal;
     }
@@ -77,6 +79,10 @@ public class MensajeCaudal extends Model {
 
     public void setCaudal(double caudal) {
         this.caudal = caudal;
+    }
+
+    public Pozo getPozo(){
+        return pozo;
     }
 
     public void setPozo(Pozo pozo){this.pozo=pozo;}
