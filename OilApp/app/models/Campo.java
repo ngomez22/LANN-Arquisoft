@@ -16,7 +16,7 @@ public class Campo extends Model{
     @GeneratedValue
     private Long id;
 
-    @OneToOne(mappedBy = "id")
+    @OneToOne
     @JoinColumn(name = "id")
     private Usuario jefeDeCampo;
 
