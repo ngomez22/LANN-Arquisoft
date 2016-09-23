@@ -21,6 +21,7 @@ public class Campo extends Model{
 
     private String region;
 
+
     @OneToMany(mappedBy = "campo")
     @JsonBackReference
     private List<Pozo> pozos;
@@ -72,6 +73,7 @@ public class Campo extends Model{
     public void setPozos(List<Pozo> pozos) {
         this.pozos = pozos;
     }
+
 
     @Override
     public String toString() {

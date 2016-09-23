@@ -4,10 +4,17 @@ import akka.dispatch.MessageDispatcher;
 import com.fasterxml.jackson.databind.JsonNode;
 import dispatchers.AkkaDispatcher;
 import models.Campo;
+import models.MensajeCaudal;
+import models.MensajeEnergia;
+import models.Pozo;
 import play.libs.Json;
 import play.mvc.Controller;
 import play.mvc.Result;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.List;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.CompletionStage;
 
@@ -84,19 +91,65 @@ public class CampoController extends Controller{
                 }
         );
     }
-//    public CompletionStage<Result> registroEnergiaDiario(Long idCampo){
-//        MessageDispatcher jdbcDispatcher = AkkaDispatcher.jdbcDispatcher;
-//
-//        return CompletableFuture.supplyAsync(
-//                ()-> {
-//
-//                    List<Pozo> mensaje = Pozo.FINDER.where().eq("campo_id",idCampo);
-//                    return mensaje;
-//                }
-//        ).thenApply(
-//                mensajes->{
-//                    return ok(Json.toJson(mensajes));
-//                }
-//        );
-//    }
+
+    public CompletionStage<Result> registroCausalDiario(Long idCampo)
+    {
+        MessageDispatcher jdbcDispatcher = AkkaDispatcher.jdbcDispatcher;
+
+        return CompletableFuture.supplyAsync(
+                ()-> {
+                    List<Pozo> mensaje = Pozo.FINDER.where().eq("campo_id",idCampo).findList();
+                    return mensaje;
+                }
+        ).thenApply(
+                mensajes->{
+                    return ok(Json.toJson(mensajes));
+                }
+        );
+    }
+
+    public CompletionStage<Result> registroEnergiaDiario(Long idCampo, String dia) {
+        MessageDispatcher jdbcDispatcher = AkkaDispatcher.jdbcDispatcher;
+
+        return CompletableFuture.supplyAsync(
+                () -> {
+                    SimpleDateFormat df = new SimpleDateFormat("dd-MM-YYYY");
+                    Date fecha=null;
+                    try {
+                        fecha = df.parse(dia);
+                    } catch (ParseException e) {
+                        e.printStackTrace();
+                    }
+
+                    List<Pozo> mensaje = Pozo.FINDER.where().eq("campo_id", idCampo).eq("fecha_envio", fecha).findList();
+                    return mensaje;
+                }
+
+        ).thenApply(
+                mensaje -> {
+                    return ok(Json.toJson(mensaje));
+                }
+        );
+    }
+
+    public CompletionStage<Result> createMensajeEnergia(Long idCampo){
+        MessageDispatcher jdbcDispatcher = AkkaDispatcher.jdbcDispatcher;
+        JsonNode nMensaje = request().body().asJson();
+        Pozo pozo = Json.fromJson( nMensaje , Pozo.class ) ;
+        return CompletableFuture.supplyAsync(
+                ()->{
+                    Campo campo = Campo.FINDER.byId(idCampo);
+                    campo.getPozos().add(pozo);
+                    pozo.setCampo(campo);
+                    pozo.save();
+                    return pozo;
+                }
+        ).thenApply(
+                mensaje -> {
+                    return ok(Json.toJson(mensaje));
+                }
+        );
+    }
+
+
 }
