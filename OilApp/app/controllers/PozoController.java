@@ -141,46 +141,6 @@ public class PozoController extends Controller{
         );
     }
 
-    public CompletionStage<Result> registroCaudalDiario(Long idPozo){
-        MessageDispatcher jdbcDispatcher = AkkaDispatcher.jdbcDispatcher;
-
-        return CompletableFuture.supplyAsync(
-                ()-> {
-                    List<MensajeCaudal> mensaje = MensajeCaudal.FINDER.where().eq("pozo_id",idPozo).findList();
-                    return mensaje;
-                }
-        ).thenApply(
-                mensajes->{
-                    return ok(Json.toJson(mensajes));
-                }
-        );
-    }
-
-   /*
-    public CompletionStage<Result> registroEnergiaDiario(Long idPozo,String dia){
-
-        MessageDispatcher jdbcDispatcher = AkkaDispatcher.jdbcDispatcher;
-
-        return CompletableFuture.supplyAsync(
-                ()-> {
-                    SimpleDateFormat df = new SimpleDateFormat("dd-MM-YYYY");
-                    Date fecha=null;
-                    try {
-                        fecha = df.parse(dia);
-                    } catch (ParseException e) {
-                        e.printStackTrace();
-                    }
-                    List<MensajeEnergia> mensaje = MensajeEnergia.FINDER.where().eq("pozo_id",idPozo).eq("fecha_envio",fecha).findList();
-                    return mensaje;
-                }
-        ).thenApply(
-                mensajes->{
-                    return ok(Json.toJson(mensajes));
-                }
-        );
-    }
-*/
-
     public CompletionStage<Result> registroEnergiaDiario(Long idPozo, String dia){
 
         MessageDispatcher jdbcDispatcher = AkkaDispatcher.jdbcDispatcher;
@@ -192,27 +152,40 @@ public class PozoController extends Controller{
                     Date fecha3 = null;
                     try {
                         fecha = df.parse(dia);
-                        String[] dias = dia.split("-");
-                        int a = Integer.parseInt(dias[0]);
-                        String fe = null;
-                        if(27>=a)
-                        {
-                            a++;
-                            fe = ""+a;
-                        }
-                        else
-                        {
-                            fe= "0"+1;
-                        }
-                        String fecha2=fe+"-"+dias[1]+"-"+dias[2];
-                        fecha3 = df.parse(fecha2);
+                        long milis = fecha.getTime();
+                        milis -= 1000*60*60*24;
+                        fecha3 = new Date(milis);
                     } catch (ParseException e) {
                         e.printStackTrace();
                     }
+                    return MensajeEnergia.FINDER.where().eq("pozo_id",idPozo).conjunction().between("fecha_envio",fecha3,fecha);
+                }
+        ).thenApply(
+                mensajes->{
+                    return ok(Json.toJson(mensajes));
+                }
+        );
+    }
 
+    public CompletionStage<Result> registroEnergiaMensual(Long idPozo, String dia){
+
+        MessageDispatcher jdbcDispatcher = AkkaDispatcher.jdbcDispatcher;
+
+        return CompletableFuture.supplyAsync(
+                ()-> {
+                    SimpleDateFormat df = new SimpleDateFormat("dd-MM-YYYY");
+                    Date fecha=null;
+                    Date fecha3 = null;
+                    try {
+                        fecha = df.parse(dia);
+                        long milis = fecha.getTime();
+                        milis -= 1000*60*60*24*30;
+                        fecha3 = new Date(milis);
+                    } catch (ParseException e) {
+                        e.printStackTrace();
+                    }
                     List<MensajeEnergia> mensaje = (List<MensajeEnergia>) MensajeEnergia.FINDER.where().eq("pozo_id",idPozo).conjunction()
-                            .where().between("fecha_envio",fecha,fecha3);
-                    //.eq("fecha_envio",fecha).findList();
+                            .where().between("fecha_envio",fecha3,fecha);
                     return mensaje;
                 }
         ).thenApply(
@@ -247,80 +220,6 @@ public class PozoController extends Controller{
         ).thenApply(
                 mensajes->{
                     return ok(Json.toJson(mensajes));
-                }
-        );
-    }
-
-
-    public CompletionStage<Result> createMensajeEnergia(Long idPozo){
-        MessageDispatcher jdbcDispatcher = AkkaDispatcher.jdbcDispatcher;
-        JsonNode nMensaje = request().body().asJson();
-        MensajeEnergia mensajeEnergia = Json.fromJson( nMensaje , MensajeEnergia.class ) ;
-        return CompletableFuture.supplyAsync(
-                ()->{
-                    Pozo pozo = Pozo.FINDER.byId(idPozo);
-                    pozo.getSensorEnergia().add(mensajeEnergia);
-                    mensajeEnergia.setPozo(pozo);
-                    mensajeEnergia.save();
-                    return mensajeEnergia;
-                }
-        ).thenApply(
-                mensaje -> {
-                    return ok(Json.toJson(mensaje));
-                }
-        );
-    }
-    public CompletionStage<Result> createMensajeCaudal(Long idPozo){
-        MessageDispatcher jdbcDispatcher = AkkaDispatcher.jdbcDispatcher;
-        JsonNode nMensaje = request().body().asJson();
-        MensajeCaudal mensajeCaudal = Json.fromJson( nMensaje , MensajeCaudal.class ) ;
-        return CompletableFuture.supplyAsync(
-                ()->{
-                    Pozo pozo = Pozo.FINDER.byId(idPozo);
-                    pozo.getSensorCaudal().add(mensajeCaudal);
-                    mensajeCaudal.setPozo(pozo);
-                    mensajeCaudal.save();
-                    return mensajeCaudal;
-                }
-        ).thenApply(
-                mensaje -> {
-                    return ok(Json.toJson(mensaje));
-                }
-        );
-    }
-    public CompletionStage<Result> createMensajeEmergencia(Long idPozo){
-        MessageDispatcher jdbcDispatcher = AkkaDispatcher.jdbcDispatcher;
-        JsonNode nMensaje = request().body().asJson();
-        MensajeEmergencia mensajeEmergencia = Json.fromJson( nMensaje , MensajeEmergencia.class ) ;
-        return CompletableFuture.supplyAsync(
-                ()->{
-                    Pozo pozo = Pozo.FINDER.byId(idPozo);
-                    pozo.getSensorEmergencia().add(mensajeEmergencia);
-                    mensajeEmergencia.setPozo(pozo);
-                    mensajeEmergencia.save();
-                    return mensajeEmergencia;
-                }
-        ).thenApply(
-                mensaje -> {
-                    return ok(Json.toJson(mensaje));
-                }
-        );
-    }
-    public CompletionStage<Result> createMensajeTemperatura(Long idPozo){
-        MessageDispatcher jdbcDispatcher = AkkaDispatcher.jdbcDispatcher;
-        JsonNode nMensaje = request().body().asJson();
-        MensajeTemperatura mensajeTemperatura = Json.fromJson( nMensaje , MensajeTemperatura.class ) ;
-        return CompletableFuture.supplyAsync(
-                ()->{
-                    Pozo pozo = Pozo.FINDER.byId(idPozo);
-                    pozo.getSensorTemperatura().add(mensajeTemperatura);
-                    mensajeTemperatura.setPozo(pozo);
-                    mensajeTemperatura.save();
-                    return mensajeTemperatura;
-                }
-        ).thenApply(
-                mensaje -> {
-                    return ok(Json.toJson(mensaje));
                 }
         );
     }

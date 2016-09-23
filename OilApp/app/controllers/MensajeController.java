@@ -104,12 +104,9 @@ public class MensajeController extends Controller {
     public CompletionStage<Result> createMensajeEnergia(){
         MessageDispatcher jdbcDispatcher = AkkaDispatcher.jdbcDispatcher;
         JsonNode nMensaje = request().body().asJson();
-        JsonNode nPozo = request().body().asJson();
-        Pozo pozo = Json.fromJson(nPozo,Pozo.class);
         MensajeEnergia mensajeEnergia = Json.fromJson( nMensaje , MensajeEnergia.class ) ;
         return CompletableFuture.supplyAsync(
                 ()->{
-                    pozo.getSensorEnergia().add(mensajeEnergia);
                     mensajeEnergia.save();
                     return mensajeEnergia;
                 }

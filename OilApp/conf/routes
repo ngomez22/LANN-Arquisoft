@@ -3,57 +3,52 @@
 # ~~~~
 
 # An example controller showing a sample home page
-GET     /                               controllers.HomeController.index
+GET     /                                       controllers.HomeController.index
 # An example controller showing how to use dependency injection
-GET     /count                          controllers.CountController.count
+GET     /count                                  controllers.CountController.count
 # An example controller showing how to write asynchronous code
-GET     /message                        controllers.AsyncController.message
+GET     /message                                controllers.AsyncController.message
 
 # Map static resources from the /public folder to the /assets URL path
-GET     /assets/*file                   controllers.Assets.versioned(path="/public", file: Asset)
+GET     /assets/*file                           controllers.Assets.versioned(path="/public", file: Asset)
 
 # Usuario routes
-GET     /usuarios                       controllers.UsuarioController.getUsuarios
-GET     /usuario/:idUsuario             controllers.UsuarioController.getUsuario(idUsuario: Long)
-POST    /usuario                        controllers.UsuarioController.createUsuario
-PUT     /usuario/:idUsuario             controllers.UsuarioController.updateUsuario(idUsuario: Long)
-DELETE  /usuario/:idUsuario             controllers.UsuarioController.deleteUsuario(idUsuario: Long)
+GET     /usuarios                               controllers.UsuarioController.getUsuarios
+GET     /usuario/:idUsuario                     controllers.UsuarioController.getUsuario(idUsuario: Long)
+POST    /usuario                                controllers.UsuarioController.createUsuario
+PUT     /usuario/:idUsuario                     controllers.UsuarioController.updateUsuario(idUsuario: Long)
+DELETE  /usuario/:idUsuario                     controllers.UsuarioController.deleteUsuario(idUsuario: Long)
 
 # Mensaje routes
-GET     /caudal                         controllers.MensajeController.getMensajesCaudal
-POST    /caudal                         controllers.MensajeController.createMensajeCaudal
-GET     /emergencia                     controllers.MensajeController.getMensajesEmergencia
-POST    /emergencia                     controllers.MensajeController.createMensajeEmergencia
-GET     /energia                        controllers.MensajeController.getMensajesEnergia
-POST    /energia                        controllers.MensajeController.createMensajeEnergia
-GET     /temperatura                    controllers.MensajeController.getMensajesTemperatura
-POST    /temperatura                    controllers.MensajeController.createMensajeTemperatura
-#POST    /caudal/:idPozo                 controllers.PozoController.createMensajeCaudal(idPozo: Long)
-#POST    /emergencia/:idPozo             controllers.PozoController.createMensajeEmergencia(idPozo: Long)
-#POST    /energia/:idPozo                controllers.PozoController.createMensajeEnergia(idPozo: Long)
-#POST    /temperatura/:idPozo            controllers.PozoController.createMensajeTemperatura(idPozo: Long)
+GET     /caudal                                 controllers.MensajeController.getMensajesCaudal
+POST    /caudal                                 controllers.MensajeController.createMensajeCaudal
+GET     /emergencia                             controllers.MensajeController.getMensajesEmergencia
+POST    /emergencia                             controllers.MensajeController.createMensajeEmergencia
+GET     /energia                                controllers.MensajeController.getMensajesEnergia
+POST    /energia                                controllers.MensajeController.createMensajeEnergia
+GET     /temperatura                            controllers.MensajeController.getMensajesTemperatura
+POST    /temperatura                            controllers.MensajeController.createMensajeTemperatura
 
 #Pozo routes
-GET     /pozos                          controllers.PozoController.getPozos
-POST    /pozo                           controllers.PozoController.createPozo
-DELETE  /pozo/:idPozo                   controllers.PozoController.deletePozo(idPozo: Long)
-PUT     /pozo/:idPozo                   controllers.PozoController.updatePozo(idPozo: Long)
-GET     /pozo/clausurar/:idPozo         controllers.PozoController.clausurarPozo(idPozo: Long)
-GET     /pozo/detener/:idPozo           controllers.PozoController.detenerPozo(idPozo: Long)
-GET     /pozo/reabrir/:idPozo           controllers.PozoController.reabrirPozo(idPozo: Long)
-GET     /pozo/registroCaudal/:idPozo    controllers.PozoController.registroCaudalDiario(idPozo:Long)
+GET     /pozos                                  controllers.PozoController.getPozos
+POST    /pozo                                   controllers.PozoController.createPozo
+DELETE  /pozo/:idPozo                           controllers.PozoController.deletePozo(idPozo: Long)
+PUT     /pozo/:idPozo                           controllers.PozoController.updatePozo(idPozo: Long)
+GET     /pozo/clausurar/:idPozo                 controllers.PozoController.clausurarPozo(idPozo: Long)
+GET     /pozo/detener/:idPozo                   controllers.PozoController.detenerPozo(idPozo: Long)
+GET     /pozo/reabrir/:idPozo                   controllers.PozoController.reabrirPozo(idPozo: Long)
+GET     /energiaDiario/:idPozo/:fecha           controllers.PozoController.registroEnergiaDiario(idPozo: Long,fecha: String)
+GET     /energiaMes/:idPozo/:fecha              controllers.PozoController.registroEnergiaMensual(idPozo: Long,fecha: String)
+
 
 #Campo routes
-GET     /campos                         controllers.CampoController.getCampos
-POST    /campo                          controllers.CampoController.createCampo
-DELETE  /campo/:idCampo             controllers.CampoController.deleteCampo(idCampo: Long)
-PUT     /campo/:idCampo                 controllers.CampoController.updateCampo(idCampo: Long)
+GET     /campos                                 controllers.CampoController.getCampos
+POST    /campo                                  controllers.CampoController.createCampo
+DELETE  /campo/:idCampo                         controllers.CampoController.deleteCampo(idCampo: Long)
+PUT     /campo/:idCampo                         controllers.CampoController.updateCampo(idCampo: Long)
 
 #Zona routes
-GET     /zonas                          controllers.ZonaController.getZonas
-POST    /zona                           controllers.ZonaController.createZona
-DELETE  /zona/:idZona                   controllers.ZonaController.deleteZona(idZona: Long)
-PUT     /zona/:idZona                   controllers.ZonaController.updateZona(idZona: Long)
-
-GET     /registroEnergiaDiario/:idPozo/:fecha   controllers.PozoController.registroEnergiaDiario(idPozo: Long,fecha: String)
-GET     /registroEnergiaPorFecha/:idPozo/:fecha1/:fecha2   controllers.PozoController.registroEnergiaPorFechas(idPozo: Long,fecha1: String,fecha2: String)
+GET     /zonas                                  controllers.ZonaController.getZonas
+POST    /zona                                   controllers.ZonaController.createZona
+DELETE  /zona/:idZona                           controllers.ZonaController.deleteZona(idZona: Long)
+PUT     /zona/:idZona                           controllers.ZonaController.updateZona(idZona: Long)
