@@ -21,7 +21,6 @@ public class MensajeTemperatura extends Model{
     private Long id;
 
     @ManyToOne
-    @JsonBackReference
     private Pozo pozo;
 
     private Date fechaEnvio;

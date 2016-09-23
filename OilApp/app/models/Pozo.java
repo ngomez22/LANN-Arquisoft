@@ -18,21 +18,24 @@ public class Pozo extends Model{
     private Long id;
 
     @OneToMany(mappedBy ="pozo")
+    @JsonBackReference
     private List<MensajeEmergencia> sensorEmergencia;
 
     @OneToMany(mappedBy ="pozo")
+    @JsonBackReference
     private List<MensajeCaudal> sensorCaudal;
 
     @OneToMany(mappedBy ="pozo")
+    @JsonBackReference
     private List<MensajeEnergia> sensorEnergia;
 
     @OneToMany(mappedBy ="pozo")
+    @JsonBackReference
     private List<MensajeTemperatura> sensorTemperatura;
 
     private String estado;
 
     @ManyToOne
-    @JsonBackReference
     private Campo campo;
 
     private static final String CLAUSURADO ="Clausurado";

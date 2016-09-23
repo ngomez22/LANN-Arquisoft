@@ -1,6 +1,7 @@
 package models;
 
 import com.avaje.ebean.Model;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 
 import javax.persistence.*;
 import java.util.List;
@@ -21,6 +22,7 @@ public class Campo extends Model{
     private String region;
 
     @OneToMany(mappedBy = "campo")
+    @JsonBackReference
     private List<Pozo> pozos;
 
     public Campo() {
