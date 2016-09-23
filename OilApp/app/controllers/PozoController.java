@@ -3,7 +3,10 @@ package controllers;
 import akka.dispatch.MessageDispatcher;
 import com.fasterxml.jackson.databind.JsonNode;
 import dispatchers.AkkaDispatcher;
-import models.*;
+import models.MensajeCaudal;
+import models.MensajeEnergia;
+import models.MensajeTemperatura;
+import models.Pozo;
 import play.libs.Json;
 import play.mvc.Controller;
 import play.mvc.Result;
@@ -11,7 +14,6 @@ import play.mvc.Result;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.List;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.CompletionStage;
 
@@ -142,12 +144,10 @@ public class PozoController extends Controller{
     }
 
     public CompletionStage<Result> registroEnergiaDiario(Long idPozo, String dia){
-
         MessageDispatcher jdbcDispatcher = AkkaDispatcher.jdbcDispatcher;
-
         return CompletableFuture.supplyAsync(
                 ()-> {
-                    SimpleDateFormat df = new SimpleDateFormat("dd-MM-YYYY");
+                    SimpleDateFormat df = new SimpleDateFormat("dd-MM-yyyy");
                     Date fecha=null;
                     Date fecha3 = null;
                     try {
@@ -158,7 +158,7 @@ public class PozoController extends Controller{
                     } catch (ParseException e) {
                         e.printStackTrace();
                     }
-                    return MensajeEnergia.FINDER.where().eq("pozo_id",idPozo).conjunction().between("fecha_envio",fecha3,fecha);
+                    return MensajeEnergia.FINDER.where().eq("pozo_id",idPozo).conjunction().between("fecha_envio",fecha3,fecha).findList();
                 }
         ).thenApply(
                 mensajes->{
@@ -173,7 +173,7 @@ public class PozoController extends Controller{
 
         return CompletableFuture.supplyAsync(
                 ()-> {
-                    SimpleDateFormat df = new SimpleDateFormat("dd-MM-YYYY");
+                    SimpleDateFormat df = new SimpleDateFormat("dd-MM-yyyy");
                     Date fecha=null;
                     Date fecha3 = null;
                     try {
@@ -184,9 +184,7 @@ public class PozoController extends Controller{
                     } catch (ParseException e) {
                         e.printStackTrace();
                     }
-                    List<MensajeEnergia> mensaje = (List<MensajeEnergia>) MensajeEnergia.FINDER.where().eq("pozo_id",idPozo).conjunction()
-                            .where().between("fecha_envio",fecha3,fecha);
-                    return mensaje;
+                    return MensajeEnergia.FINDER.where().eq("pozo_id",idPozo).conjunction().between("fecha_envio",fecha3,fecha).findList();
                 }
         ).thenApply(
                 mensajes->{
@@ -211,11 +209,108 @@ public class PozoController extends Controller{
                     } catch (ParseException e) {
                         e.printStackTrace();
                     }
+                    return MensajeEnergia.FINDER.where().eq("pozo_id",idPozo).conjunction().between("fecha_envio",fecha,fecha2);
+                }
+        ).thenApply(
+                mensajes->{
+                    return ok(Json.toJson(mensajes));
+                }
+        );
+    }
 
-                    List<MensajeEnergia> mensaje = (List<MensajeEnergia>) MensajeEnergia.FINDER.where().eq("pozo_id",idPozo).conjunction()
-                            .where().between("fecha_envio",fecha,fecha2);
-                    //.eq("fecha_envio",fecha).findList();
-                    return mensaje;
+
+    public CompletionStage<Result> registroCaudalDiario(Long idPozo, String dia){
+        MessageDispatcher jdbcDispatcher = AkkaDispatcher.jdbcDispatcher;
+        return CompletableFuture.supplyAsync(
+                ()-> {
+                    SimpleDateFormat df = new SimpleDateFormat("dd-MM-yyyy");
+                    Date fecha=null;
+                    Date fecha3 = null;
+                    try {
+                        fecha = df.parse(dia);
+                        long milis = fecha.getTime();
+                        milis -= 1000*60*60*24;
+                        fecha3 = new Date(milis);
+                    } catch (ParseException e) {
+                        e.printStackTrace();
+                    }
+                    return MensajeCaudal.FINDER.where().eq("pozo_id",idPozo).conjunction().between("fecha_envio",fecha3,fecha).findList();
+                }
+        ).thenApply(
+                mensajes->{
+                    return ok(Json.toJson(mensajes));
+                }
+        );
+    }
+
+    public CompletionStage<Result> registroCaudalMensual(Long idPozo, String dia){
+
+        MessageDispatcher jdbcDispatcher = AkkaDispatcher.jdbcDispatcher;
+
+        return CompletableFuture.supplyAsync(
+                ()-> {
+                    SimpleDateFormat df = new SimpleDateFormat("dd-MM-yyyy");
+                    Date fecha=null;
+                    Date fecha3 = null;
+                    try {
+                        fecha = df.parse(dia);
+                        long milis = fecha.getTime();
+                        milis -= 1000*60*60*24*30;
+                        fecha3 = new Date(milis);
+                    } catch (ParseException e) {
+                        e.printStackTrace();
+                    }
+                    return MensajeCaudal.FINDER.where().eq("pozo_id",idPozo).conjunction().between("fecha_envio",fecha3,fecha).findList();
+                }
+        ).thenApply(
+                mensajes->{
+                    return ok(Json.toJson(mensajes));
+                }
+        );
+    }
+
+    public CompletionStage<Result> registroTemperaturaDiario(Long idPozo, String dia){
+        MessageDispatcher jdbcDispatcher = AkkaDispatcher.jdbcDispatcher;
+        return CompletableFuture.supplyAsync(
+                ()-> {
+                    SimpleDateFormat df = new SimpleDateFormat("dd-MM-yyyy");
+                    Date fecha=null;
+                    Date fecha3 = null;
+                    try {
+                        fecha = df.parse(dia);
+                        long milis = fecha.getTime();
+                        milis -= 1000*60*60*24;
+                        fecha3 = new Date(milis);
+                    } catch (ParseException e) {
+                        e.printStackTrace();
+                    }
+                    return MensajeTemperatura.FINDER.where().eq("pozo_id",idPozo).conjunction().between("fecha_envio",fecha3,fecha).findList();
+                }
+        ).thenApply(
+                mensajes->{
+                    return ok(Json.toJson(mensajes));
+                }
+        );
+    }
+
+    public CompletionStage<Result> registroTemperaturaMensual(Long idPozo, String dia){
+
+        MessageDispatcher jdbcDispatcher = AkkaDispatcher.jdbcDispatcher;
+
+        return CompletableFuture.supplyAsync(
+                ()-> {
+                    SimpleDateFormat df = new SimpleDateFormat("dd-MM-yyyy");
+                    Date fecha=null;
+                    Date fecha3 = null;
+                    try {
+                        fecha = df.parse(dia);
+                        long milis = fecha.getTime();
+                        milis -= 1000*60*60*24*30;
+                        fecha3 = new Date(milis);
+                    } catch (ParseException e) {
+                        e.printStackTrace();
+                    }
+                    return MensajeTemperatura.FINDER.where().eq("pozo_id",idPozo).conjunction().between("fecha_envio",fecha3,fecha).findList();
                 }
         ).thenApply(
                 mensajes->{

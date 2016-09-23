@@ -39,6 +39,10 @@ GET     /pozo/detener/:idPozo                   controllers.PozoController.deten
 GET     /pozo/reabrir/:idPozo                   controllers.PozoController.reabrirPozo(idPozo: Long)
 GET     /energiaDiario/:idPozo/:fecha           controllers.PozoController.registroEnergiaDiario(idPozo: Long,fecha: String)
 GET     /energiaMes/:idPozo/:fecha              controllers.PozoController.registroEnergiaMensual(idPozo: Long,fecha: String)
+GET     /caudalDiario/:idPozo/:fecha            controllers.PozoController.registroCaudalDiario(idPozo: Long,fecha: String)
+GET     /caudalMes/:idPozo/:fecha               controllers.PozoController.registroCaudalMensual(idPozo: Long,fecha: String)
+GET     /temperaturaDiaria/:idPozo/:fecha       controllers.PozoController.registroTemperaturaDiario(idPozo: Long,fecha: String)
+GET     /temperaturaMes/:idPozo/:fecha          controllers.PozoController.registroTemperaturaMensual(idPozo: Long,fecha: String)
 
 
 #Campo routes
@@ -46,6 +50,7 @@ GET     /campos                                 controllers.CampoController.getC
 POST    /campo                                  controllers.CampoController.createCampo
 DELETE  /campo/:idCampo                         controllers.CampoController.deleteCampo(idCampo: Long)
 PUT     /campo/:idCampo                         controllers.CampoController.updateCampo(idCampo: Long)
+
 
 #Zona routes
 GET     /zonas                                  controllers.ZonaController.getZonas
