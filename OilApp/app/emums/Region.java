@@ -3,7 +3,7 @@ package emums;
 /**
  * Nicolás Gómez
  */
-public enum Regiones {
+public enum Region {
     CARIBE,
     ANDINA,
     PACIFICO,

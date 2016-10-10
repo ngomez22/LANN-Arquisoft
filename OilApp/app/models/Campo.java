@@ -2,6 +2,7 @@ package models;
 
 import com.avaje.ebean.Model;
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import emums.Region;
 
 import javax.persistence.*;
 import java.util.List;
@@ -17,11 +18,10 @@ public class Campo extends Model{
     private Long id;
 
     @OneToOne
-    //@JoinColumn(name = "id")
     private Usuario jefeDeCampo;
 
-    private String region;
-
+    @Enumerated(EnumType.STRING)
+    private Region region;
 
     @OneToMany(mappedBy = "campo")
     @JsonBackReference
@@ -38,7 +38,7 @@ public class Campo extends Model{
         this.id = id;
     };
 
-    public Campo(Usuario jefe, String regionN, List<Pozo> pozos){
+    public Campo(Usuario jefe, Region regionN, List<Pozo> pozos){
         jefeDeCampo = jefe;
         this.pozos = pozos;
         region = regionN;
@@ -52,11 +52,11 @@ public class Campo extends Model{
         this.id = id;
     }
 
-    public String getRegion(){
+    public Region getRegion(){
         return region;
     }
 
-    public void setRegion(String regionN){
+    public void setRegion(Region regionN){
         region=regionN;
     }
 
