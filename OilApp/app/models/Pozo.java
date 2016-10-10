@@ -16,19 +16,23 @@ public class Pozo extends Model{
     @GeneratedValue
     private Long id;
 
-    @OneToMany(mappedBy ="pozo")
+    private Long latitud;
+
+    private Long longitud;
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy ="pozo")
     @JsonBackReference(value = "reportes_Emergencia")
     private List<MensajeEmergencia> sensorEmergencia;
 
-    @OneToMany(mappedBy ="pozo")
+    @OneToMany(fetch = FetchType.LAZY, mappedBy ="pozo")
     @JsonBackReference(value = "reportes_Caudal")
     private List<MensajeCaudal> sensorCaudal;
 
-    @OneToMany(mappedBy ="pozo")
+    @OneToMany(fetch = FetchType.LAZY, mappedBy ="pozo")
     @JsonBackReference(value = "reportes_Energia")
     private List<MensajeEnergia> sensorEnergia;
 
-    @OneToMany(mappedBy ="pozo")
+    @OneToMany(fetch = FetchType.LAZY, mappedBy ="pozo")
     @JsonBackReference(value = "reportes_Temperatura")
     private List<MensajeTemperatura> sensorTemperatura;
 
@@ -42,7 +46,9 @@ public class Pozo extends Model{
     private static final String PARADO ="Parado";
     private static final String ABIERTO ="Abierto";
 
-    public Pozo(List<MensajeEmergencia> sensorEmergencia, List<MensajeCaudal> sensorCaudal, List<MensajeEnergia> sensorEnergia, List<MensajeTemperatura> sensorTemperatura, String estado, Campo campo) {
+    public Pozo(Long latitud, Long longitud, List<MensajeEmergencia> sensorEmergencia, List<MensajeCaudal> sensorCaudal, List<MensajeEnergia> sensorEnergia, List<MensajeTemperatura> sensorTemperatura, String estado, Campo campo) {
+        this.latitud = latitud;
+        this.longitud = longitud;
         this.sensorEmergencia = sensorEmergencia;
         this.sensorCaudal = sensorCaudal;
         this.sensorEnergia = sensorEnergia;
@@ -51,13 +57,28 @@ public class Pozo extends Model{
         this.campo = campo;
     }
 
-
     public Long getId() {
         return id;
     }
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public Long getLatitud() {
+        return latitud;
+    }
+
+    public void setLatitud(Long latitud) {
+        this.latitud = latitud;
+    }
+
+    public Long getLongitud() {
+        return longitud;
+    }
+
+    public void setLongitud(Long longitud) {
+        this.longitud = longitud;
     }
 
     public String getEstado() {
@@ -110,14 +131,8 @@ public class Pozo extends Model{
         }
     }
 
-    public boolean generarReporte()
-    {
-        boolean puede=false;
-        if(this.estado==Pozo.ENPRODUCCION)
-        {
-            return puede;
-        }
-        return puede;
+    public boolean generarReporte() {
+        return this.estado==Pozo.ENPRODUCCION;
     }
 
     @Override
