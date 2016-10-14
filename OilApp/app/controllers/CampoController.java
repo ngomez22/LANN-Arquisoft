@@ -4,8 +4,6 @@ import akka.dispatch.MessageDispatcher;
 import com.fasterxml.jackson.databind.JsonNode;
 import dispatchers.AkkaDispatcher;
 import models.Campo;
-import models.MensajeCaudal;
-import models.MensajeEnergia;
 import models.Pozo;
 import play.libs.Json;
 import play.mvc.Controller;
@@ -92,7 +90,7 @@ public class CampoController extends Controller{
         );
     }
 
-    public CompletionStage<Result> registroCausalDiario(Long idCampo)
+    public CompletionStage<Result> registroCaudalDiario(Long idCampo)
     {
         MessageDispatcher jdbcDispatcher = AkkaDispatcher.jdbcDispatcher;
 
