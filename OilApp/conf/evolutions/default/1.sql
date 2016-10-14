@@ -6,7 +6,8 @@
 create table campos (
   id                        bigserial not null,
   jefe_de_campo_id          bigint,
-  region                    varchar(255),
+  region                    varchar(9),
+  constraint ck_campos_region check (region in ('CARIBE','ANDINA','PACIFICO','ORINOQUIA','AMAZONAS')),
   constraint uq_campos_jefe_de_campo_id unique (jefe_de_campo_id),
   constraint pk_campos primary key (id))
 ;
@@ -50,8 +51,11 @@ create table reportes_Temperatura (
 
 create table pozos (
   id                        bigserial not null,
-  estado                    varchar(255),
+  latitud                   bigint,
+  longitud                  bigint,
+  estado                    varchar(10),
   campo_id                  bigint,
+  constraint ck_pozos_estado check (estado in ('ABIERTO','PRODUCCION','PARADO','CLAUSURADO')),
   constraint pk_pozos primary key (id))
 ;
 

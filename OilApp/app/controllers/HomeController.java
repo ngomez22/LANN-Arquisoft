@@ -17,7 +17,11 @@ public class HomeController extends Controller {
      * <code>GET</code> request with a path of <code>/</code>.
      */
     public Result index() {
-        return ok(index.render("OilCol."));
+        return ok(index.render("OilApp"));
+    }
+
+    public Result homePage() {
+        return ok(home.render("OilApp"));
     }
 
 }
