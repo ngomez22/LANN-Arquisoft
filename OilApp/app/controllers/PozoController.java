@@ -143,6 +143,18 @@ public class PozoController extends Controller{
         );
     }
 
+    public Date diaAntes(Date dia){
+        long milis = dia.getTime();
+        milis -= 1000*60*60*24;
+        return new Date(milis);
+    }
+
+    public Date mesAntes(Date dia){
+        long milis = dia.getTime();
+        milis -= 1000*60*60*24*30;
+        return new Date(milis);
+    }
+
     public CompletionStage<Result> registroEnergiaDiario(Long idPozo, String dia){
         MessageDispatcher jdbcDispatcher = AkkaDispatcher.jdbcDispatcher;
         return CompletableFuture.supplyAsync(
@@ -152,9 +164,7 @@ public class PozoController extends Controller{
                     Date fecha3 = null;
                     try {
                         fecha = df.parse(dia);
-                        long milis = fecha.getTime();
-                        milis -= 1000*60*60*24;
-                        fecha3 = new Date(milis);
+                        fecha3 = diaAntes(fecha);
                     } catch (ParseException e) {
                         e.printStackTrace();
                     }
@@ -178,9 +188,7 @@ public class PozoController extends Controller{
                     Date fecha3 = null;
                     try {
                         fecha = df.parse(dia);
-                        long milis = fecha.getTime();
-                        milis -= 1000*60*60*24*30;
-                        fecha3 = new Date(milis);
+                        fecha3 = mesAntes(fecha);
                     } catch (ParseException e) {
                         e.printStackTrace();
                     }
@@ -204,7 +212,6 @@ public class PozoController extends Controller{
                     Date fecha2 = null;
                     try {
                         fecha = df.parse(dia);
-                        String[] dias = dia.split("-");
                         fecha2 = df.parse(dia2);
                     } catch (ParseException e) {
                         e.printStackTrace();
@@ -228,9 +235,7 @@ public class PozoController extends Controller{
                     Date fecha3 = null;
                     try {
                         fecha = df.parse(dia);
-                        long milis = fecha.getTime();
-                        milis -= 1000*60*60*24;
-                        fecha3 = new Date(milis);
+                        fecha3 = diaAntes(fecha);
                     } catch (ParseException e) {
                         e.printStackTrace();
                     }
@@ -254,9 +259,7 @@ public class PozoController extends Controller{
                     Date fecha3 = null;
                     try {
                         fecha = df.parse(dia);
-                        long milis = fecha.getTime();
-                        milis -= 1000*60*60*24*30;
-                        fecha3 = new Date(milis);
+                        fecha3 = mesAntes(fecha);
                     } catch (ParseException e) {
                         e.printStackTrace();
                     }
@@ -278,9 +281,7 @@ public class PozoController extends Controller{
                     Date fecha3 = null;
                     try {
                         fecha = df.parse(dia);
-                        long milis = fecha.getTime();
-                        milis -= 1000*60*60*24;
-                        fecha3 = new Date(milis);
+                        fecha3 = diaAntes(fecha);
                     } catch (ParseException e) {
                         e.printStackTrace();
                     }
@@ -304,9 +305,7 @@ public class PozoController extends Controller{
                     Date fecha3 = null;
                     try {
                         fecha = df.parse(dia);
-                        long milis = fecha.getTime();
-                        milis -= 1000*60*60*24*30;
-                        fecha3 = new Date(milis);
+                        fecha3 = mesAntes(fecha);
                     } catch (ParseException e) {
                         e.printStackTrace();
                     }
