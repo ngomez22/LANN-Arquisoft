@@ -3,8 +3,6 @@ package models;
 
 import com.avaje.ebean.Model;
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import emums.EstadoPozo;
-
 import javax.persistence.*;
 import java.util.List;
 
@@ -38,8 +36,7 @@ public class Pozo extends Model{
     @JsonBackReference(value = "reportes_Temperatura")
     private List<MensajeTemperatura> sensorTemperatura;
 
-    @Enumerated(EnumType.STRING)
-    private EstadoPozo estado;
+    private String estado;
 
     @ManyToOne
     private Campo campo;
@@ -49,7 +46,7 @@ public class Pozo extends Model{
     private static final String PARADO ="Parado";
     private static final String ABIERTO ="Abierto";
 
-    public Pozo(Long latitud, Long longitud, List<MensajeEmergencia> sensorEmergencia, List<MensajeCaudal> sensorCaudal, List<MensajeEnergia> sensorEnergia, List<MensajeTemperatura> sensorTemperatura, EstadoPozo estado, Campo campo) {
+    public Pozo(Long latitud, Long longitud, List<MensajeEmergencia> sensorEmergencia, List<MensajeCaudal> sensorCaudal, List<MensajeEnergia> sensorEnergia, List<MensajeTemperatura> sensorTemperatura, String estado, Campo campo) {
         this.latitud = latitud;
         this.longitud = longitud;
         this.sensorEmergencia = sensorEmergencia;
@@ -84,11 +81,11 @@ public class Pozo extends Model{
         this.longitud = longitud;
     }
 
-    public EstadoPozo getEstado() {
+    public String getEstado() {
         return estado;
     }
 
-    public void setEstado(EstadoPozo estado) {
+    public void setEstado(String estado) {
         this.estado = estado;
     }
 
@@ -102,12 +99,12 @@ public class Pozo extends Model{
 
     public void clausurarPozo()
     {
-        this.estado = EstadoPozo.CLAUSURADO;
+        this.estado = Pozo.CLAUSURADO;
     }
 
     public void detenerPozoEmergencia()
     {
-        this.setEstado(EstadoPozo.PARADO);
+        this.setEstado(Pozo.PARADO);
     }
 
     public List<MensajeEmergencia> getSensorEmergencia() {
@@ -128,14 +125,14 @@ public class Pozo extends Model{
 
     public void reabrirPozo()
     {
-        if(this.estado.equals(EstadoPozo.PARADO))
+        if(this.estado.equals(Pozo.PARADO))
         {
-            this.setEstado(EstadoPozo.PRODUCCION);
+            this.setEstado(Pozo.ENPRODUCCION);
         }
     }
 
     public boolean generarReporte() {
-        return this.estado==EstadoPozo.PRODUCCION;
+        return this.estado==Pozo.ENPRODUCCION;
     }
 
     @Override
