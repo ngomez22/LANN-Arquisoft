@@ -7,17 +7,90 @@
 @(title: String)(content: Html)
 
 <!DOCTYPE html>
-<html lang="en">
+<html>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
     <head>
-        @* Here's where we render the page title `String`. *@
         <title>@title</title>
-        <link rel="stylesheet" media="screen" href="@routes.Assets.versioned("stylesheets/main.css")">
-        <link rel="shortcut icon" type="image/png" href="@routes.Assets.versioned("images/favicon.png")">
-        <script src="@routes.Assets.versioned("javascripts/hello.js")" type="text/javascript"></script>
-    </head>
+        <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css"/>
+        <link href="public/stylesheets/modern-business.css" rel="stylesheet">
+        <link href="public/stylesheets/font-awesome.min.css" rel="stylesheet" type="text/css">
+    </head>|
     <body>
-        @* And here's where we render the `Html` object containing
-         * the page content. *@
+        <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+            <div class="container">
+                    <!-- Brand and toggle get grouped for better mobile display -->
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="index.html">Inicio</a>
+                </div>
+                    <!-- Collect the nav links, forms, and other content for toggling -->
+                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                    <ul class="nav navbar-nav navbar-right">
+                        <li>
+                            <a href="about.html">Acerca</a>
+                        </li>
+                        <li>
+                            <a href="services.html">Servicios</a>
+                        </li>
+                        <li>
+                            <a href="contact.html">Contacto</a>
+                        </li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Reportes <b class="caret"></b></a>
+                            <ul class="dropdown-menu">
+                                <li>
+                                    <a href="portfolio-1-col.html">Energía</a>
+                                </li>
+                                <li>
+                                    <a href="portfolio-2-col.html">Temperatura</a>
+                                </li>
+                                <li>
+                                    <a href="portfolio-3-col.html">Caudal</a>
+                                </li>
+                                <li>
+                                    <a href="portfolio-4-col.html">Emergencias</a>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+                    <!-- /.navbar-collapse -->
+            </div>
+                <!-- /.container -->
+        </nav>
+        <div style="padding:20px">
         @content
+                <!-- Call to Action Section -->
+            <div class="well">
+                <div class="row">
+                    <div class="col-md-12">
+                        <p>Capa de presentación para el proyecto realizado por el grupo LANN</p>
+                    </div>
+                </div>
+            </div>
+
+            <hr>
+
+                <!-- Footer -->
+            <footer>
+                <div class="row">
+                    <div class="col-lg-12">
+                        <p>Arquitecutra y diseño de Software 2016-2</p>
+                    </div>
+                </div>
+            </footer>
+            <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+            <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.23/angular.min.js"></script>
+            <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+        </div>
     </body>
 </html>
