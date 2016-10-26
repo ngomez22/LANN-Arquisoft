@@ -9,7 +9,7 @@
             <!-- Page Heading/Breadcrumbs -->
         <div class="row">
             <div class="col-lg-12">
-                <h1 class="page-header">Acerca</h1>
+                <h1 class="page-header">Acerca de OilCol</h1>
             </div>
         </div>
             <!-- /.row -->
@@ -22,7 +22,7 @@
             @for(usuario<-usuarios){
             <div class="col-md-4 text-center">
                 <div class="thumbnail">
-                    <img class="img-responsive" src=@usuario.getAvatar() alt="">
+                    <img class="img-responsive" height="150" width="250" src="@usuario.getAvatar()" >
                     <div class="caption">
                         <h3>@usuario.getNombre()<br>
                             <small>@usuario.getCargo</small>
@@ -39,6 +39,7 @@
                 </div>
             </div>
             }
+
         </div>
             <!-- /.row -->
     </div>

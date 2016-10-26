@@ -76,6 +76,7 @@ public class Campo extends Model{
         this.pozos = pozos;
     }
 
+
     @Override
     public String toString() {
         return "Campo{" +

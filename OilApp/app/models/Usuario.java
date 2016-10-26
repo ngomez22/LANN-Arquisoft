@@ -11,6 +11,8 @@ import javax.persistence.*;
 @Table(name = "usuarios")
 public class Usuario extends Model{
 
+    public static final String DEFAULT_AVATAR = "http://i.imgur.com/u0gpu69.png";
+
     public static Model.Finder<Long,Usuario> FINDER = new Model.Finder<>(Usuario.class);
 
     @Id
@@ -31,14 +33,13 @@ public class Usuario extends Model{
         this.id = null;
         this.nombre = "NO NAME";
         this.nivelAcceso = -1;
-        this.avatar = null;
+        this.avatar = DEFAULT_AVATAR;
         this.edad= -1;
         this.cargo = null;
     }
     public Usuario(Long id) {
         this();
         this.id = id;
-        this.avatar = "http://imgur.com/u0gpu69";
     }
 
     public Usuario(Long id, String nombre, Integer nivelAcceso, String avatar, Integer edad, String cargo) {
