@@ -2,10 +2,10 @@
  * This template takes a single argument, a String containing a
  * message to display.
  *@
-@(message: String)
+@(usuarios:List[Usuario])
 
 @main("OilCol S.A") {
-    <div ng-app class="container">
+    <div class="container">
             <!-- Page Heading/Breadcrumbs -->
         <div class="row">
             <div class="col-lg-12">
@@ -19,14 +19,14 @@
             <div class="col-lg-12">
                 <h2 class="page-header">Nuestro equipo</h2>
             </div>
+            @for(usuario<-usuarios){
             <div class="col-md-4 text-center">
                 <div class="thumbnail">
-                    <img class="img-responsive" src="http://placehold.it/750x450" alt="">
+                    <img class="img-responsive" src=@usuario.getAvatar() alt="">
                     <div class="caption">
-                        <h3>John Smith<br>
-                            <small>Job Title</small>
+                        <h3>@usuario.getNombre()<br>
+                            <small>@usuario.getCargo</small>
                         </h3>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Iste saepe et quisquam nesciunt maxime.</p>
                         <ul class="list-inline">
                             <li><a href="#"><i class="fa fa-2x fa-facebook-square"></i></a>
                             </li>
@@ -38,6 +38,7 @@
                     </div>
                 </div>
             </div>
+            }
         </div>
             <!-- /.row -->
     </div>

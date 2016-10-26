@@ -7,6 +7,8 @@ import models.Usuario;
 import play.libs.Json;
 import play.mvc.Controller;
 import play.mvc.Result;
+
+import java.util.List;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.CompletionStage;
 
@@ -30,6 +32,10 @@ public class UsuarioController extends Controller {
                             return ok(toJson(usuarioEntities));
                         }
                 );
+    }
+
+    public static List<Usuario> fetchUsuarios() {
+        return Usuario.FINDER.all();
     }
 
     public CompletionStage<Result> createUsuario(){

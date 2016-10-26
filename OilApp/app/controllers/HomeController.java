@@ -20,6 +20,14 @@ public class HomeController extends Controller {
         return ok(index.render("OilCol"));
     }
 
-    public Result about() { return ok(about.render("Hola, prueba"));}
+    public Result about() { return ok(about.render(UsuarioController.fetchUsuarios()));}
+
+    public Result services() {
+        return ok(services.render("Hola"));
+    }
+
+    public Result resources() {
+        return ok(resources.render("Hola"));
+    }
 
 }
