@@ -23,11 +23,17 @@ public class Usuario extends Model{
 
     private String avatar;
 
+    private Integer edad;
+
+    private String cargo;
+
     public Usuario() {
         this.id = null;
         this.nombre = "NO NAME";
         this.nivelAcceso = -1;
         this.avatar = null;
+        this.edad= -1;
+        this.cargo = null;
     }
     public Usuario(Long id) {
         this();
@@ -35,11 +41,13 @@ public class Usuario extends Model{
         this.avatar = "http://imgur.com/u0gpu69";
     }
 
-    public Usuario(Long id, String nombre, Integer nivelAcceso, String avatar) {
+    public Usuario(Long id, String nombre, Integer nivelAcceso, String avatar, Integer edad, String cargo) {
         this.id = id;
         this.nombre = nombre;
         this.nivelAcceso = nivelAcceso;
         this.avatar = avatar;
+        this.edad = edad;
+        this.cargo = cargo;
     }
 
     public Long getId() {
@@ -72,6 +80,22 @@ public class Usuario extends Model{
 
     public void setAvatar(String avatar) {
         this.avatar = avatar;
+    }
+
+    public Integer getEdad() {
+        return edad;
+    }
+
+    public void setEdad(Integer edad) {
+        this.edad = edad;
+    }
+
+    public String getCargo() {
+        return cargo;
+    }
+
+    public void setCargo(String cargo) {
+        this.cargo = cargo;
     }
 
     @Override

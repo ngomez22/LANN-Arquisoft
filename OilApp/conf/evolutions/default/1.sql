@@ -66,6 +66,9 @@ create table usuarios (
   id                        bigint not null,
   nombre                    varchar(255),
   nivel_acceso              integer,
+  avatar                    varchar(255),
+  edad                      integer,
+  cargo                     varchar(255),
   constraint pk_usuarios primary key (id))
 ;
 
