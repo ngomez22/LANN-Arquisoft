@@ -4,7 +4,6 @@
 
 # An example controller showing a sample home page
 GET     /                                       controllers.HomeController.index
-GET     /about                                  controllers.HomeController.about
 GET     /services                               controllers.HomeController.services
 GET     /resources                              controllers.HomeController.resources
 # An example controller showing how to use dependency injection
@@ -21,6 +20,11 @@ GET     /usuario/:idUsuario                     controllers.UsuarioController.ge
 POST    /usuario                                controllers.UsuarioController.createUsuario
 PUT     /usuario/:idUsuario                     controllers.UsuarioController.updateUsuario(idUsuario: Long)
 DELETE  /usuario/:idUsuario                     controllers.UsuarioController.deleteUsuario(idUsuario: Long)
+
+GET     /about                                  controllers.UsuarioController.fetch
+GET     /about/register                         controllers.UsuarioController.create
+POST    /about/save                             controllers.UsuarioController.save
+GET     /about/delete/:idUsuario                controllers.UsuarioController.delete(idUsuario:Long)
 
 # Mensaje routes
 GET     /caudal                                 controllers.MensajeController.getMensajesCaudal

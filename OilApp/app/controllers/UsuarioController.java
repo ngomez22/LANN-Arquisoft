@@ -4,14 +4,16 @@ import akka.dispatch.MessageDispatcher;
 import com.fasterxml.jackson.databind.JsonNode;
 import dispatchers.AkkaDispatcher;
 import models.Usuario;
+import play.data.Form;
 import play.libs.Json;
 import play.mvc.Controller;
 import play.mvc.Result;
-
-import java.util.List;
+import views.html.about;
+import views.html.createUser;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.CompletionStage;
 
+import static play.data.Form.form;
 import static play.libs.Json.toJson;
 
 /**
@@ -34,8 +36,8 @@ public class UsuarioController extends Controller {
                 );
     }
 
-    public static List<Usuario> fetchUsuarios() {
-        return Usuario.FINDER.all();
+    public Result fetch() {
+        return ok(about.render(Usuario.FINDER.all()));
     }
 
     public CompletionStage<Result> createUsuario(){
@@ -52,6 +54,28 @@ public class UsuarioController extends Controller {
                     return ok(Json.toJson(usuario1));
                 }
         );
+    }
+
+    public Result create(){
+        Usuario def = new Usuario();
+        def.setNombre("Juan");
+        def.setNivelAcceso(3);
+        def.setAvatar("http://i.imgur.com/u0gpu69.png");
+        def.setEdad(25);
+        def.setCargo("Empleado");
+        Form<Usuario> usuarioForm = form(Usuario.class).fill(def);
+        return ok(createUser.render(usuarioForm));
+    }
+
+    public Result save() {
+        Form<Usuario> usuarioForm = form(Usuario.class).bindFromRequest();
+        if(usuarioForm.hasErrors()){
+            return badRequest(createUser.render(usuarioForm));
+        } else {
+            Usuario usuario = usuarioForm.get();
+            usuario.save();
+            return(redirect(routes.UsuarioController.fetch()));
+        }
     }
 
     public CompletionStage<Result> getUsuario(Long id) {
@@ -100,5 +124,12 @@ public class UsuarioController extends Controller {
                         }
                 );
     }
+
+    public Result delete(Long id) {
+        Usuario.FINDER.byId(id).delete();
+        return redirect(routes.UsuarioController.fetch());
+    }
+
+
 
 }

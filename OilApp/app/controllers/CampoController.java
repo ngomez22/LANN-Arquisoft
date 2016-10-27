@@ -3,6 +3,7 @@ package controllers;
 import akka.dispatch.MessageDispatcher;
 import com.fasterxml.jackson.databind.JsonNode;
 import dispatchers.AkkaDispatcher;
+import emums.Region;
 import models.Campo;
 import models.Pozo;
 import play.libs.Json;
@@ -30,6 +31,21 @@ public class CampoController extends Controller{
                 supplyAsync(
                         () -> {
                             return Campo.FINDER.all();
+                        }
+                        ,jdbcDispatcher)
+                .thenApply(
+                        campos -> {
+                            return ok(toJson(campos));
+                        }
+                );
+    }
+
+    public CompletionStage<Result> getCamposRegion(Region r) {
+        MessageDispatcher jdbcDispatcher = AkkaDispatcher.jdbcDispatcher;
+        return CompletableFuture.
+                supplyAsync(
+                        () -> {
+                            return Campo.FINDER.where().eq("region", r);
                         }
                         ,jdbcDispatcher)
                 .thenApply(
