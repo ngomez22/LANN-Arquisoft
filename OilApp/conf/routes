@@ -38,7 +38,7 @@ POST    /temperatura                            controllers.MensajeController.cr
 
 #Pozo routes
 GET     /pozos                                  controllers.PozoController.getPozos
-POST    /pozo                                   controllers.PozoController.createPozo
+#POST    /pozo                                   controllers.PozoController.createPozo
 DELETE  /pozo/:idPozo                           controllers.PozoController.deletePozo(idPozo: Long)
 PUT     /pozo/:idPozo                           controllers.PozoController.updatePozo(idPozo: Long)
 GET     /pozo/clausurar/:idPozo                 controllers.PozoController.clausurarPozo(idPozo: Long)
@@ -50,6 +50,12 @@ GET     /caudalDiario/:idPozo/:fecha            controllers.PozoController.regis
 GET     /caudalMes/:idPozo/:fecha               controllers.PozoController.registroCaudalMensual(idPozo: Long,fecha: String)
 GET     /temperaturaDiaria/:idPozo/:fecha       controllers.PozoController.registroTemperaturaDiario(idPozo: Long,fecha: String)
 GET     /temperaturaMes/:idPozo/:fecha          controllers.PozoController.registroTemperaturaMensual(idPozo: Long,fecha: String)
+
+
+GET /pozosCampo/:idCampo                        controllers.PozoController.getPozosCampo(idCampo: Long)
+GET /pozos/:idCampo/create                      controllers.PozoController.createPozo(idCampo: Long)
+GET /pozosTodos                                 controllers.PozoController.fetch
+GET /pozos/save                                 controllers.PozoController.save
 
 
 #Campo routes

@@ -6,6 +6,7 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 import emums.EstadoPozo;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -58,6 +59,17 @@ public class Pozo extends Model{
         this.sensorTemperatura = sensorTemperatura;
         this.estado = estado;
         this.campo = campo;
+    }
+
+    public Pozo()
+    {
+        latitud =0L;
+        longitud =0L;
+        estado = EstadoPozo.ABIERTO;
+        this.sensorEmergencia = new ArrayList();
+        this.sensorCaudal = new ArrayList();
+        this.sensorEnergia = new ArrayList();
+        this.sensorTemperatura = new ArrayList();
     }
 
     public Long getId() {
