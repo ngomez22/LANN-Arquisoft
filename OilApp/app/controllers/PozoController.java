@@ -341,6 +341,11 @@ public class PozoController extends Controller{
         }
     }
 
+    public Result delete(Long idCampo, Long idPozo) {
+        Pozo.FINDER.byId(idPozo).delete();
+        return redirect(routes.PozoController.getPozosCampo(idCampo));
+    }
+
     public Result fetch() {
         return ok(pozos.render(Pozo.FINDER.all(),0L));
     }

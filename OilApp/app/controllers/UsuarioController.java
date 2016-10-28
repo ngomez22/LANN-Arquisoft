@@ -8,8 +8,7 @@ import play.data.Form;
 import play.libs.Json;
 import play.mvc.Controller;
 import play.mvc.Result;
-import views.html.about;
-import views.html.createUser;
+import views.html.*;
 
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.CompletionStage;

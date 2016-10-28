@@ -55,6 +55,7 @@ GET     /temperaturaMes/:idPozo/:fecha          controllers.PozoController.regis
 GET     /resources/campos/:id/pozos             controllers.PozoController.getPozosCampo(id: Long)
 GET     /resources/campos/:id/pozos/create      controllers.PozoController.createPozo(id: Long)
 GET     /resources/campos/:id/pozos/save        controllers.PozoController.save(id: Long)
+GET     /resources/campos/:idCampo/pozos/delete/:idPozo controllers.PozoController.delete(idCampo:Long, idPozo:Long)
 
 
 #Campo routes
