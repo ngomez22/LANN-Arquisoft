@@ -4,22 +4,19 @@
 
 @main("Crear campo") {
 
-
-
     <!-- Page Content -->
     <div class="container">
         <div class="main-content">
             <h3>Crear nuevo campo en la región @region</h3><hr>
-            @form(routes.CampoController.save(), 'class -> "form-horizontal"){
+            @form(routes.CampoController.save(region), 'class -> "form-horizontal"){
                 @inputText(campoForm("localidad"), '_label -> "Localidad")
                 <div class="control-group">
                     <div class="controls">
                         <input id="create" type="submit" value="Create" class="btn btn-primary">
-                        <a href="@routes.CampoController.getCamposRegion(region)"></a>
+                        <a href="/resources/@region/campos"></a>
                     </div>
                 </div>
             }
-
         </div>
     </div>
         <!-- /.container -->

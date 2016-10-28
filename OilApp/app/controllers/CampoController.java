@@ -3,7 +3,6 @@ package controllers;
 import akka.dispatch.MessageDispatcher;
 import com.fasterxml.jackson.databind.JsonNode;
 import dispatchers.AkkaDispatcher;
-import emums.Region;
 import models.Campo;
 import models.Pozo;
 import play.data.Form;
@@ -15,6 +14,7 @@ import views.html.createCampo;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
@@ -154,53 +154,56 @@ public class CampoController extends Controller{
         );
     }
 
-
-
     public Result getCamposRegion(String r) {
-        return ok(campos.render(Campo.FINDER.where().eq("region", r).findList(), r));
+        List<Campo> list = Campo.FINDER.where().eq("region", r).findList();
+        return ok(campos.render(list, r));
     }
 
     public Result createCampoRegion(String r) {
-        Region region = null;
-        String localidad = "";
+        String localidad = "popo";
         switch (r){
-            case "Caribre":
-                region = Region.CARIBE;
+            case "Caribe":
                 localidad = "Parque Tayrona";
                 break;
             case "Andina":
-                region = Region.ANDINA;
                 localidad = "Popayan";
                 break;
             case "Pacifico":
-                region = Region.PACIFICO;
                 localidad = "Serranía del Baudó";
                 break;
             case "Orinoquia":
-                region = Region.ORINOQUIA;
-                localidad = "";
+                localidad = "Serranía de la Macarena";
                 break;
             case "Amazonas":
-                region = Region.AMAZONAS;
+                localidad = "Llanuras del Guaviare";
                 break;
         }
         Campo def = new Campo();
-        def.setRegion(region);
-        def.setLocalidad("Juanchaco");
+        def.setRegion(r);
+        def.setLocalidad(localidad);
 
         Form<Campo> campoForm = form(Campo.class).fill(def);
         return ok(createCampo.render(r, campoForm));
     }
 
-    public Result save() {
+    public Result save(String r) {
         Form<Campo> campoForm = form(Campo.class).bindFromRequest();
         if(campoForm.hasErrors()){
-            return badRequest(createCampo.render(campoForm.get().getRegion().toString(), campoForm));
+            return badRequest(createCampo.render(r, campoForm));
         } else {
+            List<Pozo> pozos = new ArrayList<Pozo>();
             Campo campo = campoForm.get();
+            campo.setRegion(r);
+            campo.setPozos(pozos);
             campo.save();
-            return(redirect(routes.CampoController.getCamposRegion(campo.getRegion().toString())));
+            return(redirect(routes.CampoController.getCamposRegion(r)));
         }
+    }
+
+    public Result delete(String r, Long id) {
+        System.out.println("Region: " + r + " - ID campo: " + id);
+        Campo.FINDER.byId(id).delete();
+        return redirect(routes.CampoController.getCamposRegion(r));
     }
 
 

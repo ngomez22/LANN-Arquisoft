@@ -6,9 +6,8 @@
 create table campos (
   id                        bigserial not null,
   jefe_de_campo_id          bigint,
-  region                    varchar(9),
+  region                    varchar(255),
   localidad                 varchar(255),
-  constraint ck_campos_region check (region in ('CARIBE','ANDINA','PACIFICO','ORINOQUIA','AMAZONAS')),
   constraint uq_campos_jefe_de_campo_id unique (jefe_de_campo_id),
   constraint pk_campos primary key (id))
 ;

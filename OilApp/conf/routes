@@ -58,6 +58,7 @@ POST    /campo                                  controllers.CampoController.crea
 DELETE  /campo/:idCampo                         controllers.CampoController.deleteCampo(idCampo: Long)
 PUT     /campo/:idCampo                         controllers.CampoController.updateCampo(idCampo: Long)
 
-GET     /resources/:r                           controllers.CampoController.getCamposRegion(r: String)
-GET     /resources/:r/create                    controllers.CampoController.createCampoRegion(r: String)
-GET     /resources/save                         controllers.CampoController.save
+GET     /resources/:r/campos                    controllers.CampoController.getCamposRegion(r: String)
+GET     /resources/:r/campos/create             controllers.CampoController.createCampoRegion(r: String)
+GET     /resources/:r/campos/save               controllers.CampoController.save(r: String)
+GET     /resources/:r/campos/delete/:idCampo    controllers.CampoController.delete(r: String, idCampo: Long)
