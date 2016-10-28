@@ -31,7 +31,7 @@
         <div class="row">
             <div class="list-group">
             @for(campo<-campos) {
-                <a href="/resources" class="list-group-item-action">
+                <a href="/resources/campos/@campo.getId/pozos" class="list-group-item-active">
                     <div>
                         <h3>
                             <i class="fa fa-align-center fa-3x fa-map-pin"></i>
@@ -46,8 +46,8 @@
                         </p>
                         <p>Pozos: @campo.getCantidadPozos</p>
                         <a href="@routes.CampoController.delete(region, campo.getId)"><button class="btn btn-default">Borrar</button></a>
-                    </div>
-                </a><hr>
+                    </div><hr>
+                </a>
             }
             </div>
         </div>

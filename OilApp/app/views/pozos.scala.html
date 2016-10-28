@@ -1,26 +1,44 @@
 @(pozos: List[Pozo])(idCampo :Long)
 
 @main("OilCol S.A."){
+    <div class="container">
+            <!-- /.row -->
 
-    <div class ="al">
-        <br>
+            <!-- Page Heading/Breadcrumbs -->
+        <div class="row">
+            <div class="col-lg-12">
+                <h1 class="page-header">
+                    <p>Pozos del campo @idCampo
+                        <a  href="/resources/campos/@idCampo/pozos/create">
+                            <button type="submit" class="btn btn-primary">Agregar pozo</button>
+                        </a>
+                    </p>
+                </h1>
+                <ol class="breadcrumb">
+                    <li><a href="/">Home</a></li>
+                    <li><a href="/resources">Regiones</a></li>
+                    <li class="active">Pozos</li>
+                </ol>
+            </div>
+        </div>
+            <!-- /.row -->
+
+            <!-- Team Members -->
+        <div class="row">
+            <div class="list-group">
+            @for(pozo<-pozos) {
+                <a href="/" class="list-group-item-active">
+                    <div>
+                        <h3>Pozo número @pozo.getId</h3><br>
+                        <p>Estado: @pozo.getEstado</p>
+                        <p><b>Coordenadas:</b></p>
+                        <p>Longitud: @pozo.getLongitud  Latitud: @pozo.getLatitud</p>
+                    </div><hr>
+                </a>
+            }
+            </div>
+        </div>
+            <!-- /.row -->
     </div>
-    <div class ="al">
-        <p>
-         Estos son los pozos.
-    </p>
-        <a  href="/pozos/@idCampo/create">
-            <button type="submit" class="btn btn-primary">Agregar Pozo</button>
-        </a>
-    </div>
-    <div class="list-group" class="col-md-6">
-    @for(pozo<-pozos) {
-        <a href="/resources" class="list-group-item">
-            <h3>Pozo número: @pozo.getId</h3><br>
-            <p>Está en estado: @pozo.getEstado</p>
-            <p>Que está en las coordenadas:</p>
-            <p>Longitud: @pozo.getLongitud  Latitud: @pozo.getLatitud</p>
-        </a>
-    }
-    </div>
+
 }

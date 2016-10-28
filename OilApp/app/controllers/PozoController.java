@@ -319,25 +319,25 @@ public class PozoController extends Controller{
         );
     }
 
-    public Result getPozosCampo(long id) {
+    public Result getPozosCampo(Long id) {
         return ok(pozos.render(Pozo.FINDER.where().eq("campo_id", id).findList(), id));
     }
 
-    public Result createPozo(long idCampo)
-    {
+    public Result createPozo(Long idCampo) {
         Pozo poz = new Pozo();
         Form<Pozo> pozoForm = form(Pozo.class).fill(poz);
         return ok(createPozo.render(pozoForm, idCampo));
     }
 
-    public Result save() {
+    public Result save(Long idCampo) {
         Form<Pozo> pozoForm = form(Pozo.class).bindFromRequest();
         if(pozoForm.hasErrors()){
             return badRequest(createPozo.render(pozoForm,0L));
         } else {
             Pozo pozo= pozoForm.get();
+            pozo.setCampo(Campo.FINDER.byId(idCampo));
             pozo.save();
-            return redirect(routes.PozoController.fetch());
+            return redirect(routes.PozoController.getPozosCampo(idCampo));
         }
     }
 

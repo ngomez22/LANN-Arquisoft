@@ -52,10 +52,9 @@ GET     /temperaturaDiaria/:idPozo/:fecha       controllers.PozoController.regis
 GET     /temperaturaMes/:idPozo/:fecha          controllers.PozoController.registroTemperaturaMensual(idPozo: Long,fecha: String)
 
 
-GET /pozosCampo/:idCampo                        controllers.PozoController.getPozosCampo(idCampo: Long)
-GET /pozos/:idCampo/create                      controllers.PozoController.createPozo(idCampo: Long)
-GET /pozosTodos                                 controllers.PozoController.fetch
-GET /pozos/save                                 controllers.PozoController.save
+GET     /resources/campos/:id/pozos             controllers.PozoController.getPozosCampo(id: Long)
+GET     /resources/campos/:id/pozos/create      controllers.PozoController.createPozo(id: Long)
+GET     /resources/campos/:id/pozos/save        controllers.PozoController.save(id: Long)
 
 
 #Campo routes
