@@ -1,0 +1,26 @@
+@(pozos: List[Pozo])(idCampo :Long)
+
+@main("OilCol S.A."){
+
+    <div class ="al">
+        <br>
+    </div>
+    <div class ="al">
+        <p>
+         Estos son los pozos.
+    </p>
+        <a  href="/pozos/@idCampo/create">
+            <button type="submit" class="btn btn-primary">Agregar Pozo</button>
+        </a>
+    </div>
+    <div class="list-group" class="col-md-6">
+    @for(pozo<-pozos) {
+        <a href="/resources" class="list-group-item">
+            <h3>Pozo número: @pozo.getId</h3><br>
+            <p>Está en estado: @pozo.getEstado</p>
+            <p>Que está en las coordenadas:</p>
+            <p>Longitud: @pozo.getLongitud  Latitud: @pozo.getLatitud</p>
+        </a>
+    }
+    </div>
+}

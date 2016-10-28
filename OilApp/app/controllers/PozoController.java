@@ -3,13 +3,13 @@ package controllers;
 import akka.dispatch.MessageDispatcher;
 import com.fasterxml.jackson.databind.JsonNode;
 import dispatchers.AkkaDispatcher;
-import models.MensajeCaudal;
-import models.MensajeEnergia;
-import models.MensajeTemperatura;
-import models.Pozo;
+import models.*;
+import play.data.Form;
 import play.libs.Json;
 import play.mvc.Controller;
 import play.mvc.Result;
+import views.html.*;
+
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -17,6 +17,7 @@ import java.util.Date;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.CompletionStage;
 
+import static play.data.Form.form;
 import static play.libs.Json.toJson;
 
 /**
@@ -316,6 +317,32 @@ public class PozoController extends Controller{
                     return ok(Json.toJson(mensajes));
                 }
         );
+    }
+
+    public Result getPozosCampo(long id) {
+        return ok(pozos.render(Pozo.FINDER.where().eq("campo_id", id).findList(), id));
+    }
+
+    public Result createPozo(long idCampo)
+    {
+        Pozo poz = new Pozo();
+        Form<Pozo> pozoForm = form(Pozo.class).fill(poz);
+        return ok(createPozo.render(pozoForm, idCampo));
+    }
+
+    public Result save() {
+        Form<Pozo> pozoForm = form(Pozo.class).bindFromRequest();
+        if(pozoForm.hasErrors()){
+            return badRequest(createPozo.render(pozoForm,0L));
+        } else {
+            Pozo pozo= pozoForm.get();
+            pozo.save();
+            return redirect(routes.PozoController.fetch());
+        }
+    }
+
+    public Result fetch() {
+        return ok(pozos.render(Pozo.FINDER.all(),0L));
     }
 
 }
