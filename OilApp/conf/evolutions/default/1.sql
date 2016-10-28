@@ -7,6 +7,7 @@ create table campos (
   id                        bigserial not null,
   jefe_de_campo_id          bigint,
   region                    varchar(9),
+  localidad                 varchar(255),
   constraint ck_campos_region check (region in ('CARIBE','ANDINA','PACIFICO','ORINOQUIA','AMAZONAS')),
   constraint uq_campos_jefe_de_campo_id unique (jefe_de_campo_id),
   constraint pk_campos primary key (id))
@@ -72,13 +73,6 @@ create table usuarios (
   constraint pk_usuarios primary key (id))
 ;
 
-create table zona (
-  id                        bigserial not null,
-  nombre                    varchar(255),
-  area                      float,
-  constraint pk_zona primary key (id))
-;
-
 create sequence usuariosId;
 
 alter table campos add constraint fk_campos_jefeDeCampo_1 foreign key (jefe_de_campo_id) references usuarios (id);
@@ -115,8 +109,6 @@ drop table if exists pozos cascade;
 drop table if exists sensores cascade;
 
 drop table if exists usuarios cascade;
-
-drop table if exists zona cascade;
 
 drop sequence if exists usuariosId;
 

@@ -2,7 +2,7 @@
  * This template takes a single argument, a String containing a
  * message to display.
  *@
-@(campos:List[Campo])
+@(campos:List[Campo])(region : String)
 
 @main("OilCol S.A") {
     <div class="container">
@@ -17,30 +17,21 @@
             <!-- Team Members -->
         <div class="row">
             <div class="col-lg-12">
-                <h2 class="page-header">Nuestro equipo
-                    <a  href="/about/register">
-                        <button type="submit" class="btn btn-primary">Crear usuario</button>
+                <h2 class="page-header">Campos de la región @region
+                    <a  href="/resources/@region/create">
+                        <button type="submit" class="btn btn-primary">Agregar campo</button>
                     </a>
                 </h2>
             </div>
-            @for(usuario<-usuarios){
-            <div class="col-md-4 text-center">
-                <div class="thumbnail">
-                    <img class="img-responsive" height="200" width="200" src="@usuario.getAvatar()" >
-                    <div class="caption">
-                        <h3>@usuario.getNombre()<br>
-                            <small>@usuario.getCargo</small>
-                        </h3>
-                        <ul class="list-inline">
-                            <li><a href="#"><i class="fa fa-3x fa-pencil"></i></a>
-                            </li>
-                            <li><a href="@routes.UsuarioController.delete(usuario.getId())"><i class="fa fa-3x fa-trash" style="color:brown"></i></a>
-                        </ul>
-                    </div>
-                </div>
-            </div>
+            <div class="list-group">
+            @for(campo<-campos) {
+                <a href="/resources" class="list-group-item">
+                    <h3>Campo de @campo.getLocalidad()</h3><br>
+                    <p>Jefe de campo: @campo.getJefeDeCampo().getNombre()</p>
+                    <p>Pozos: @campo.getCantidadPozos</p>
+                </a>
             }
-
+            </div>
         </div>
             <!-- /.row -->
     </div>

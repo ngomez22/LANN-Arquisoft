@@ -10,6 +10,7 @@ import play.mvc.Controller;
 import play.mvc.Result;
 import views.html.about;
 import views.html.createUser;
+
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.CompletionStage;
 
@@ -28,16 +29,12 @@ public class UsuarioController extends Controller {
                         () -> {
                             return Usuario.FINDER.all();
                         }
-                        ,jdbcDispatcher)
+                        , jdbcDispatcher)
                 .thenApply(
                         usuarioEntities -> {
                             return ok(toJson(usuarioEntities));
                         }
                 );
-    }
-
-    public Result fetch() {
-        return ok(about.render(Usuario.FINDER.all()));
     }
 
     public CompletionStage<Result> createUsuario(){
@@ -54,28 +51,6 @@ public class UsuarioController extends Controller {
                     return ok(Json.toJson(usuario1));
                 }
         );
-    }
-
-    public Result create(){
-        Usuario def = new Usuario();
-        def.setNombre("Juan");
-        def.setNivelAcceso(3);
-        def.setAvatar("http://i.imgur.com/u0gpu69.png");
-        def.setEdad(25);
-        def.setCargo("Empleado");
-        Form<Usuario> usuarioForm = form(Usuario.class).fill(def);
-        return ok(createUser.render(usuarioForm));
-    }
-
-    public Result save() {
-        Form<Usuario> usuarioForm = form(Usuario.class).bindFromRequest();
-        if(usuarioForm.hasErrors()){
-            return badRequest(createUser.render(usuarioForm));
-        } else {
-            Usuario usuario = usuarioForm.get();
-            usuario.save();
-            return(redirect(routes.UsuarioController.fetch()));
-        }
     }
 
     public CompletionStage<Result> getUsuario(Long id) {
@@ -125,11 +100,36 @@ public class UsuarioController extends Controller {
                 );
     }
 
+    //FRONT END METHODS
+
+    public Result fetch() {
+        return ok(about.render(Usuario.FINDER.all()));
+    }
+
+    public Result create(){
+        Usuario def = new Usuario();
+        def.setNombre("Juan");
+        def.setNivelAcceso(3);
+        def.setAvatar("http://i.imgur.com/u0gpu69.png");
+        def.setEdad(25);
+        def.setCargo("Empleado");
+        Form<Usuario> usuarioForm = form(Usuario.class).fill(def);
+        return ok(createUser.render(usuarioForm));
+    }
+
+    public Result save() {
+        Form<Usuario> usuarioForm = form(Usuario.class).bindFromRequest();
+        if(usuarioForm.hasErrors()){
+            return badRequest(createUser.render(usuarioForm));
+        } else {
+            Usuario usuario = usuarioForm.get();
+            usuario.save();
+            return(redirect(routes.UsuarioController.fetch()));
+        }
+    }
+
     public Result delete(Long id) {
         Usuario.FINDER.byId(id).delete();
         return redirect(routes.UsuarioController.fetch());
     }
-
-
-
 }

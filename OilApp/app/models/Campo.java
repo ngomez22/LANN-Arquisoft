@@ -23,6 +23,8 @@ public class Campo extends Model{
     @Enumerated(EnumType.STRING)
     private Region region;
 
+    private String localidad;
+
     @OneToMany(mappedBy = "campo")
     @JsonBackReference
     private List<Pozo> pozos;
@@ -31,6 +33,7 @@ public class Campo extends Model{
         this.id = null;
         this.jefeDeCampo = null;
         this.region = null;
+        this.localidad = null;
     }
 
     public Campo(Long id) {
@@ -38,10 +41,11 @@ public class Campo extends Model{
         this.id = id;
     };
 
-    public Campo(Usuario jefe, Region regionN, List<Pozo> pozos){
-        jefeDeCampo = jefe;
+    public Campo(Usuario jefeDeCampo, Region region, String localidad, List<Pozo> pozos){
+        this.localidad = localidad;
+        this.jefeDeCampo = jefeDeCampo;
         this.pozos = pozos;
-        region = regionN;
+        this.region = region;
     }
 
     public Long getId() {
@@ -68,9 +72,19 @@ public class Campo extends Model{
         jefeDeCampo=jefe;
     }
 
+    public String getLocalidad() {
+        return localidad;
+    }
+
+    public void setLocalidad(String localidad) {
+        this.localidad = localidad;
+    }
+
     public List<Pozo> getPozos() {
         return pozos;
     }
+
+    public int getCantidadPozos() { return pozos.size(); }
 
     public void setPozos(List<Pozo> pozos) {
         this.pozos = pozos;
