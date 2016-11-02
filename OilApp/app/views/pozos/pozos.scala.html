@@ -39,6 +39,15 @@
                         </li>
                         <li><a href="@routes.PozoController.delete(idCampo, pozo.getId)"><i class="fa fa-2x fa-trash" style="color:brown"></i></a>
                         </li>
+                        <li><a  href="/resources/campos/@idCampo/pozos/reabrir/@pozo.getId">
+                            <button type="submit" class="btn btn-primary">Reabrir pozo</button>
+                        </li>
+                        <li><a  href="/resources/campos/@idCampo/pozos/clausurar/@pozo.getId">
+                            <button type="submit" class="btn btn-primary">Clausurar pozo</button>
+                        </li>
+                        <li><a  href="/resources/campos/@idCampo/pozos/detener/@pozo.getId">
+                            <button type="submit" class="btn btn-primary">Detener pozo</button>
+                        </li>
                     </ul>
                 </li><hr>
             }

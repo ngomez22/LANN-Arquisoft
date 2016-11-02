@@ -57,7 +57,10 @@ GET     /temperaturaMes/:idPozo/:fecha          controllers.PozoController.regis
 GET     /resources/campos/:id/pozos             controllers.PozoController.getPozosCampo(id: Long)
 GET     /resources/campos/:id/pozos/create      controllers.PozoController.createPozo(id: Long)
 GET     /resources/campos/:id/pozos/save        controllers.PozoController.save(id: Long)
-GET     /resources/campos/:idCampo/pozos/delete/:idPozo controllers.PozoController.delete(idCampo:Long, idPozo:Long)
+GET     /resources/campos/:idCampo/pozos/delete/:idPozo     controllers.PozoController.delete(idCampo:Long, idPozo:Long)
+GET     /resources/campos/:idCampo/pozos/reabrir/:idPozo  controllers.PozoController.reabrir(idCampo:Long, idPozo:Long)
+GET     /resources/campos/:idCampo/pozos/clausurar/:idPozo    controllers.PozoController.clausurar(idCampo:Long, idPozo:Long)
+GET     /resources/campos/:idCampo/pozos/detener/:idPozo    controllers.PozoController.detener(idCampo:Long, idPozo:Long)
 
 
 # Mensaje routes

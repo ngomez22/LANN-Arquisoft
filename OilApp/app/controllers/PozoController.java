@@ -8,8 +8,7 @@ import play.data.Form;
 import play.libs.Json;
 import play.mvc.Controller;
 import play.mvc.Result;
-import views.html.pozos.*;
-
+import views.html.pozos.pozos;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -19,6 +18,9 @@ import java.util.concurrent.CompletionStage;
 
 import static play.data.Form.form;
 import static play.libs.Json.toJson;
+
+
+
 
 /**
  * Created by Nicolas Vasquez on 30/08/2016.
@@ -326,13 +328,13 @@ public class PozoController extends Controller{
     public Result createPozo(Long idCampo) {
         Pozo poz = new Pozo();
         Form<Pozo> pozoForm = form(Pozo.class).fill(poz);
-        return ok(createPozo.render(pozoForm, idCampo));
+        return ok(views.html.pozos.createPozo.render(pozoForm, idCampo));
     }
 
     public Result save(Long idCampo) {
         Form<Pozo> pozoForm = form(Pozo.class).bindFromRequest();
         if(pozoForm.hasErrors()){
-            return badRequest(createPozo.render(pozoForm,0L));
+            return badRequest(views.html.pozos.createPozo.render(pozoForm,0L));
         } else {
             Pozo pozo= pozoForm.get();
             pozo.setCampo(Campo.FINDER.byId(idCampo));
@@ -348,4 +350,26 @@ public class PozoController extends Controller{
 
 
 
+
+    public Result reabrir(Long idPozo, Long idCampo){
+        Pozo pozo = Pozo.FINDER.byId(idPozo);
+        pozo.reabrirPozo();
+        pozo.save();
+        return redirect(routes.PozoController.getPozosCampo(idCampo));
+    }
+
+
+    public Result clausurar(Long idPozo, Long idCampo){
+        Pozo pozo = Pozo.FINDER.byId(idPozo);
+        pozo.clausurarPozo();
+        pozo.save();
+        return redirect(routes.PozoController.getPozosCampo(idCampo));
+    }
+
+    public Result detener(Long idPozo, Long idCampo){
+        Pozo pozo = Pozo.FINDER.byId(idPozo);
+        pozo.detenerPozoEmergencia();
+        pozo.save();
+        return redirect(routes.PozoController.getPozosCampo(idCampo));
+    }
 }

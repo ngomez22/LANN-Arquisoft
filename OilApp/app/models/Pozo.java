@@ -52,10 +52,10 @@ public class Pozo extends Model{
     @ManyToOne
     private Campo campo;
 
-    private static final String CLAUSURADO ="Clausurado";
-    private static final String ENPRODUCCION ="En produccion";
-    private static final String PARADO ="Parado";
-    private static final String ABIERTO ="Abierto";
+    public static final String CLAUSURADO ="Clausurado";
+    public static final String ENPRODUCCION ="En produccion";
+    public static final String PARADO ="Parado";
+    public static final String ABIERTO ="Abierto";
 
     public Pozo(Double latitud, Double longitud, List<MensajeEmergencia> sensorEmergencia, List<MensajeCaudal> sensorCaudal, List<MensajeEnergia> sensorEnergia, List<MensajeTemperatura> sensorTemperatura, EstadoPozo estado, Campo campo) {
         this.latitud = latitud;
