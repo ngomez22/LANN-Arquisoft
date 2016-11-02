@@ -166,14 +166,14 @@ public class MensajeController extends Controller {
         return ok(emergencia.render(MensajeEmergencia.FINDER.where().eq("pozo_id", idPozo).findList(), idPozo));
     }
 
-    public Result emergenciaPozoDia(Long idPozo) {
+    public Result emergenciasPozoDia(Long idPozo) {
         DateTime dt = new DateTime();
         Date fecha2 = dt.minusDays(1).toDate();
         System.out.println("1: " + dt.toString() + " - 2: " + fecha2.toString());
         return ok(temperatura.render(MensajeTemperatura.FINDER.where().between("fecha_Envio", fecha2, dt.toDate()).eq("pozo_id", idPozo).findList(), idPozo));
     }
 
-    public Result emergenciaPozoMes(Long idPozo) {
+    public Result emergenciasPozoMes(Long idPozo) {
         DateTime dt = new DateTime();
         Date fecha2 = dt.minusMonths(1).toDate();
         System.out.println("1: " + dt.toString() + " - 2: " + fecha2.toString());
