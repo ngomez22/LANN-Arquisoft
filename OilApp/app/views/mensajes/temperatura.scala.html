@@ -21,17 +21,30 @@
 
             <!-- Team Members -->
         <div class="row">
-            <ul class="list-group">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th> </th>
+                        <th>Temperatura</th>
+                        <th>Fecha</th>
+                    </tr>
+                </thead>
+                <tbody>
                 @for(temperatura <-reportes) {
-                    <li class="list-group-item">
-                        <h3><b>
+                    <tr>
+                        <td>
                             <i class="fa fa-align-center fa-2x fa-thermometer-full"></i>
-                            <p>Temperatura: @temperatura.getTemperatura</p>
-                            <p>Fecha: @temperatura.getFechaEnvio().toString;</p>
-                        </b></h3><br>
-                    </li>
+                        </td>
+                        <td>
+                            <p>@temperatura.getTemperatura</p>
+                        </td>
+                        <td>
+                            <p>@temperatura.getFechaEnvio.format("dd/MM/yyyy hh:mm:ss")</p>
+                        </td>
+                    </tr>
                 }
-            </ul>
+                </tbody>
+            </table>
         </div>
             <!-- /.row -->
     </div>

@@ -1,6 +1,7 @@
 package models;
 
 import com.avaje.ebean.Model;
+import play.data.validation.Constraints;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -20,10 +21,13 @@ public class MensajeTemperatura extends Model{
     private Long id;
 
     @ManyToOne
+    @Constraints.Required
     private Pozo pozo;
 
+    @Constraints.Required
     private Date fechaEnvio;
 
+    @Constraints.Required
     private Double temperatura;
 
     public MensajeTemperatura() {

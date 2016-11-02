@@ -1,7 +1,7 @@
 package models;
 
 import com.avaje.ebean.Model;
-import com.fasterxml.jackson.annotation.JsonBackReference;
+import play.data.validation.Constraints;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -22,8 +22,10 @@ public class MensajeEnergia extends Model {
     @GeneratedValue
     private Long id;
 
+    @Constraints.Required
     private Date fechaEnvio;
 
+    @Constraints.Required
     private Double consumoEnergia;
 
     public MensajeEnergia() {

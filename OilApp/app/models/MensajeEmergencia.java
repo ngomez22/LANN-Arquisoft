@@ -1,7 +1,7 @@
 package models;
 
 import com.avaje.ebean.Model;
-import com.fasterxml.jackson.annotation.JsonBackReference;
+import play.data.validation.Constraints;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -19,11 +19,14 @@ public class MensajeEmergencia extends Model {
     @GeneratedValue
     private Long id;
 
+    @Constraints.Required
     private Date fechaEnvio;
 
     @ManyToOne
+    @Constraints.Required
     private Pozo pozo;
 
+    @Constraints.Required
     private String emergencia;
 
     public MensajeEmergencia() {

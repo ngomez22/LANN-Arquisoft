@@ -1,0 +1,40 @@
+@(usuarioForm:Form[Usuario])
+
+@import helper._
+
+@main("Crear usuario") {
+
+
+
+    <!-- Page Content -->
+    <div class="container">
+        <div class="main-content form-group">
+            <h3>Crear nuevo usuario</h3><hr>
+            @helper.form(routes.UsuarioController.save(), 'class -> "form-horizontal"){
+                <fieldset>
+                    @inputText(usuarioForm("nombre"), '_label -> "Nombre")
+                    @inputText(usuarioForm("nivelAcceso"), '_label -> "Nivel de acceso")
+                    @inputText(usuarioForm("cargo"), '_label -> "Cargo")
+                    @inputText(usuarioForm("edad"), '_label -> "Edad")
+
+                    <div class="form-group">
+                        <div class="col-md-4 inputGroupContainer">
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                                @inputText(usuarioForm("avatar"), '_label -> "Avatar")
+                            </div>
+                        </div>
+                    </div>
+                </fieldset>
+                <div class="control-group">
+                    <div class="controls">
+                        <input id="create" type="submit" value="Create" class="btn btn-primary">
+                        <a class="btn" href="@routes.UsuarioController.fetch()">Cancel</a>
+                    </div>
+                </div>
+            }
+
+        </div>
+    </div>
+        <!-- /.container -->
+}

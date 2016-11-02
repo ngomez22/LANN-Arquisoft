@@ -46,20 +46,12 @@ create table reportes_Temperatura (
 
 create table pozos (
   id                        bigserial not null,
-  latitud                   bigint,
-  longitud                  bigint,
+  latitud                   float,
+  longitud                  float,
   estado                    varchar(10),
   campo_id                  bigint,
   constraint ck_pozos_estado check (estado in ('ABIERTO','PRODUCCION','PARADO','CLAUSURADO')),
   constraint pk_pozos primary key (id))
-;
-
-create table sensores (
-  id                        bigserial not null,
-  pozo_id                   bigint,
-  tipo                      varchar(255),
-  constraint uq_sensores_pozo_id unique (pozo_id),
-  constraint pk_sensores primary key (id))
 ;
 
 create table usuarios (
@@ -86,8 +78,6 @@ alter table reportes_Temperatura add constraint fk_reportes_Temperatura_pozo_5 f
 create index ix_reportes_Temperatura_pozo_5 on reportes_Temperatura (pozo_id);
 alter table pozos add constraint fk_pozos_campo_6 foreign key (campo_id) references campos (id);
 create index ix_pozos_campo_6 on pozos (campo_id);
-alter table sensores add constraint fk_sensores_pozo_7 foreign key (pozo_id) references pozos (id);
-create index ix_sensores_pozo_7 on sensores (pozo_id);
 
 
 
@@ -104,8 +94,6 @@ drop table if exists reportes_Energia cascade;
 drop table if exists reportes_Temperatura cascade;
 
 drop table if exists pozos cascade;
-
-drop table if exists sensores cascade;
 
 drop table if exists usuarios cascade;
 

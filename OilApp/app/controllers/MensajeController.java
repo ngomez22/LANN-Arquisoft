@@ -11,7 +11,7 @@ import org.joda.time.DateTime;
 import play.libs.Json;
 import play.mvc.Controller;
 import play.mvc.Result;
-import views.html.*;
+import views.html.mensajes.*;
 
 import java.util.Date;
 import java.util.concurrent.CompletableFuture;
@@ -205,14 +205,12 @@ public class MensajeController extends Controller {
     public Result caudalPozoDia(Long idPozo) {
         DateTime dt = new DateTime();
         Date fecha2 = dt.minusDays(1).toDate();
-        System.out.println("1: " + dt.toString() + " - 2: " + fecha2.toString());
         return ok(caudal.render(MensajeCaudal.FINDER.where().between("fecha_Envio", fecha2, dt.toDate()).eq("pozo_id", idPozo).findList(), idPozo));
     }
 
     public Result caudalPozoMes(Long idPozo) {
         DateTime dt = new DateTime();
         Date fecha2 = dt.minusMonths(1).toDate();
-        System.out.println("1: " + dt.toString() + " - 2: " + fecha2.toString());
         return ok(caudal.render(MensajeCaudal.FINDER.where().between("fecha_Envio", fecha2, dt.toDate()).eq("pozo_id", idPozo).findList(), idPozo));
     }
 
@@ -223,14 +221,12 @@ public class MensajeController extends Controller {
     public Result temperaturaPozoDia(Long idPozo) {
         DateTime dt = new DateTime();
         Date fecha2 = dt.minusDays(1).toDate();
-        System.out.println("1: " + dt.toString() + " - 2: " + fecha2.toString());
         return ok(temperatura.render(MensajeTemperatura.FINDER.where().between("fecha_Envio", fecha2, dt.toDate()).eq("pozo_id", idPozo).findList(), idPozo));
     }
 
     public Result temperaturaPozoMes(Long idPozo) {
         DateTime dt = new DateTime();
         Date fecha2 = dt.minusMonths(1).toDate();
-        System.out.println("1: " + dt.toString() + " - 2: " + fecha2.toString());
         return ok(temperatura.render(MensajeTemperatura.FINDER.where().between("fecha_Envio", fecha2, dt.toDate()).eq("pozo_id", idPozo).findList(), idPozo));
     }
 }

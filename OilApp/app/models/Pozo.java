@@ -25,18 +25,22 @@ public class Pozo extends Model{
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy ="pozo")
     @JsonBackReference(value = "reportes_Emergencia")
+    @OrderBy("fecha_Envio asc")
     private List<MensajeEmergencia> sensorEmergencia;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy ="pozo")
     @JsonBackReference(value = "reportes_Caudal")
+    @OrderBy("fecha_Envio asc")
     private List<MensajeCaudal> sensorCaudal;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy ="pozo")
     @JsonBackReference(value = "reportes_Energia")
+    @OrderBy("fecha_Envio asc")
     private List<MensajeEnergia> sensorEnergia;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy ="pozo")
     @JsonBackReference(value = "reportes_Temperatura")
+    @OrderBy("fecha_Envio asc")
     private List<MensajeTemperatura> sensorTemperatura;
 
     @Enumerated(EnumType.STRING)

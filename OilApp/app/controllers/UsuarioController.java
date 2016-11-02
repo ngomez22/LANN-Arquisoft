@@ -8,7 +8,7 @@ import play.data.Form;
 import play.libs.Json;
 import play.mvc.Controller;
 import play.mvc.Result;
-import views.html.*;
+import views.html.users.*;
 
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.CompletionStage;
@@ -109,7 +109,7 @@ public class UsuarioController extends Controller {
         Usuario def = new Usuario();
         def.setNombre("Juan");
         def.setNivelAcceso(3);
-        def.setAvatar("http://i.imgur.com/u0gpu69.png");
+        def.setAvatar(Usuario.DEFAULT_AVATAR);
         def.setEdad(25);
         def.setCargo("Empleado");
         Form<Usuario> usuarioForm = form(Usuario.class).fill(def);

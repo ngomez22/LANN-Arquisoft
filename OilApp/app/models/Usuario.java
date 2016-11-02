@@ -1,6 +1,7 @@
 package models;
 
 import com.avaje.ebean.Model;
+import play.data.validation.Constraints;
 
 import javax.persistence.*;
 
@@ -19,14 +20,17 @@ public class Usuario extends Model{
     @GeneratedValue(strategy= GenerationType.SEQUENCE,generator = "usuariosId")
     private Long id;
 
+    @Constraints.Required
     private String nombre;
 
+    @Constraints.Required
     private Integer nivelAcceso;
 
     private String avatar;
 
     private Integer edad;
 
+    @Constraints.Required
     private String cargo;
 
     public Usuario() {
