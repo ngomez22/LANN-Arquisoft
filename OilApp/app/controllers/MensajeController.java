@@ -209,7 +209,7 @@ public class MensajeController extends Controller {
         return ok(caudal.render(MensajeCaudal.FINDER.where().between("fecha_Envio", fecha2, dt.toDate()).eq("pozo_id", idPozo).findList(), idPozo));
     }
 
-    public Result caudaPozoMes(Long idPozo) {
+    public Result caudalPozoMes(Long idPozo) {
         DateTime dt = new DateTime();
         Date fecha2 = dt.minusMonths(1).toDate();
         System.out.println("1: " + dt.toString() + " - 2: " + fecha2.toString());
