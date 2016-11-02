@@ -346,8 +346,6 @@ public class PozoController extends Controller{
         return redirect(routes.PozoController.getPozosCampo(idCampo));
     }
 
-    public Result fetch() {
-        return ok(pozos.render(Pozo.FINDER.all(),0L));
-    }
+
 
 }

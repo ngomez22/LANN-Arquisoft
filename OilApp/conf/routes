@@ -4,7 +4,6 @@
 
 # An example controller showing a sample home page
 GET     /                                       controllers.HomeController.index
-GET     /services                               controllers.HomeController.services
 GET     /resources                              controllers.HomeController.resources
 # An example controller showing how to use dependency injection
 GET     /count                                  controllers.CountController.count
@@ -14,27 +13,31 @@ GET     /message                                controllers.AsyncController.mess
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file                           controllers.Assets.versioned(path="/public", file: Asset)
 
+
 # Usuario routes
 GET     /usuarios                               controllers.UsuarioController.getUsuarios
 GET     /usuario/:idUsuario                     controllers.UsuarioController.getUsuario(idUsuario: Long)
 POST    /usuario                                controllers.UsuarioController.createUsuario
 PUT     /usuario/:idUsuario                     controllers.UsuarioController.updateUsuario(idUsuario: Long)
 DELETE  /usuario/:idUsuario                     controllers.UsuarioController.deleteUsuario(idUsuario: Long)
-
+#---------------
 GET     /about                                  controllers.UsuarioController.fetch
 GET     /about/register                         controllers.UsuarioController.create
 POST    /about/save                             controllers.UsuarioController.save
 GET     /about/delete/:idUsuario                controllers.UsuarioController.delete(idUsuario:Long)
 
-# Mensaje routes
-GET     /caudal                                 controllers.MensajeController.getMensajesCaudal
-POST    /caudal                                 controllers.MensajeController.createMensajeCaudal
-GET     /emergencia                             controllers.MensajeController.getMensajesEmergencia
-POST    /emergencia                             controllers.MensajeController.createMensajeEmergencia
-GET     /energia                                controllers.MensajeController.getMensajesEnergia
-POST    /energia                                controllers.MensajeController.createMensajeEnergia
-GET     /temperatura                            controllers.MensajeController.getMensajesTemperatura
-POST    /temperatura                            controllers.MensajeController.createMensajeTemperatura
+
+#Campo routes
+GET     /campos                                 controllers.CampoController.getCampos
+POST    /campo                                  controllers.CampoController.createCampo
+DELETE  /campo/:idCampo                         controllers.CampoController.deleteCampo(idCampo: Long)
+PUT     /campo/:idCampo                         controllers.CampoController.updateCampo(idCampo: Long)
+#----------------
+GET     /resources/:r/campos                    controllers.CampoController.getCamposRegion(r: String)
+GET     /resources/:r/campos/create             controllers.CampoController.createCampoRegion(r: String)
+GET     /resources/:r/campos/save               controllers.CampoController.save(r: String)
+GET     /resources/:r/campos/delete/:idCampo    controllers.CampoController.delete(r: String, idCampo: Long)
+
 
 #Pozo routes
 GET     /pozos                                  controllers.PozoController.getPozos
@@ -50,21 +53,33 @@ GET     /caudalDiario/:idPozo/:fecha            controllers.PozoController.regis
 GET     /caudalMes/:idPozo/:fecha               controllers.PozoController.registroCaudalMensual(idPozo: Long,fecha: String)
 GET     /temperaturaDiaria/:idPozo/:fecha       controllers.PozoController.registroTemperaturaDiario(idPozo: Long,fecha: String)
 GET     /temperaturaMes/:idPozo/:fecha          controllers.PozoController.registroTemperaturaMensual(idPozo: Long,fecha: String)
-
-
+#------------------
 GET     /resources/campos/:id/pozos             controllers.PozoController.getPozosCampo(id: Long)
 GET     /resources/campos/:id/pozos/create      controllers.PozoController.createPozo(id: Long)
 GET     /resources/campos/:id/pozos/save        controllers.PozoController.save(id: Long)
 GET     /resources/campos/:idCampo/pozos/delete/:idPozo controllers.PozoController.delete(idCampo:Long, idPozo:Long)
 
 
-#Campo routes
-GET     /campos                                 controllers.CampoController.getCampos
-POST    /campo                                  controllers.CampoController.createCampo
-DELETE  /campo/:idCampo                         controllers.CampoController.deleteCampo(idCampo: Long)
-PUT     /campo/:idCampo                         controllers.CampoController.updateCampo(idCampo: Long)
-
-GET     /resources/:r/campos                    controllers.CampoController.getCamposRegion(r: String)
-GET     /resources/:r/campos/create             controllers.CampoController.createCampoRegion(r: String)
-GET     /resources/:r/campos/save               controllers.CampoController.save(r: String)
-GET     /resources/:r/campos/delete/:idCampo    controllers.CampoController.delete(r: String, idCampo: Long)
+# Mensaje routes
+GET     /caudal                                 controllers.MensajeController.getMensajesCaudal
+POST    /caudal                                 controllers.MensajeController.createMensajeCaudal
+GET     /emergencia                             controllers.MensajeController.getMensajesEmergencia
+POST    /emergencia                             controllers.MensajeController.createMensajeEmergencia
+GET     /energia                                controllers.MensajeController.getMensajesEnergia
+POST    /energia                                controllers.MensajeController.createMensajeEnergia
+GET     /temperatura                            controllers.MensajeController.getMensajesTemperatura
+POST    /temperatura                            controllers.MensajeController.createMensajeTemperatura
+#---------------
+GET     /resources/campos/pozos/:idPozo/        controllers.MensajeController.services(idPozo: Long)
+GET     /resources/campos/pozos/:idPozo/emergencias controllers.MensajeController.emergenciasPozo(idPozo:Long)
+GET     /resources/campos/pozos/:idPozo/emergencias/dia controllers.MensajeController.emergenciasPozoDia(idPozo:Long)
+GET     /resources/campos/pozos/:idPozo/emergencias/mes controllers.MensajeController.emergenciasPozoMes(idPozo:Long)
+GET     /resources/campos/pozos/:idPozo/energia controllers.MensajeController.energiaPozo(idPozo:Long)
+GET     /resources/campos/pozos/:idPozo/energia/dia controllers.MensajeController.energiaPozoDia(idPozo:Long)
+GET     /resources/campos/pozos/:idPozo/energia/mes controllers.MensajeController.energiaPozoMes(idPozo:Long)
+GET     /resources/campos/pozos/:idPozo/caudal  controllers.MensajeController.caudalPozo(idPozo:Long)
+GET     /resources/campos/pozos/:idPozo/caudal/dia controllers.MensajeController.caudalPozoDia(idPozo:Long)
+GET     /resources/campos/pozos/:idPozo/caudal/mes controllers.MensajeController.caudalPozoMes(idPozo:Long)
+GET     /resources/campos/pozos/:idPozo/temperatura controllers.MensajeController.temperaturaPozo(idPozo:Long)
+GET     /resources/campos/pozos/:idPozo/temperatura/dia controllers.MensajeController.temperaturaPozoDia(idPozo:Long)
+GET     /resources/campos/pozos/:idPozo/temperatura/mes controllers.MensajeController.temperaturaPozoMes(idPozo:Long)

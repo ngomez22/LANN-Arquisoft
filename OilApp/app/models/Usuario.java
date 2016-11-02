@@ -46,7 +46,10 @@ public class Usuario extends Model{
         this.id = id;
         this.nombre = nombre;
         this.nivelAcceso = nivelAcceso;
-        this.avatar = avatar;
+        if(avatar == null || avatar.equals(""))
+            this.avatar = DEFAULT_AVATAR;
+        else
+            this.avatar = avatar;
         this.edad = edad;
         this.cargo = cargo;
     }
@@ -80,7 +83,10 @@ public class Usuario extends Model{
     }
 
     public void setAvatar(String avatar) {
-        this.avatar = avatar;
+        if(avatar == null || avatar.equals(""))
+            this.avatar = DEFAULT_AVATAR;
+        else
+            this.avatar = avatar;
     }
 
     public Integer getEdad() {

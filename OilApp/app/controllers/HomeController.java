@@ -20,10 +20,6 @@ public class HomeController extends Controller {
         return ok(index.render("OilCol"));
     }
 
-    public Result services() {
-        return ok(services.render(""));
-    }
-
     public Result resources() { return ok(resources.render("")); }
 
 }

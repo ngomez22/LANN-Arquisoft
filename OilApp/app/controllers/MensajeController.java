@@ -3,11 +3,17 @@ package controllers;
 import akka.dispatch.MessageDispatcher;
 import com.fasterxml.jackson.databind.JsonNode;
 import dispatchers.AkkaDispatcher;
-import models.*;
+import models.MensajeCaudal;
+import models.MensajeEmergencia;
+import models.MensajeEnergia;
+import models.MensajeTemperatura;
+import org.joda.time.DateTime;
 import play.libs.Json;
 import play.mvc.Controller;
 import play.mvc.Result;
+import views.html.*;
 
+import java.util.Date;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.CompletionStage;
 
@@ -148,5 +154,83 @@ public class MensajeController extends Controller {
                     return ok(Json.toJson(mensaje));
                 }
         );
+    }
+
+
+
+    public Result services(Long idPozo) {
+        return ok(services.render(idPozo));
+    }
+
+    public Result emergenciasPozo(Long idPozo) {
+        return ok(emergencia.render(MensajeEmergencia.FINDER.where().eq("pozo_id", idPozo).findList(), idPozo));
+    }
+
+    public Result emergenciaPozoDia(Long idPozo) {
+        DateTime dt = new DateTime();
+        Date fecha2 = dt.minusDays(1).toDate();
+        System.out.println("1: " + dt.toString() + " - 2: " + fecha2.toString());
+        return ok(temperatura.render(MensajeTemperatura.FINDER.where().between("fecha_Envio", fecha2, dt.toDate()).eq("pozo_id", idPozo).findList(), idPozo));
+    }
+
+    public Result emergenciaPozoMes(Long idPozo) {
+        DateTime dt = new DateTime();
+        Date fecha2 = dt.minusMonths(1).toDate();
+        System.out.println("1: " + dt.toString() + " - 2: " + fecha2.toString());
+        return ok(emergencia.render(MensajeEmergencia.FINDER.where().between("fecha_Envio", fecha2, dt.toDate()).eq("pozo_id", idPozo).findList(), idPozo));
+    }
+
+    public Result energiaPozo(Long idPozo) {
+        return ok(energia.render(MensajeEnergia.FINDER.where().eq("pozo_id", idPozo).findList(), idPozo));
+    }
+
+    public Result energiaPozoDia(Long idPozo) {
+        DateTime dt = new DateTime();
+        Date fecha2 = dt.minusDays(1).toDate();
+        System.out.println("1: " + dt.toString() + " - 2: " + fecha2.toString());
+        return ok(energia.render(MensajeEnergia.FINDER.where().between("fecha_Envio", fecha2, dt.toDate()).eq("pozo_id", idPozo).findList(), idPozo));
+    }
+
+    public Result energiaPozoMes(Long idPozo) {
+        DateTime dt = new DateTime();
+        Date fecha2 = dt.minusMonths(1).toDate();
+        System.out.println("1: " + dt.toString() + " - 2: " + fecha2.toString());
+        return ok(energia.render(MensajeEnergia.FINDER.where().between("fecha_Envio", fecha2, dt.toDate()).eq("pozo_id", idPozo).findList(), idPozo));
+    }
+
+    public Result caudalPozo(Long idPozo) {
+        return ok(caudal.render(MensajeCaudal.FINDER.where().eq("pozo_id", idPozo).findList(), idPozo));
+    }
+
+    public Result caudalPozoDia(Long idPozo) {
+        DateTime dt = new DateTime();
+        Date fecha2 = dt.minusDays(1).toDate();
+        System.out.println("1: " + dt.toString() + " - 2: " + fecha2.toString());
+        return ok(caudal.render(MensajeCaudal.FINDER.where().between("fecha_Envio", fecha2, dt.toDate()).eq("pozo_id", idPozo).findList(), idPozo));
+    }
+
+    public Result caudaPozoMes(Long idPozo) {
+        DateTime dt = new DateTime();
+        Date fecha2 = dt.minusMonths(1).toDate();
+        System.out.println("1: " + dt.toString() + " - 2: " + fecha2.toString());
+        return ok(caudal.render(MensajeCaudal.FINDER.where().between("fecha_Envio", fecha2, dt.toDate()).eq("pozo_id", idPozo).findList(), idPozo));
+    }
+
+    public Result temperaturaPozo(Long idPozo) {
+        return ok(temperatura.render(MensajeTemperatura.FINDER.where().eq("pozo_id", idPozo).findList(), idPozo));
+    }
+
+    public Result temperaturaPozoDia(Long idPozo) {
+        DateTime dt = new DateTime();
+        Date fecha2 = dt.minusDays(1).toDate();
+        System.out.println("1: " + dt.toString() + " - 2: " + fecha2.toString());
+        return ok(temperatura.render(MensajeTemperatura.FINDER.where().between("fecha_Envio", fecha2, dt.toDate()).eq("pozo_id", idPozo).findList(), idPozo));
+    }
+
+    public Result temperaturaPozoMes(Long idPozo) {
+        DateTime dt = new DateTime();
+        Date fecha2 = dt.minusMonths(1).toDate();
+        System.out.println("1: " + dt.toString() + " - 2: " + fecha2.toString());
+        return ok(temperatura.render(MensajeTemperatura.FINDER.where().between("fecha_Envio", fecha2, dt.toDate()).eq("pozo_id", idPozo).findList(), idPozo));
     }
 }

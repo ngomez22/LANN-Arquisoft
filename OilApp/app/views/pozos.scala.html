@@ -35,7 +35,7 @@
                         <p>Longitud: @pozo.getLongitud  Latitud: @pozo.getLatitud</p>
                     </div>
                     <ul class="list-inline">
-                        <li><a href="#"><i class="fa fa-2x fa-database"></i></a>
+                        <li><a href="@routes.MensajeController.services(pozo.getId)"><i class="fa fa-2x fa-database"></i></a>
                         </li>
                         <li><a href="@routes.PozoController.delete(idCampo, pozo.getId)"><i class="fa fa-2x fa-trash" style="color:brown"></i></a>
                         </li>

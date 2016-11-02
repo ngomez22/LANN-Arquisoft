@@ -19,9 +19,9 @@ public class Pozo extends Model{
     @GeneratedValue
     private Long id;
 
-    private Long latitud;
+    private Double latitud;
 
-    private Long longitud;
+    private Double longitud;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy ="pozo")
     @JsonBackReference(value = "reportes_Emergencia")
@@ -50,7 +50,7 @@ public class Pozo extends Model{
     private static final String PARADO ="Parado";
     private static final String ABIERTO ="Abierto";
 
-    public Pozo(Long latitud, Long longitud, List<MensajeEmergencia> sensorEmergencia, List<MensajeCaudal> sensorCaudal, List<MensajeEnergia> sensorEnergia, List<MensajeTemperatura> sensorTemperatura, EstadoPozo estado, Campo campo) {
+    public Pozo(Double latitud, Double longitud, List<MensajeEmergencia> sensorEmergencia, List<MensajeCaudal> sensorCaudal, List<MensajeEnergia> sensorEnergia, List<MensajeTemperatura> sensorTemperatura, EstadoPozo estado, Campo campo) {
         this.latitud = latitud;
         this.longitud = longitud;
         this.sensorEmergencia = sensorEmergencia;
@@ -63,8 +63,8 @@ public class Pozo extends Model{
 
     public Pozo()
     {
-        latitud =0L;
-        longitud =0L;
+        latitud =-1.0;
+        longitud =-1.0;
         estado = EstadoPozo.ABIERTO;
         this.sensorEmergencia = new ArrayList();
         this.sensorCaudal = new ArrayList();
@@ -80,19 +80,19 @@ public class Pozo extends Model{
         this.id = id;
     }
 
-    public Long getLatitud() {
+    public Double getLatitud() {
         return latitud;
     }
 
-    public void setLatitud(Long latitud) {
+    public void setLatitud(Double latitud) {
         this.latitud = latitud;
     }
 
-    public Long getLongitud() {
+    public Double getLongitud() {
         return longitud;
     }
 
-    public void setLongitud(Long longitud) {
+    public void setLongitud(Double longitud) {
         this.longitud = longitud;
     }
 
