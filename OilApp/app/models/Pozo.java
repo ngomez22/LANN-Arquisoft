@@ -4,6 +4,7 @@ package models;
 import com.avaje.ebean.Model;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import emums.EstadoPozo;
+import play.data.validation.Constraints;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -19,8 +20,10 @@ public class Pozo extends Model{
     @GeneratedValue
     private Long id;
 
+    @Constraints.Required
     private Double latitud;
 
+    @Constraints.Required
     private Double longitud;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy ="pozo")
