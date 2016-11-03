@@ -27,6 +27,7 @@
                         <th> </th>
                         <th>Caudal</th>
                         <th>Fecha</th>
+                        <th>Hora</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -39,7 +40,10 @@
                             <p>@caudal.getCaudal</p>
                         </td>
                         <td>
-                            <p>@caudal.getFechaEnvio.format("dd/MM/yyyy hh:mm:ss")</p>
+                            <p>@caudal.getFechaEnvio.format("dd/MM/yyyy")</p>
+                        </td>
+                        <td>
+                            <p>@caudal.getFechaEnvio.format("hh:mm:ss")</p>
                         </td>
                     </tr>
                 }

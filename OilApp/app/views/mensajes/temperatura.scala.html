@@ -27,6 +27,7 @@
                         <th> </th>
                         <th>Temperatura</th>
                         <th>Fecha</th>
+                        <th>Hora</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -39,7 +40,10 @@
                             <p>@temperatura.getTemperatura</p>
                         </td>
                         <td>
-                            <p>@temperatura.getFechaEnvio.format("dd/MM/yyyy hh:mm:ss")</p>
+                            <p>@temperatura.getFechaEnvio.format("dd/MM/yyyy")</p>
+                        </td>
+                        <td>
+                            <p>@temperatura.getFechaEnvio.format("hh:mm:ss")</p>
                         </td>
                     </tr>
                 }

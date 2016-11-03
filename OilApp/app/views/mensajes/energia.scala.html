@@ -27,6 +27,7 @@
                         <th> </th>
                         <th>Consumo de energía</th>
                         <th>Fecha</th>
+                        <th>Hora</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -39,7 +40,10 @@
                             <p>@energia.getConsumoEnergia</p>
                         </td>
                         <td>
-                            <p>@energia.getFechaEnvio.format("dd/MM/yy hh:mm:ss")</p>
+                            <p>@energia.getFechaEnvio.format("dd/MM/yy")</p>
+                        </td>
+                        <td>
+                            <p>@energia.getFechaEnvio.format("hh:mm:ss")</p>
                         </td>
                     </tr>
                 }

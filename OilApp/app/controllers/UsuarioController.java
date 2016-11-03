@@ -10,6 +10,7 @@ import play.mvc.Controller;
 import play.mvc.Result;
 import views.html.users.*;
 
+import java.util.List;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.CompletionStage;
 
@@ -130,5 +131,9 @@ public class UsuarioController extends Controller {
     public Result delete(Long id) {
         Usuario.FINDER.byId(id).delete();
         return redirect(routes.UsuarioController.fetch());
+    }
+
+    public List jefeIds (){
+        return Usuario.FINDER.where().eq("cargo", Usuario.JEFE_CAMPO).findIds();
     }
 }

@@ -27,6 +27,7 @@
                         <th> </th>
                         <th>Mensaje</th>
                         <th>Fecha</th>
+                        <th>Hora</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -39,7 +40,10 @@
                             <p>@emergencia.getEmergencia</p>
                         </td>
                         <td>
-                            <p>@emergencia.getFechaEnvio.format("dd/MM/yyyy hh:mm:ss")</p>
+                            <p>@emergencia.getFechaEnvio.format("dd/MM/yyyy")</p>
+                        </td>
+                        <td>
+                            <p>@emergencia.getFechaEnvio.format("hh:mm:ss")</p>
                         </td>
                     </tr>
                 }

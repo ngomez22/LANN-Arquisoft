@@ -12,6 +12,10 @@ import javax.persistence.*;
 @Table(name = "usuarios")
 public class Usuario extends Model{
 
+    public static final String JEFE_PRODUCCION = "Jefe de produccion";
+    public static final String JEFE_CAMPO = "Jefe de campo";
+    public static final String EMPLEADO = "Empleado";
+    public static final String OTRO = "Otro";
     public static final String DEFAULT_AVATAR = "http://i.imgur.com/u0gpu69.png";
 
     public static Model.Finder<Long,Usuario> FINDER = new Model.Finder<>(Usuario.class);
@@ -39,7 +43,7 @@ public class Usuario extends Model{
         this.nivelAcceso = -1;
         this.avatar = DEFAULT_AVATAR;
         this.edad= -1;
-        this.cargo = null;
+        this.cargo = OTRO;
     }
     public Usuario(Long id) {
         this();
@@ -55,7 +59,10 @@ public class Usuario extends Model{
         else
             this.avatar = avatar;
         this.edad = edad;
-        this.cargo = cargo;
+        if(cargo==null || cargo.equals(""))
+            this.cargo = OTRO;
+        else
+            this.cargo = cargo;
     }
 
     public Long getId() {
@@ -106,7 +113,10 @@ public class Usuario extends Model{
     }
 
     public void setCargo(String cargo) {
-        this.cargo = cargo;
+        if(cargo==null || cargo.equals(""))
+            this.cargo = OTRO;
+        else
+            this.cargo = cargo;
     }
 
     @Override
