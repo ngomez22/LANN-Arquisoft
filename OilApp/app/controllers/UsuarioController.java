@@ -119,13 +119,14 @@ public class UsuarioController extends Controller {
 
     public Result save() {
         Form<Usuario> usuarioForm = form(Usuario.class).bindFromRequest();
-        if(usuarioForm.hasErrors()){
+        if(usuarioForm.hasErrors()) {
+            flash("error", "Hay errores en los campos.");
             return badRequest(createUser.render(usuarioForm));
-        } else {
-            Usuario usuario = usuarioForm.get();
-            usuario.save();
-            return(redirect(routes.UsuarioController.fetch()));
         }
+        Usuario usuario = usuarioForm.get();
+        usuario.save();
+        flash("success", "Se agregó con éxito el usuario " + usuario.getNombre() + " con el cargo " + usuario.getCargo());
+        return redirect(routes.UsuarioController.fetch());
     }
 
     public Result delete(Long id) {

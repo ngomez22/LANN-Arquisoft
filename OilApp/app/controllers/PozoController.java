@@ -67,7 +67,6 @@ public class PozoController extends Controller{
                 ()->{
                     Pozo pozo1 = Pozo.FINDER.byId(idPozo);
                     pozo1.setCampo(pozo.getCampo());
-                    pozo1.setEstado(pozo.getEstado());
                     pozo1.save();
                     return pozo1;
 
@@ -100,7 +99,11 @@ public class PozoController extends Controller{
         return CompletableFuture.supplyAsync(
                 ()->{
                     Pozo pozo1 = Pozo.FINDER.byId(idPozo);
-                    pozo1.clausurarPozo();
+                    try {
+                        pozo1.clausurarPozo();
+                    } catch(Exception e){
+                        e.printStackTrace();
+                    }
                     pozo1.save();
                     return pozo1;
                 }
@@ -117,7 +120,11 @@ public class PozoController extends Controller{
         return CompletableFuture.supplyAsync(
                 ()->{
                     Pozo pozo1 = Pozo.FINDER.byId(idPozo);
-                    pozo1.detenerPozoEmergencia();
+                    try {
+                        pozo1.detenerPozoEmergencia();
+                    } catch(Exception e){
+                        e.printStackTrace();
+                    }
                     pozo1.save();
                     return pozo1;
                 }
@@ -135,8 +142,31 @@ public class PozoController extends Controller{
         return CompletableFuture.supplyAsync(
                 ()->{
                     Pozo pozo1 = Pozo.FINDER.byId(idPozo);
-                    pozo1.reabrirPozo();
-                    pozo1.save();
+                    try {
+                        pozo1.reabrirPozo();
+                    } catch(Exception e){
+                        e.printStackTrace();
+                    }                    pozo1.save();
+                    return pozo1;
+                }
+        ).thenApply(
+                ppozo-> {
+                    return ok(Json.toJson(ppozo));
+                }
+        );
+    }
+
+    public CompletionStage<Result> iniciarProducirPozo(Long idPozo){
+        MessageDispatcher jdbcDispatcher = AkkaDispatcher.jdbcDispatcher;
+
+        return CompletableFuture.supplyAsync(
+                ()->{
+                    Pozo pozo1 = Pozo.FINDER.byId(idPozo);
+                    try {
+                        pozo1.iniciarProduccionPozo();
+                    } catch(Exception e){
+                        e.printStackTrace();
+                    }                    pozo1.save();
                     return pozo1;
                 }
         ).thenApply(
@@ -353,23 +383,42 @@ public class PozoController extends Controller{
 
     public Result reabrir(Long idPozo, Long idCampo){
         Pozo pozo = Pozo.FINDER.byId(idPozo);
-        pozo.reabrirPozo();
-        pozo.save();
+        try {
+            pozo.reabrirPozo();
+        } catch(Exception e){
+            e.printStackTrace();
+        }        pozo.save();
         return redirect(routes.PozoController.getPozosCampo(idCampo));
     }
 
 
     public Result clausurar(Long idPozo, Long idCampo){
         Pozo pozo = Pozo.FINDER.byId(idPozo);
-        pozo.clausurarPozo();
-        pozo.save();
+        try {
+            pozo.clausurarPozo();
+        } catch(Exception e){
+            e.printStackTrace();
+        }        pozo.save();
         return redirect(routes.PozoController.getPozosCampo(idCampo));
     }
 
     public Result detener(Long idPozo, Long idCampo){
         Pozo pozo = Pozo.FINDER.byId(idPozo);
-        pozo.detenerPozoEmergencia();
-        pozo.save();
+        try {
+            pozo.detenerPozoEmergencia();
+        } catch(Exception e){
+            e.printStackTrace();
+        }        pozo.save();
+        return redirect(routes.PozoController.getPozosCampo(idCampo));
+    }
+
+    public Result producir(Long idPozo, Long idCampo){
+        Pozo pozo = Pozo.FINDER.byId(idPozo);
+        try {
+            pozo.iniciarProduccionPozo();
+        } catch(Exception e){
+            e.printStackTrace();
+        }        pozo.save();
         return redirect(routes.PozoController.getPozosCampo(idCampo));
     }
 }

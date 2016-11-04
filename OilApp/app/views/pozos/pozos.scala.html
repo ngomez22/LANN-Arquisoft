@@ -1,3 +1,4 @@
+@import emums.EstadoPozo
 @(pozos: List[Pozo])(idCampo :Long)
 
 @main("OilCol S.A."){
@@ -39,15 +40,29 @@
                         </li>
                         <li><a href="@routes.PozoController.delete(idCampo, pozo.getId)"><i class="fa fa-2x fa-trash" style="color:brown"></i></a>
                         </li>
-                        <li><a  href="/resources/campos/@idCampo/pozos/reabrir/@pozo.getId">
-                            <button type="submit" class="btn btn-primary">Reabrir pozo</button></a>
-                        </li>
-                        <li><a  href="/resources/campos/@idCampo/pozos/clausurar/@pozo.getId">
-                            <button type="submit" class="btn btn-primary">Clausurar pozo</button></a>
-                        </li>
-                        <li><a  href="/resources/campos/@idCampo/pozos/detener/@pozo.getId">
-                            <button type="submit" class="btn btn-primary">Detener pozo</button></a>
-                        </li>
+                        @if(pozo.getEstado.equals(EstadoPozo.ABIERTO)){
+                            <li><a  href="/resources/campos/@idCampo/pozos/producir/@pozo.getId">
+                                <button type="submit" class="btn btn-primary">Producción</button></a>
+                            </li>
+                        } else {
+                            @if(pozo.getEstado.equals(EstadoPozo.PARADO)){
+                                <li><a  href="/resources/campos/@idCampo/pozos/reabrir/@pozo.getId">
+                                    <button type="submit" class="btn btn-primary">Reabrir pozo</button></a>
+                                </li>
+                                <li><a  href="/resources/campos/@idCampo/pozos/producir/@pozo.getId">
+                                    <button type="submit" class="btn btn-primary">Producción</button></a>
+                                </li>
+                            } else {
+                                @if(pozo.getEstado.equals(EstadoPozo.PRODUCCION)){
+                                    <li><a  href="/resources/campos/@idCampo/pozos/detener/@pozo.getId">
+                                        <button type="submit" class="btn btn-primary">Detener pozo</button></a>
+                                    </li>
+                                    <li><a  href="/resources/campos/@idCampo/pozos/clausurar/@pozo.getId">
+                                        <button type="submit" class="btn btn-primary">Clausurar pozo</button></a>
+                                    </li>
+                                }
+                            }
+                        }
                     </ul>
                 </li><br>
             }

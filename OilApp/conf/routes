@@ -61,6 +61,7 @@ GET     /resources/campos/:idCampo/pozos/delete/:idPozo     controllers.PozoCont
 GET     /resources/campos/:idCampo/pozos/reabrir/:idPozo  controllers.PozoController.reabrir(idCampo:Long, idPozo:Long)
 GET     /resources/campos/:idCampo/pozos/clausurar/:idPozo    controllers.PozoController.clausurar(idCampo:Long, idPozo:Long)
 GET     /resources/campos/:idCampo/pozos/detener/:idPozo    controllers.PozoController.detener(idCampo:Long, idPozo:Long)
+GET     /resources/campos/:idCampo/pozos/producir/:idPozo   controllers.PozoController.producir(idCampo:Long, idPozo:Long)
 
 
 # Mensaje routes
