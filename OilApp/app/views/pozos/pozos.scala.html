@@ -42,16 +42,16 @@
                         </li>
                         @if(pozo.getEstado.equals(EstadoPozo.ABIERTO)){
                             <li><a  href="/resources/campos/@idCampo/pozos/producir/@pozo.getId">
-                                <button type="submit" class="btn btn-primary">Producción</button></a>
-                            </li>
+                                <button type="submit" class="btn btn-primary">Producción</button>
+                            </a></li>
                         } else {
                             @if(pozo.getEstado.equals(EstadoPozo.PARADO)){
                                 <li><a  href="/resources/campos/@idCampo/pozos/reabrir/@pozo.getId">
-                                    <button type="submit" class="btn btn-primary">Reabrir pozo</button></a>
-                                </li>
+                                    <button type="submit" class="btn btn-primary">Reabrir pozo</button>
+                                </a></li>
                                 <li><a  href="/resources/campos/@idCampo/pozos/producir/@pozo.getId">
-                                    <button type="submit" class="btn btn-primary">Producción</button></a>
-                                </li>
+                                    <button type="submit" class="btn btn-primary">Producción</button>
+                                </a></li>
                             } else {
                                 @if(pozo.getEstado.equals(EstadoPozo.PRODUCCION)){
                                     <li><a  href="/resources/campos/@idCampo/pozos/detener/@pozo.getId">

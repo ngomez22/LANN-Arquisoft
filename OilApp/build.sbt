@@ -12,5 +12,6 @@ libraryDependencies ++= Seq(
   cache,
   javaWs,
   "org.postgresql" % "postgresql" % "9.4.1209.jre7",
+  "be.objectify" %% "deadbolt-java" % "2.5.3",
   filters
 )
