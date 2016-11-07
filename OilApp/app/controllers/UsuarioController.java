@@ -108,8 +108,9 @@ public class UsuarioController extends Controller {
 
     public Result create(){
         Usuario def = new Usuario();
+        def.setUsername("juanito10");
+        def.setPassword("password");
         def.setNombre("Juan");
-        def.setNivelAcceso(3);
         def.setAvatar(Usuario.DEFAULT_AVATAR);
         def.setEdad(25);
         def.setCargo("Empleado");

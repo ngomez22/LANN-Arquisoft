@@ -44,6 +44,12 @@ create table reportes_Temperatura (
   constraint pk_reportes_Temperatura primary key (id))
 ;
 
+create table permiso (
+  id                        bigserial not null,
+  value                     varchar(255),
+  constraint pk_permiso primary key (id))
+;
+
 create table pozos (
   id                        bigserial not null,
   latitud                   float,
@@ -54,18 +60,35 @@ create table pozos (
   constraint pk_pozos primary key (id))
 ;
 
+create table rol (
+  id                        bigserial not null,
+  name                      varchar(255),
+  constraint pk_rol primary key (id))
+;
+
 create table usuarios (
-  id                        bigint not null,
+  id                        bigserial not null,
+  username                  varchar(255),
+  password                  varchar(255),
   nombre                    varchar(255),
-  nivel_acceso              integer,
   avatar                    varchar(255),
   edad                      integer,
   cargo                     varchar(255),
   constraint pk_usuarios primary key (id))
 ;
 
-create sequence usuariosId;
 
+create table usuarios_rol (
+  usuarios_id                    bigint not null,
+  rol_id                         bigint not null,
+  constraint pk_usuarios_rol primary key (usuarios_id, rol_id))
+;
+
+create table usuarios_permiso (
+  usuarios_id                    bigint not null,
+  permiso_id                     bigint not null,
+  constraint pk_usuarios_permiso primary key (usuarios_id, permiso_id))
+;
 alter table campos add constraint fk_campos_jefeDeCampo_1 foreign key (jefe_de_campo_id) references usuarios (id);
 create index ix_campos_jefeDeCampo_1 on campos (jefe_de_campo_id);
 alter table reportes_caudal add constraint fk_reportes_caudal_pozo_2 foreign key (pozo_id) references pozos (id);
@@ -81,6 +104,14 @@ create index ix_pozos_campo_6 on pozos (campo_id);
 
 
 
+alter table usuarios_rol add constraint fk_usuarios_rol_usuarios_01 foreign key (usuarios_id) references usuarios (id);
+
+alter table usuarios_rol add constraint fk_usuarios_rol_rol_02 foreign key (rol_id) references rol (id);
+
+alter table usuarios_permiso add constraint fk_usuarios_permiso_usuarios_01 foreign key (usuarios_id) references usuarios (id);
+
+alter table usuarios_permiso add constraint fk_usuarios_permiso_permiso_02 foreign key (permiso_id) references permiso (id);
+
 # --- !Downs
 
 drop table if exists campos cascade;
@@ -93,9 +124,15 @@ drop table if exists reportes_Energia cascade;
 
 drop table if exists reportes_Temperatura cascade;
 
+drop table if exists permiso cascade;
+
 drop table if exists pozos cascade;
+
+drop table if exists rol cascade;
 
 drop table if exists usuarios cascade;
 
-drop sequence if exists usuariosId;
+drop table if exists usuarios_rol cascade;
+
+drop table if exists usuarios_permiso cascade;
 

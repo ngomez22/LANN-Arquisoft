@@ -1,16 +1,21 @@
 package models;
 
+import be.objectify.deadbolt.java.models.Permission;
+import be.objectify.deadbolt.java.models.Role;
+import be.objectify.deadbolt.java.models.Subject;
 import com.avaje.ebean.Model;
 import play.data.validation.Constraints;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Nicolás Gómez
  */
 @Entity
 @Table(name = "usuarios")
-public class Usuario extends Model{
+public class Usuario extends Model implements Subject {
 
     public static final String JEFE_PRODUCCION = "Jefe de produccion";
     public static final String JEFE_CAMPO = "Jefe de campo";
@@ -21,14 +26,17 @@ public class Usuario extends Model{
     public static Model.Finder<Long,Usuario> FINDER = new Model.Finder<>(Usuario.class);
 
     @Id
-    @GeneratedValue(strategy= GenerationType.SEQUENCE,generator = "usuariosId")
+    @GeneratedValue
     private Long id;
 
     @Constraints.Required
-    private String nombre;
+    private String username;
 
     @Constraints.Required
-    private Integer nivelAcceso;
+    private String password;
+
+    @Constraints.Required
+    private String nombre;
 
     private String avatar;
 
@@ -37,23 +45,33 @@ public class Usuario extends Model{
     @Constraints.Required
     private String cargo;
 
+    @ManyToMany
+    public List<Rol> roles;
+
+    @ManyToMany
+    public List<Permiso> permisos;
+
     public Usuario() {
         this.id = null;
+        this.username = null;
+        this.password = null;
         this.nombre = "NO NAME";
-        this.nivelAcceso = -1;
         this.avatar = DEFAULT_AVATAR;
         this.edad= -1;
         this.cargo = OTRO;
+        this.roles = new ArrayList<>();
+        this.permisos = new ArrayList<>();
     }
     public Usuario(Long id) {
         this();
         this.id = id;
     }
 
-    public Usuario(Long id, String nombre, Integer nivelAcceso, String avatar, Integer edad, String cargo) {
+    public Usuario(Long id, String username, String password, String nombre, String avatar, Integer edad, String cargo, List<Rol> roles, List<Permiso> permisos) {
         this.id = id;
+        this.username = username;
+        this.password = password;
         this.nombre = nombre;
-        this.nivelAcceso = nivelAcceso;
         if(avatar == null || avatar.equals(""))
             this.avatar = DEFAULT_AVATAR;
         else
@@ -63,6 +81,8 @@ public class Usuario extends Model{
             this.cargo = OTRO;
         else
             this.cargo = cargo;
+        this.roles = roles;
+        this.permisos = permisos;
     }
 
     public Long getId() {
@@ -73,20 +93,28 @@ public class Usuario extends Model{
         this.id = id;
     }
 
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
     public String getNombre() {
         return nombre;
     }
 
     public void setNombre(String nombre) {
         this.nombre = nombre;
-    }
-
-    public Integer getNivelAcceso() {
-        return nivelAcceso;
-    }
-
-    public void setNivelAcceso(Integer nivelAcceso) {
-        this.nivelAcceso = nivelAcceso;
     }
 
     public String getAvatar() {
@@ -120,11 +148,21 @@ public class Usuario extends Model{
     }
 
     @Override
-    public String toString() {
-        return "Usuario{" +
-                "id=" + id +
-                ", nombre='" + nombre + '\'' +
-                ", nivelAcceso=" + nivelAcceso +
-                '}';
+    public List<? extends Role> getRoles() {
+        return roles;
+    }
+
+    @Override
+    public List<? extends Permission> getPermissions() {
+        return permisos;
+    }
+
+    @Override
+    public String getIdentifier() {
+        return username;
+    }
+
+    public static Usuario encontrarUsuario(String u){
+        return FINDER.where().eq("username", u).findUnique();
     }
 }
