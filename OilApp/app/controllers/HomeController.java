@@ -26,4 +26,8 @@ public class HomeController extends Controller {
         return forbidden(error.render());
     }
 
+    public Result login() {
+        return ok(signin.render());
+    }
+
 }
