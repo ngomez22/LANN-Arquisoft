@@ -21,7 +21,9 @@ import be.objectify.deadbolt.java.ExecutionContextProvider;
 import be.objectify.deadbolt.java.models.Subject;
 import play.mvc.Http;
 import play.mvc.Result;
+import play.mvc.Results;
 import scala.concurrent.ExecutionContext;
+import views.html.*;
 
 import java.util.Optional;
 import java.util.concurrent.CompletableFuture;
@@ -54,11 +56,10 @@ public class NoUserDeadboltHandler extends AbstractDeadboltHandler
                                                  final Optional<String> content)
     {
         final ExecutionContext executionContext = executionContextProvider.get();
-        /*return CompletableFuture.supplyAsync(accessFailed::render,
+        return CompletableFuture.supplyAsync(error::render,
                                              (Executor) executionContext)
                                 .thenApplyAsync(Results::ok,
-                                                (Executor) executionContext);*/
-        return null;
+                                                (Executor) executionContext);
     }
 
     public CompletionStage<Optional<DynamicResourceHandler>> getDynamicResourceHandler(Http.Context context)
