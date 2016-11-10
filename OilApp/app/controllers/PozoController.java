@@ -381,7 +381,7 @@ public class PozoController extends Controller{
 
 
 
-    public Result reabrir(Long idPozo, Long idCampo){
+    public Result reabrir( Long idCampo,Long idPozo){
         Pozo pozo = Pozo.FINDER.byId(idPozo);
         try {
             pozo.reabrirPozo();
@@ -392,7 +392,7 @@ public class PozoController extends Controller{
     }
 
 
-    public Result clausurar(Long idPozo, Long idCampo){
+    public Result clausurar( Long idCampo,Long idPozo){
         Pozo pozo = Pozo.FINDER.byId(idPozo);
         try {
             pozo.clausurarPozo();
@@ -402,7 +402,7 @@ public class PozoController extends Controller{
         return redirect(routes.PozoController.getPozosCampo(idCampo));
     }
 
-    public Result detener(Long idPozo, Long idCampo){
+    public Result detener( Long idCampo,Long idPozo){
         Pozo pozo = Pozo.FINDER.byId(idPozo);
         try {
             pozo.detenerPozoEmergencia();
@@ -412,7 +412,7 @@ public class PozoController extends Controller{
         return redirect(routes.PozoController.getPozosCampo(idCampo));
     }
 
-    public Result producir(Long idPozo, Long idCampo){
+    public Result producir( Long idCampo,Long idPozo){
         Pozo pozo = Pozo.FINDER.byId(idPozo);
         try {
             pozo.iniciarProduccionPozo();
