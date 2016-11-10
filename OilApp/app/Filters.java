@@ -1,10 +1,11 @@
-import javax.inject.*;
-import play.*;
-import play.mvc.EssentialFilter;
-import play.http.HttpFilters;
-import play.mvc.*;
-
 import filters.ExampleFilter;
+import play.Environment;
+import play.Mode;
+import play.http.HttpFilters;
+import play.mvc.EssentialFilter;
+
+import javax.inject.Inject;
+import javax.inject.Singleton;
 
 /**
  * This class configures filters that run on every request. This
@@ -20,17 +21,17 @@ public class Filters implements HttpFilters {
 
     private final Environment env;
     private final EssentialFilter exampleFilter;
-    private final DeadboltRoutePathFilter deadbolt;
+    //private final DeadboltRoutePathFilter deadbolt;
 
     /**
      * @param env Basic environment settings for the current application.
      * @param exampleFilter A demonstration filter that adds a header to
      */
     @Inject
-    public Filters(Environment env, ExampleFilter exampleFilter,final DeadboltRoutePathFilter deadbolt) {
+    public Filters(Environment env, ExampleFilter exampleFilter){//, final DeadboltRoutePathFilter deadbolt) {
         this.env = env;
         this.exampleFilter = exampleFilter;
-        this.deadbolt = deadbolt;
+        //this.deadbolt = deadbolt;
     }
 
     @Override
@@ -41,7 +42,7 @@ public class Filters implements HttpFilters {
       if (env.mode().equals(Mode.DEV)) {
           return new EssentialFilter[] { exampleFilter };
       } else {
-         return new EssentialFilter[] {deadbolt};
+         return new EssentialFilter[] {};//deadbolt};
       }
     }
 

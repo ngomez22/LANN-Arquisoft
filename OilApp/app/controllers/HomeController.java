@@ -20,6 +20,10 @@ public class HomeController extends Controller {
         return ok(index.render("OilCol"));
     }
 
-    public Result resources() { return ok(resources.render("")); }
+    public Result resources() { return ok(resources.render()); }
+
+    public Result error() {
+        return forbidden(error.render());
+    }
 
 }
