@@ -8,7 +8,7 @@ import play.data.Form;
 import play.libs.Json;
 import play.mvc.Controller;
 import play.mvc.Result;
-import views.html.pozos.pozos;
+import views.html.pozos.*;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
