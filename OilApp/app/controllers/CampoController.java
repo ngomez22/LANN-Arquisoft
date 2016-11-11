@@ -5,6 +5,7 @@ import com.fasterxml.jackson.databind.JsonNode;
 import dispatchers.AkkaDispatcher;
 import models.Campo;
 import models.Pozo;
+import models.Usuario;
 import play.data.Form;
 import play.libs.Json;
 import play.mvc.Controller;
@@ -205,5 +206,14 @@ public class CampoController extends Controller{
         return redirect(routes.CampoController.getCamposRegion(r));
     }
 
+
+    public Result asignarJefe( String r,Long idCampo ,Long usuarioId)
+    {
+        Campo campo =Campo.FINDER.byId(idCampo);
+        Usuario usuario = Usuario.FINDER.byId(usuarioId);
+        campo.setJefeDeCampo(usuario);
+        campo.save();
+        return redirect(routes.CampoController.getCamposRegion(r));
+    }
 
 }

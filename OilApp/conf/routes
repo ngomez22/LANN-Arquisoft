@@ -40,6 +40,8 @@ GET     /resources/:r/campos                    controllers.CampoController.getC
 GET     /resources/:r/campos/create             controllers.CampoController.createCampoRegion(r: String)
 GET     /resources/:r/campos/save               controllers.CampoController.save(r: String)
 GET     /resources/:r/campos/delete/:idCampo    controllers.CampoController.delete(r: String, idCampo: Long)
+GET     /asignarJefe/:r/:idCampo                controllers.UsuarioController.asignarJefes(r: String, idCampo: Long)
+GET     /campo/asignado/:r/:idCampo/:usuario    controllers.CampoController.asignarJefe(r: String, idCampo: Long, usuario:Long)
 
 
 #Pozo routes

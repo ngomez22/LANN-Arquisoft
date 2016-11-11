@@ -41,7 +41,7 @@
                         @if(campo.getJefeDeCampo() != null){
                             Jefe de campo: @campo.getJefeDeCampo().getNombre()
                         }else {
-                            No hay jefe de campo
+                            <a href="@routes.UsuarioController.asignarJefes(region, campo.getId)"><button class="btn btn-primary">Asignar jefe de Campo</button></a>
                         }
                         </p>
                         <p>Pozos: @campo.getCantidadPozos</p>

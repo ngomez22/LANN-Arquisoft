@@ -135,7 +135,12 @@ public class UsuarioController extends Controller {
         return redirect(routes.UsuarioController.fetch());
     }
 
-    public List jefeIds (){
-        return Usuario.FINDER.where().eq("cargo", Usuario.JEFE_CAMPO).findIds();
+    public List<Usuario> jefeIds (){
+        return Usuario.FINDER.where().eq("cargo", Usuario.JEFE_CAMPO).findList();
+    }
+
+    public Result asignarJefes(String region, Long idCampo)
+    {
+        return ok(asignar.render(jefeIds(),region,idCampo));
     }
 }
