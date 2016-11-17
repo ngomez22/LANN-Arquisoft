@@ -60,6 +60,6 @@ public class MyDeadboltHandler extends AbstractDeadboltHandler
                                                  final Optional<String> content)
     {
         // you can return any result from here - forbidden, etc
-        return CompletableFuture.completedFuture(ok(error.render()));
+        return CompletableFuture.completedFuture(forbidden(error.render()));
     }
 }

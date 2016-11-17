@@ -1,13 +1,11 @@
 package modules;
 
-import be.objectify.deadbolt.java.TemplateFailureListener;
 import be.objectify.deadbolt.java.cache.HandlerCache;
 import play.api.Configuration;
 import play.api.Environment;
 import play.api.inject.Binding;
 import play.api.inject.Module;
 import scala.collection.Seq;
-import security.MyCustomTemplateFailureListener;
 import security.MyHandlerCache;
 
 import javax.inject.Singleton;
@@ -20,8 +18,9 @@ public class DeadboltHook extends Module {
 
     @Override
     public Seq<Binding<?>> bindings(Environment environment, Configuration configuration) {
-        return seq(bind(TemplateFailureListener.class).to(MyCustomTemplateFailureListener.class).in(Singleton.class),
-                bind(HandlerCache.class).to(MyHandlerCache.class).in(Singleton.class));
+        //return seq(bind(TemplateFailureListener.class).to(MyCustomTemplateFailureListener.class).in(Singleton.class),
+        //        bind(HandlerCache.class).to(MyHandlerCache.class).in(Singleton.class));
+        return seq(bind(HandlerCache.class).to(MyHandlerCache.class).in(Singleton.class));
     }
 
 }
