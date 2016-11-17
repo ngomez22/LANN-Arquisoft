@@ -6,9 +6,6 @@ import org.slf4j.LoggerFactory;
 
 import javax.inject.Singleton;
 
-/**
- * @author Steve Chaloner (steve@objectify.be)
- */
 @Singleton
 public class MyCustomTemplateFailureListener implements TemplateFailureListener
 {
