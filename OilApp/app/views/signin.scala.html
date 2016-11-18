@@ -1,16 +1,25 @@
+@(loginForm: Form[AuthController.Login])
+
 @main("Inicio sesión") {
 <!-- Page Content -->
-    <body>
-
-        <div class="container col-lg-4 col-lg-offset-4">
-            <form class="form-signin">
-                <h2 class="form-signin-heading">Inicio de sesión</h2>
-                <label for="inputEmail" class="sr-only">Email address</label>
-                <input type="text" id="inputEmail" class="form-control" placeholder="Usuario" required="" autofocus="">
-                <label for="inputPassword" class="sr-only">Password</label>
-                <input type="password" id="inputPassword" class="form-control" placeholder="Contraseña" required=""><br>
-                <button class="btn btn-lg btn-primary btn-block" type="submit">Iniciar sesión</button><br>
-            </form>
-            <a href="/"><button class="btn btn-lg btn-danger btn-block">Cancelar</button></a>
-        </div> <!-- /container -->
+    <div class="container col-lg-4 col-lg-offset-4">
+        @helper.form(routes.AuthController.authenticate) {
+            <h1>Inicio de sesión</h1>
+            @if(loginForm.hasGlobalErrors) {
+                <p class="text-danger">
+                    @loginForm.globalError.message
+                </p>
+            }
+            <p >
+                <input id="inputEmail" class="form-control" type="text" name="username" placeholder="Usuario" value="@loginForm("username").value">
+            </p>
+            <p>
+                <input id="inputPassword" class="form-control" type="password" name="password" placeholder="Contraseña">
+            </p>
+            <p>
+                <button class="btn btn-lg btn-primary btn-block" type="submit">Iniciar sesión</button>
+            </p>
+        }
+        <a href="@routes.HomeController.index()"><button class="btn btn-lg btn-danger btn-block">Cancelar</button></a>
+    </div>
 }

@@ -29,6 +29,7 @@ public class Usuario extends Model implements Subject {
     @GeneratedValue
     private Long id;
 
+    @Column(unique=true)
     @Constraints.Required
     private String username;
 
@@ -164,5 +165,9 @@ public class Usuario extends Model implements Subject {
 
     public static Usuario encontrarUsuario(String u){
         return FINDER.where().eq("username", u).findUnique();
+    }
+
+    public static Usuario authenticate(String u, String p) {
+        return FINDER.where().eq("username", u).eq("password", p).findUnique();
     }
 }

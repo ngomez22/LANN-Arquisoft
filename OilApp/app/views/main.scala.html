@@ -4,7 +4,10 @@
  * two arguments, a `String` for the title of the page and an `Html`
  * object to insert into the body of the page.
  *@
+
 @(title: String)(content: Html)
+
+@import be.objectify.deadbolt.java.views.html.subjectPresentOr
 
 <!DOCTYPE html>
 <html ng-app="mainApp">
@@ -53,7 +56,11 @@
                             <a href="/resources">Recursos</a>
                         </li>
                         <li>
-                            <a href="/login">Iniciar sesión</a>
+                        @subjectPresentOr() {
+                            <a href="@routes.AuthController.logout()">Cerrar sesión</a>
+                        }{
+                            <a href="@routes.AuthController.login()">Iniciar sesión</a>
+                        }
                         </li>
                     </ul>
                 </div>

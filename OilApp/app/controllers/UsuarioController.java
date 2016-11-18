@@ -1,7 +1,6 @@
 package controllers;
 
 import akka.dispatch.MessageDispatcher;
-import be.objectify.deadbolt.java.actions.SubjectPresent;
 import com.fasterxml.jackson.databind.JsonNode;
 import dispatchers.AkkaDispatcher;
 import models.Usuario;
@@ -21,7 +20,6 @@ import static play.libs.Json.toJson;
 /**
  * Nicolás Gómez
  */
-@SubjectPresent
 public class UsuarioController extends Controller {
 
     public CompletionStage<Result> getUsuarios() {
@@ -145,4 +143,5 @@ public class UsuarioController extends Controller {
     {
         return ok(asignar.render(jefeIds(),region,idCampo));
     }
+
 }

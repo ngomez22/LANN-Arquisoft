@@ -46,7 +46,7 @@ public class MyDeadboltHandler extends AbstractDeadboltHandler
     public CompletionStage<Optional<? extends Subject>> getSubject(final Http.Context context)
     {
         // in a real application, the user name would probably be in the session following a login process
-        return CompletableFuture.supplyAsync(() -> Optional.ofNullable(Usuario.encontrarUsuario("steve")),
+        return CompletableFuture.supplyAsync(() -> Optional.ofNullable(Usuario.encontrarUsuario(context.session().get("user"))),
                                              (Executor) executionContextProvider.get());
     }
 

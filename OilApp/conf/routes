@@ -6,7 +6,11 @@
 GET     /                                       controllers.HomeController.index
 GET     /resources                              controllers.HomeController.resources
 GET     /error                                  controllers.HomeController.error
-GET     /login                                  controllers.HomeController.login
+
+# Authentication routes
+GET     /login                                  controllers.AuthController.login
+POST    /authenticate                           controllers.AuthController.authenticate
+GET     /logout                                 controllers.AuthController.logout
 
 # An example controller showing how to use dependency injection
 GET     /count                                  controllers.CountController.count

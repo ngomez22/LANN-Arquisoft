@@ -1,7 +1,7 @@
 package controllers;
 
-import play.mvc.*;
-
+import play.mvc.Controller;
+import play.mvc.Result;
 import views.html.*;
 
 /**
@@ -25,9 +25,4 @@ public class HomeController extends Controller {
     public Result error() {
         return forbidden(error.render());
     }
-
-    public Result login() {
-        return ok(signin.render());
-    }
-
 }

@@ -15,17 +15,39 @@
  */
 package security;
 
+import actions.CustomRestrictAction;
+import be.objectify.deadbolt.java.actions.Restrict;
 import be.objectify.deadbolt.java.models.Role;
+import play.mvc.With;
 
-public enum MyRoles implements Role
-{
-    foo,
-    bar,
-    hurdy;
+import java.lang.annotation.*;
+
+public enum MyRoles implements Role {
+    jefeProduccion,
+    jefeCampo,
+    empleado,
+    otro;
 
     @Override
-    public String getName()
-    {
+    public String getName() {
         return name();
+    }
+
+    @Retention(RetentionPolicy.RUNTIME)
+    @Documented
+    public @interface MyRolesGroup {
+        MyRoles value();
+
+    }
+
+    @With(CustomRestrictAction.class)
+    @Retention(RetentionPolicy.RUNTIME)
+    @Target({ElementType.METHOD, ElementType.TYPE})
+    @Documented
+    @Inherited
+    public @interface CustomRestrict {
+        MyRolesGroup[] value();
+
+        Restrict config();
     }
 }
