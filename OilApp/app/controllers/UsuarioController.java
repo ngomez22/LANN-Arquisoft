@@ -116,14 +116,14 @@ public class UsuarioController extends Controller {
 
     @Restrict(@Group({"jefeProduccion"}))
     public Result create(){
-        Usuario def = new Usuario();
-        def.setUsername("juanito10");
-        def.setPassword("password");
-        def.setNombre("Juan");
-        def.setAvatar(Usuario.DEFAULT_AVATAR);
-        def.setEdad(25);
-        def.setCargo("Empleado");
-        Form<Usuario> usuarioForm = form(Usuario.class).fill(def);
+        Form<Usuario> usuarioForm = form(Usuario.class);
+        return ok(createUser.render(usuarioForm));
+    }
+
+    @Restrict(@Group({"jefeProduccion"}))
+    public Result update(Long idUsuario){
+        Usuario user = Usuario.FINDER.byId(idUsuario);
+        Form<Usuario> usuarioForm = form(Usuario.class).fill(user);
         return ok(createUser.render(usuarioForm));
     }
 
@@ -135,8 +135,15 @@ public class UsuarioController extends Controller {
             return badRequest(createUser.render(usuarioForm));
         }
         Usuario usuario = usuarioForm.get();
-        usuario.save();
         usuario.definirRoles();
+        System.out.println(usuario.toString());
+        Usuario search = Usuario.FINDER.where().eq("username", usuario.getUsername()).findUnique();
+        if(search != null) {
+            usuario.setId(search.getId());
+            usuario.update();
+        }
+        else
+            usuario.save();
         Ebean.saveManyToManyAssociations(usuario, "roles");
         flash("success", "Se agregó con éxito el usuario " + usuario.getNombre() + " con el cargo " + usuario.getCargo());
         return redirect(routes.UsuarioController.fetch());

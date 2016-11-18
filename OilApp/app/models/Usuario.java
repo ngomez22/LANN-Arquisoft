@@ -86,6 +86,21 @@ public class Usuario extends Model implements Subject {
         this.permisos = permisos;
     }
 
+    @Override
+    public String toString() {
+        return "Usuario{" +
+                "id=" + id +
+                ", username='" + username + '\'' +
+                ", password='" + password + '\'' +
+                ", nombre='" + nombre + '\'' +
+                ", avatar='" + avatar + '\'' +
+                ", edad=" + edad +
+                ", cargo='" + cargo + '\'' +
+                ", roles=" + roles +
+                ", permisos=" + permisos +
+                '}';
+    }
+
     public Long getId() {
         return id;
     }

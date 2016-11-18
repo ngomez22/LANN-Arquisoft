@@ -38,7 +38,7 @@
                                 </h3>
                                 @restrict(roles = anyOf(allOf("jefeProduccion"))) {
                                     <ul class="list-inline">
-                                        <li><a href="#"><i class="fa fa-3x fa-pencil"></i></a>
+                                        <li><a href="@routes.UsuarioController.update(usuario.getId())"><i class="fa fa-3x fa-pencil"></i></a>
                                         </li>
                                         <li><a href="@routes.UsuarioController.delete(usuario.getId())"><i class="fa fa-3x fa-trash" style="color: brown"></i></a>
                                         </li>

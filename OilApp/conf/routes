@@ -31,6 +31,7 @@ DELETE  /usuario/:idUsuario                     controllers.UsuarioController.de
 #---------------
 GET     /about                                  controllers.UsuarioController.fetch
 GET     /about/register                         controllers.UsuarioController.create
+GET     /about/update/:idUsuario                controllers.UsuarioController.update(idUsuario: Long)
 POST    /about/save                             controllers.UsuarioController.save
 GET     /about/delete/:idUsuario                controllers.UsuarioController.delete(idUsuario:Long)
 
