@@ -1,8 +1,10 @@
 package controllers;
 
 import akka.dispatch.MessageDispatcher;
+import be.objectify.deadbolt.java.actions.DeferredDeadbolt;
 import be.objectify.deadbolt.java.actions.Group;
 import be.objectify.deadbolt.java.actions.Restrict;
+import be.objectify.deadbolt.java.actions.SubjectNotPresent;
 import com.fasterxml.jackson.databind.JsonNode;
 import dispatchers.AkkaDispatcher;
 import models.MensajeCaudal;
@@ -25,6 +27,7 @@ import static play.libs.Json.toJson;
  * Created by Nicolás on 30/08/16.
  */
 @Restrict({@Group({"jefeProduccion"}), @Group({"jefeCampo"}), @Group({"sensor"})})
+@DeferredDeadbolt
 public class MensajeController extends Controller {
 
     // ----- Servicios para los mensajes de caudal
@@ -44,6 +47,7 @@ public class MensajeController extends Controller {
                 );
     }
 
+    @SubjectNotPresent
     public CompletionStage<Result> createMensajeCaudal(){
         MessageDispatcher jdbcDispatcher = AkkaDispatcher.jdbcDispatcher;
         JsonNode nMensaje = request().body().asJson();
@@ -77,6 +81,7 @@ public class MensajeController extends Controller {
                 );
     }
 
+    @SubjectNotPresent
     public CompletionStage<Result> createMensajeEmergencia(){
         MessageDispatcher jdbcDispatcher = AkkaDispatcher.jdbcDispatcher;
         JsonNode nMensaje = request().body().asJson();
@@ -110,6 +115,7 @@ public class MensajeController extends Controller {
                 );
     }
 
+    @SubjectNotPresent
     public CompletionStage<Result> createMensajeEnergia(){
         MessageDispatcher jdbcDispatcher = AkkaDispatcher.jdbcDispatcher;
         JsonNode nMensaje = request().body().asJson();
@@ -143,6 +149,7 @@ public class MensajeController extends Controller {
                 );
     }
 
+    @SubjectNotPresent
     public CompletionStage<Result> createMensajeTemperatura(){
         MessageDispatcher jdbcDispatcher = AkkaDispatcher.jdbcDispatcher;
         JsonNode nMensaje = request().body().asJson();

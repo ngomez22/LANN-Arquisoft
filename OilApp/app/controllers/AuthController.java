@@ -1,7 +1,9 @@
 package controllers;
 
+import com.fasterxml.jackson.databind.JsonNode;
 import models.Usuario;
 import play.data.Form;
+import play.libs.Json;
 import play.mvc.Controller;
 import play.mvc.Result;
 import views.html.signin;
@@ -37,6 +39,16 @@ public class AuthController extends Controller {
         return redirect(
                 routes.HomeController.index()
         );
+    }
+
+    public Result externalAuth() {
+        JsonNode login = request().body().asJson();
+        Login l = Json.fromJson(login, Login.class);
+        if(l.validate()== null){
+            session().clear();
+            session("user", l.username);
+        }
+        return ok();
     }
 
     public static class Login {

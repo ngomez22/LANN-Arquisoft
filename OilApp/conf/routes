@@ -11,6 +11,7 @@ GET     /error                                  controllers.HomeController.error
 GET     /login                                  controllers.AuthController.login
 POST    /authenticate                           controllers.AuthController.authenticate
 GET     /logout                                 controllers.AuthController.logout
+POST    /extlogin                               controllers.AuthController.externalAuth
 
 # An example controller showing how to use dependency injection
 GET     /count                                  controllers.CountController.count
