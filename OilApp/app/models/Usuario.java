@@ -148,6 +148,22 @@ public class Usuario extends Model implements Subject {
             this.cargo = cargo;
     }
 
+    public void definirRoles() {
+        switch(cargo) {
+            case JEFE_PRODUCCION:
+                roles.add(Rol.rolPorNombre("jefeProduccion"));
+                break;
+            case JEFE_CAMPO:
+                roles.add(Rol.rolPorNombre("jefeCampo"));
+                break;
+            case EMPLEADO:
+                roles.add(Rol.rolPorNombre("empleado"));
+                break;
+            default:
+                roles.add(Rol.rolPorNombre("otro"));
+        }
+    }
+
     @Override
     public List<? extends Role> getRoles() {
         return roles;
@@ -162,6 +178,8 @@ public class Usuario extends Model implements Subject {
     public String getIdentifier() {
         return username;
     }
+
+    //--------------------------------------------------------------
 
     public static Usuario encontrarUsuario(String u){
         return FINDER.where().eq("username", u).findUnique();

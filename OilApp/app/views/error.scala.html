@@ -1,5 +1,7 @@
+@import be.objectify.deadbolt.java.views.html.subjectPresentOr
 @main("Error") {
-<!-- Page Content -->
+
+    <!-- Page Content -->
     <div class="container">
 
         <!-- Page Heading/Breadcrumbs -->
@@ -17,11 +19,14 @@
         <!-- /.row -->
 
         <div class="row">
-
             <div class="col-lg-12">
                 <div class="jumbotron">
-                    <p>No tiene los suficientes permisos para acceder a esta página</p>
-                    <p>Regrese a la <a href = "/">página principal</a> o <a href="/login">inicie sesión</a></p>
+                    <p>No tiene los suficientes permisos para acceder a esta página.</p>
+                    @subjectPresentOr() {
+                        <p>Regrese a la <a href = "/">página principal</a>.</p>
+                    }{
+                        <p><a href="/login">Inicie sesión</a> o regrese a la <a href = "/">página principal</a></p>
+                    }
                 </div>
             </div>
 
