@@ -17,7 +17,7 @@ public class Global extends GlobalSettings
     {
         if (Rol.FINDER.findRowCount() == 0)
         {
-            for (String name : Arrays.asList("jefeProduccion", "jefeCampo", "empleado", "otro"))
+            for (String name : Arrays.asList("jefeProduccion", "jefeCampo", "empleado", "otro", "sensor"))
             {
                 Rol rol = new Rol();
                 rol.name = name;
@@ -34,6 +34,20 @@ public class Global extends GlobalSettings
             user.setUsername("ngomez");
             user.setPassword("12345");
             user.roles.add(Rol.rolPorNombre("jefeProduccion"));
+            user.save();
+
+            Ebean.saveManyToManyAssociations(user,
+                    "roles");
+        }
+        if(Usuario.FINDER.where().eq("username", "sensor").findUnique() == null){
+            Usuario user = new Usuario();
+            user.setNombre("sensor");
+            user.setCargo("sensor");
+            user.setEdad(0);
+            user.setUsername("sensor");
+            user.setPassword("clavesecreta");
+            user.roles.add(Rol.rolPorNombre("sensor"));
+
             user.save();
 
             Ebean.saveManyToManyAssociations(user,

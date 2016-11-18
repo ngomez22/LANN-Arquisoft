@@ -62,12 +62,10 @@ public class Usuario extends Model implements Subject {
         this.cargo = OTRO;
         this.roles = new ArrayList<>();
         this.permisos = new ArrayList<>();
-        definirRoles();
     }
     public Usuario(Long id) {
         this();
         this.id = id;
-        definirRoles();
     }
 
     public Usuario(Long id, String username, String password, String nombre, String avatar, Integer edad, String cargo, List<Rol> roles, List<Permiso> permisos) {
@@ -86,7 +84,6 @@ public class Usuario extends Model implements Subject {
             this.cargo = cargo;
         this.roles = roles;
         this.permisos = permisos;
-        definirRoles();
     }
 
     public Long getId() {
@@ -152,6 +149,7 @@ public class Usuario extends Model implements Subject {
     }
 
     public void definirRoles() {
+        this.roles = new ArrayList<>();
         switch(cargo) {
             case JEFE_PRODUCCION:
                 roles.add(Rol.rolPorNombre("jefeProduccion"));
@@ -181,6 +179,7 @@ public class Usuario extends Model implements Subject {
     public String getIdentifier() {
         return username;
     }
+
 
     //--------------------------------------------------------------
 

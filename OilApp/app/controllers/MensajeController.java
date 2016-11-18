@@ -1,6 +1,8 @@
 package controllers;
 
 import akka.dispatch.MessageDispatcher;
+import be.objectify.deadbolt.java.actions.Group;
+import be.objectify.deadbolt.java.actions.Restrict;
 import com.fasterxml.jackson.databind.JsonNode;
 import dispatchers.AkkaDispatcher;
 import models.MensajeCaudal;
@@ -22,6 +24,7 @@ import static play.libs.Json.toJson;
 /**
  * Created by Nicolás on 30/08/16.
  */
+@Restrict({@Group({"jefeProduccion"}), @Group({"jefeCampo"}), @Group({"sensor"})})
 public class MensajeController extends Controller {
 
     // ----- Servicios para los mensajes de caudal

@@ -1,6 +1,8 @@
 package controllers;
 
 import akka.dispatch.MessageDispatcher;
+import be.objectify.deadbolt.java.actions.Group;
+import be.objectify.deadbolt.java.actions.Restrict;
 import com.fasterxml.jackson.databind.JsonNode;
 import dispatchers.AkkaDispatcher;
 import models.Campo;
@@ -26,6 +28,7 @@ import static play.libs.Json.toJson;
 /**
  * Created by a.sandoval1303 on 30/08/2016.
  */
+@Restrict({@Group({"jefeProduccion"}), @Group({"jefeCampo"}), @Group({"empleado"})})
 public class CampoController extends Controller{
 
      public CompletionStage<Result> getCampos() {
@@ -44,6 +47,7 @@ public class CampoController extends Controller{
                 );
     }
 
+    @Restrict({@Group({"jefeProduccion"}), @Group({"jefeCampo"})})
     public CompletionStage<Result> createCampo(){
         MessageDispatcher jdbcDispatcher = AkkaDispatcher.jdbcDispatcher;
         JsonNode nCampo = request().body().asJson();
@@ -60,6 +64,7 @@ public class CampoController extends Controller{
         );
     }
 
+    @Restrict({@Group({"jefeProduccion"}), @Group({"jefeCampo"})})
     public CompletionStage<Result> updateCampo(Long idCampo){
         MessageDispatcher jdbcDispatcher = AkkaDispatcher.jdbcDispatcher;
         JsonNode nCampo= request().body().asJson();
@@ -80,6 +85,7 @@ public class CampoController extends Controller{
         );
     }
 
+    @Restrict({@Group({"jefeProduccion"}), @Group({"jefeCampo"})})
     public CompletionStage<Result> deleteCampo(Long idCampo){
         MessageDispatcher jdbcDispatcher = AkkaDispatcher.jdbcDispatcher;
 
@@ -95,6 +101,7 @@ public class CampoController extends Controller{
         );
     }
 
+    @Restrict({@Group({"jefeProduccion"}), @Group({"jefeCampo"})})
     public CompletionStage<Result> registroCaudalDiario(Long idCampo)
     {
         MessageDispatcher jdbcDispatcher = AkkaDispatcher.jdbcDispatcher;
@@ -111,6 +118,7 @@ public class CampoController extends Controller{
         );
     }
 
+    @Restrict({@Group({"jefeProduccion"}), @Group({"jefeCampo"})})
     public CompletionStage<Result> registroEnergiaDiario(Long idCampo, String dia) {
         MessageDispatcher jdbcDispatcher = AkkaDispatcher.jdbcDispatcher;
 
@@ -135,6 +143,7 @@ public class CampoController extends Controller{
         );
     }
 
+    @Restrict({@Group({"jefeProduccion"}), @Group({"jefeCampo"})})
     public CompletionStage<Result> createMensajeEnergia(Long idCampo){
         MessageDispatcher jdbcDispatcher = AkkaDispatcher.jdbcDispatcher;
         JsonNode nMensaje = request().body().asJson();
@@ -159,6 +168,7 @@ public class CampoController extends Controller{
         return ok(campos.render(list, r));
     }
 
+    @Restrict({@Group({"jefeProduccion"}), @Group({"jefeCampo"})})
     public Result createCampoRegion(String r) {
         String localidad = "popo";
         switch (r){
@@ -186,6 +196,7 @@ public class CampoController extends Controller{
         return ok(createCampo.render(r, campoForm));
     }
 
+    @Restrict({@Group({"jefeProduccion"}), @Group({"jefeCampo"})})
     public Result save(String r) {
         Form<Campo> campoForm = form(Campo.class).bindFromRequest();
         if(campoForm.hasErrors()){
@@ -200,13 +211,14 @@ public class CampoController extends Controller{
         }
     }
 
+    @Restrict({@Group({"jefeProduccion"}), @Group({"jefeCampo"})})
     public Result delete(String r, Long id) {
         System.out.println("Region: " + r + " - ID campo: " + id);
         Campo.FINDER.byId(id).delete();
         return redirect(routes.CampoController.getCamposRegion(r));
     }
 
-
+    @Restrict({@Group({"jefeProduccion"})})
     public Result asignarJefe( String r,Long idCampo ,Long usuarioId)
     {
         Campo campo =Campo.FINDER.byId(idCampo);

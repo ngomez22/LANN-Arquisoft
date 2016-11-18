@@ -1,6 +1,8 @@
 package controllers;
 
 import akka.dispatch.MessageDispatcher;
+import be.objectify.deadbolt.java.actions.Group;
+import be.objectify.deadbolt.java.actions.Restrict;
 import com.fasterxml.jackson.databind.JsonNode;
 import dispatchers.AkkaDispatcher;
 import models.*;
@@ -25,6 +27,7 @@ import static play.libs.Json.toJson;
 /**
  * Created by Nicolas Vasquez on 30/08/2016.
  */
+@Restrict({@Group({"jefeProduccion"}), @Group({"jefeCampo"}), @Group({"empleado"})})
 public class PozoController extends Controller{
 
     public CompletionStage<Result> getPozos() {
@@ -43,6 +46,7 @@ public class PozoController extends Controller{
                 );
     }
 
+    @Restrict({@Group({"jefeProduccion"}), @Group({"jefeCampo"})})
     public CompletionStage<Result> createPozo(){
         MessageDispatcher jdbcDispatcher = AkkaDispatcher.jdbcDispatcher;
         JsonNode nPozo = request().body().asJson();
@@ -59,6 +63,7 @@ public class PozoController extends Controller{
         );
     }
 
+    @Restrict({@Group({"jefeProduccion"}), @Group({"jefeCampo"})})
     public CompletionStage<Result> updatePozo(Long idPozo){
         MessageDispatcher jdbcDispatcher = AkkaDispatcher.jdbcDispatcher;
         JsonNode nPozo= request().body().asJson();
@@ -78,6 +83,7 @@ public class PozoController extends Controller{
         );
     }
 
+    @Restrict({@Group({"jefeProduccion"}), @Group({"jefeCampo"})})
     public CompletionStage<Result> deletePozo(Long idPozo){
         MessageDispatcher jdbcDispatcher = AkkaDispatcher.jdbcDispatcher;
 
@@ -93,6 +99,7 @@ public class PozoController extends Controller{
         );
     }
 
+    @Restrict({@Group({"jefeProduccion"}), @Group({"jefeCampo"})})
     public CompletionStage<Result> clausurarPozo(Long idPozo){
         MessageDispatcher jdbcDispatcher = AkkaDispatcher.jdbcDispatcher;
 
@@ -114,6 +121,7 @@ public class PozoController extends Controller{
         );
     }
 
+    @Restrict({@Group({"jefeProduccion"}), @Group({"jefeCampo"})})
     public CompletionStage<Result> detenerPozo(Long idPozo){
         MessageDispatcher jdbcDispatcher = AkkaDispatcher.jdbcDispatcher;
 
@@ -136,6 +144,7 @@ public class PozoController extends Controller{
     }
 
 
+    @Restrict({@Group({"jefeProduccion"}), @Group({"jefeCampo"})})
     public CompletionStage<Result> reabrirPozo(Long idPozo){
         MessageDispatcher jdbcDispatcher = AkkaDispatcher.jdbcDispatcher;
 
@@ -156,6 +165,7 @@ public class PozoController extends Controller{
         );
     }
 
+    @Restrict({@Group({"jefeProduccion"}), @Group({"jefeCampo"})})
     public CompletionStage<Result> iniciarProducirPozo(Long idPozo){
         MessageDispatcher jdbcDispatcher = AkkaDispatcher.jdbcDispatcher;
 
@@ -188,6 +198,7 @@ public class PozoController extends Controller{
         return new Date(milis);
     }
 
+    @Restrict({@Group({"jefeProduccion"}), @Group({"jefeCampo"})})
     public CompletionStage<Result> registroEnergiaDiario(Long idPozo, String dia){
         MessageDispatcher jdbcDispatcher = AkkaDispatcher.jdbcDispatcher;
         return CompletableFuture.supplyAsync(
@@ -210,6 +221,7 @@ public class PozoController extends Controller{
         );
     }
 
+    @Restrict({@Group({"jefeProduccion"}), @Group({"jefeCampo"})})
     public CompletionStage<Result> registroEnergiaMensual(Long idPozo, String dia){
 
         MessageDispatcher jdbcDispatcher = AkkaDispatcher.jdbcDispatcher;
@@ -234,6 +246,7 @@ public class PozoController extends Controller{
         );
     }
 
+    @Restrict({@Group({"jefeProduccion"}), @Group({"jefeCampo"})})
     public CompletionStage<Result> registroEnergiaPorFechas(Long idPozo, String dia, String dia2){
 
         MessageDispatcher jdbcDispatcher = AkkaDispatcher.jdbcDispatcher;
@@ -258,7 +271,7 @@ public class PozoController extends Controller{
         );
     }
 
-
+    @Restrict({@Group({"jefeProduccion"}), @Group({"jefeCampo"})})
     public CompletionStage<Result> registroCaudalDiario(Long idPozo, String dia){
         MessageDispatcher jdbcDispatcher = AkkaDispatcher.jdbcDispatcher;
         return CompletableFuture.supplyAsync(
@@ -281,6 +294,7 @@ public class PozoController extends Controller{
         );
     }
 
+    @Restrict({@Group({"jefeProduccion"}), @Group({"jefeCampo"})})
     public CompletionStage<Result> registroCaudalMensual(Long idPozo, String dia){
 
         MessageDispatcher jdbcDispatcher = AkkaDispatcher.jdbcDispatcher;
@@ -305,6 +319,7 @@ public class PozoController extends Controller{
         );
     }
 
+    @Restrict({@Group({"jefeProduccion"}), @Group({"jefeCampo"})})
     public CompletionStage<Result> registroTemperaturaDiario(Long idPozo, String dia){
         MessageDispatcher jdbcDispatcher = AkkaDispatcher.jdbcDispatcher;
         return CompletableFuture.supplyAsync(
@@ -327,6 +342,7 @@ public class PozoController extends Controller{
         );
     }
 
+    @Restrict({@Group({"jefeProduccion"}), @Group({"jefeCampo"})})
     public CompletionStage<Result> registroTemperaturaMensual(Long idPozo, String dia){
 
         MessageDispatcher jdbcDispatcher = AkkaDispatcher.jdbcDispatcher;
@@ -355,12 +371,14 @@ public class PozoController extends Controller{
         return ok(pozos.render(Pozo.FINDER.where().eq("campo_id", id).findList(), id));
     }
 
+    @Restrict({@Group({"jefeProduccion"}), @Group({"jefeCampo"})})
     public Result createPozo(Long idCampo) {
         Pozo poz = new Pozo();
         Form<Pozo> pozoForm = form(Pozo.class).fill(poz);
         return ok(views.html.pozos.createPozo.render(pozoForm, idCampo));
     }
 
+    @Restrict({@Group({"jefeProduccion"}), @Group({"jefeCampo"})})
     public Result save(Long idCampo) {
         Form<Pozo> pozoForm = form(Pozo.class).bindFromRequest();
         if(pozoForm.hasErrors()){
@@ -373,14 +391,13 @@ public class PozoController extends Controller{
         }
     }
 
+    @Restrict({@Group({"jefeProduccion"}), @Group({"jefeCampo"})})
     public Result delete(Long idCampo, Long idPozo) {
         Pozo.FINDER.byId(idPozo).delete();
         return redirect(routes.PozoController.getPozosCampo(idCampo));
     }
 
-
-
-
+    @Restrict({@Group({"jefeProduccion"}), @Group({"jefeCampo"})})
     public Result reabrir( Long idCampo,Long idPozo){
         Pozo pozo = Pozo.FINDER.byId(idPozo);
         try {
@@ -391,7 +408,7 @@ public class PozoController extends Controller{
         return redirect(routes.PozoController.getPozosCampo(idCampo));
     }
 
-
+    @Restrict({@Group({"jefeProduccion"}), @Group({"jefeCampo"})})
     public Result clausurar( Long idCampo,Long idPozo){
         Pozo pozo = Pozo.FINDER.byId(idPozo);
         try {
@@ -402,6 +419,7 @@ public class PozoController extends Controller{
         return redirect(routes.PozoController.getPozosCampo(idCampo));
     }
 
+    @Restrict({@Group({"jefeProduccion"}), @Group({"jefeCampo"})})
     public Result detener( Long idCampo,Long idPozo){
         Pozo pozo = Pozo.FINDER.byId(idPozo);
         try {
@@ -412,6 +430,7 @@ public class PozoController extends Controller{
         return redirect(routes.PozoController.getPozosCampo(idCampo));
     }
 
+    @Restrict({@Group({"jefeProduccion"}), @Group({"jefeCampo"})})
     public Result producir( Long idCampo,Long idPozo){
         Pozo pozo = Pozo.FINDER.byId(idPozo);
         try {

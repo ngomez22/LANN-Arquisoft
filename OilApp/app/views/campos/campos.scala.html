@@ -3,6 +3,9 @@
  * message to display.
  *@
 @(campos:List[Campo], region : String)
+    @import be.objectify.deadbolt.java.views.html.restrict
+    @import be.objectify.deadbolt.java.views.html.restrictOr
+    @import be.objectify.deadbolt.java.utils.TemplateUtils.{anyOf, allOf}
 
 @main("OilCol S.A") {
     <div class="container">
@@ -14,7 +17,9 @@
                 <h1 class="page-header">
                     <p>Campos de la región @region
                     <a  href="/resources/@region/campos/create">
-                        <button type="submit" class="btn btn-primary">Agregar campo</button>
+                        @restrict(roles = anyOf(allOf("jefeProduccion"), allOf("jefeCampo"))) {
+                            <button type="submit" class="btn btn-primary">Agregar campo</button>
+                        }
                     </a>
                     </p>
                 </h1>
@@ -41,18 +46,27 @@
                         @if(campo.getJefeDeCampo() != null){
                             Jefe de campo: @campo.getJefeDeCampo().getNombre()
                         }else {
-                            <a href="@routes.UsuarioController.asignarJefes(region, campo.getId)"><button class="btn btn-primary">Asignar jefe de Campo</button></a>
+                            @restrictOr(roles = anyOf(allOf("jefeProduccion"))) {
+                                <a href="@routes.UsuarioController.asignarJefes(region, campo.getId)"><button class="btn btn-primary">
+                                    Asignar jefe de Campo</button></a>
+                            }{
+                                No hay jefe de campo asignado.
+                            }
                         }
                         </p>
                         <p>Pozos: @campo.getCantidadPozos</p>
-                        <ul class="list-inline">
-                            <li>
-                                <a href="/resources/campos/@campo.getId/pozos"><button class="btn btn-default">Informacion</button></a>
-                            </li>
-                            <li>
-                                <a href="@routes.CampoController.delete(region, campo.getId)"><button class="btn btn-danger">Borrar</button></a>
-                            </li>
-                        </ul>
+                        @restrict(roles = anyOf(allOf("jefeProduccion"), allOf("jefeCampo"))) {
+                            <ul class="list-inline">
+                                <li>
+                                    <a href="/resources/campos/@campo.getId/pozos"><button class="btn btn-default">
+                                        Informacion</button></a>
+                                </li>
+                                <li>
+                                    <a href="@routes.CampoController.delete(region, campo.getId)"><button class="btn btn-danger">
+                                        Borrar</button></a>
+                                </li>
+                            </ul>
+                        }
                     </div>
                 </li>
             }
