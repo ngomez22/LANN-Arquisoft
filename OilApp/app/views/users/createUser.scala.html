@@ -45,15 +45,15 @@
                     @helper.form(routes.UsuarioController.save(), 'class -> "form-horizontal"){
                        <center><div class="col-md-4">
                         <fieldset class="form-group">
-                    @inputText(usuarioForm("username"), '_label -> "Usuario(*)", 'placeholder -> "Nombre de usuario", 'size -> "45")
-                    @inputPassword(usuarioForm("password"), '_label -> "Contraseña(*)", 'placeholder -> "min. 8 caracteres,1 mayúscula ", 'size ->"45")
-                    @inputText(usuarioForm("nombre"), '_label -> "Nombre(*)", 'placeholder -> "Nombre completo", 'size -> "45")
+                            @inputText(usuarioForm("nombre"), '_label -> "Nombre(*)", 'placeholder -> "Nombre completo", 'size -> "30")
+                            @inputText(usuarioForm("edad"), '_label -> "Edad", 'placeholder -> "0..", 'size -> "30")
+                            @inputText(usuarioForm("cargo"), '_label -> "Cargo(*)", 'placeholder -> "Jefe de Campo...", 'size -> "30")
                     </div>
                          <div class=""col-md-4">
                         <fieldset class="form-group">
-                            @inputText(usuarioForm("cargo"), '_label -> "Cargo(*)", 'placeholder -> "Jefe de campo,de producción, empleado, otro", 'size -> "45")
-                            @inputText(usuarioForm("edad"), '_label -> "Edad", 'placeholder -> "0..", 'size -> "45")
-                            @inputText(usuarioForm("avatar"), '_label -> "Avatar", 'placeholder -> "Muestre su mejor pérfil", 'size -> "45")
+                            @inputText(usuarioForm("username"), '_label -> "Usuario(*)", 'placeholder -> "Nombre de usuario", 'size -> "30")
+                            @inputPassword(usuarioForm("password"), '_label -> "Contraseña(*)", 'placeholder -> "min. 8 caracteres,1 mayúscula ", 'size ->"30")
+                            @inputText(usuarioForm("avatar"), '_label -> "Avatar", 'placeholder -> "Muestre su mejor pérfil", 'size -> "30")
                         </fieldset>
                      </div>
                          </center>
