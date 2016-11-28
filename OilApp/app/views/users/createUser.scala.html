@@ -40,10 +40,11 @@
                 <div class="modal-content">
                     <span class="close">×</span>
                      <div class="container">
+                         <center>
                     <div class="main-content form-group row">
                     <h3 style:="background-color:blue;">Crear nuevo usuario</h3><hr>
                     @helper.form(routes.UsuarioController.save(), 'class -> "form-horizontal"){
-                       <center><div class="col-md-4">
+                       <div class="col-md-4">
                         <fieldset class="form-group">
                             @inputText(usuarioForm("nombre"), '_label -> "Nombre(*)", 'placeholder -> "Nombre completo", 'size -> "30")
                             @inputText(usuarioForm("edad"), '_label -> "Edad", 'placeholder -> "0..", 'size -> "30")
@@ -55,14 +56,16 @@
                             @inputPassword(usuarioForm("password"), '_label -> "Contraseña(*)", 'placeholder -> "min. 8 caracteres,1 mayúscula ", 'size ->"30")
                             @inputText(usuarioForm("avatar"), '_label -> "Avatar", 'placeholder -> "Muestre su mejor pérfil", 'size -> "30")
                         </fieldset>
+
                      </div>
-                         </center>
+
                     <div class="control-group">
-                    <div class="controls row">
+                    <div class="controls row col-md-11">
                     <input id="create" type="submit" value="Save" class="btn btn-primary">
                     <a class="btn btn-danger" href="@routes.UsuarioController.fetch()">Cancel</a>
                     </div>
                     </div>
+                         </center>
                     }
                     </div>
                     </div>
