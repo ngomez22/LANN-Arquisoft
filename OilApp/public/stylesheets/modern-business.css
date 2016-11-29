@@ -5,6 +5,16 @@
  */
 
 /* Global Styles */
+@media screen and (max-width: 600px) {
+    .back-btn {
+        visibility: hidden;
+        clear: both;
+        float: left;
+        margin: 10px auto 5px 20px;
+        width: 28%;
+        display: none;
+    }
+}
 
 html,
 body {
@@ -90,4 +100,8 @@ footer {
     header.carousel .carousel {
         height: 70%;
     }
+}
+
+.info-btn {
+    color: forestgreen;
 }

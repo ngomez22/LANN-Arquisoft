@@ -9,7 +9,7 @@
     <div class="container">
 
             <!-- Image Header -->
-        <div class="row">
+        <div class="row hidden-ms hidden-sm hidden-xs">
             <div class="col-lg-12">
                 <img class="img-responsive" src="http://i.imgur.com/4DqsJil.jpg" alt="">
             </div>
@@ -18,21 +18,21 @@
 
             <!-- Service Panels -->
             <!-- The circle icons use Font Awesome's stacked icon classes. For more information, visit http://fontawesome.io/examples/ -->
-        <div class="row">
+        <div class="row hidden-xs hidden-sm hidden-md">
             <div class="col-lg-12">
                 <h2 class="page-header">Servicios del pozo @idPozo</h2>
             </div>
-            <div class="col-md-3 col-sm-6">
+            <div class="col-md-3 col-sm-3 col-xs-3">
                 <div class="panel panel-default text-center">
                     <div class="panel-heading">
+                        <h4>Energía</h4>
                         <span class="fa-stack fa-5x">
                             <i class="fa fa-circle fa-stack-2x text-primary"></i>
                             <i class="fa fa-plug fa-stack-1x fa-inverse"></i>
                         </span>
                     </div>
                     <div class="panel-body">
-                        <h4>Energía</h4>
-                        <p>Los pozos de OilCol cuenta con sensores de energía que permiten monitorear el consumo.</p>
+                        <p class="hidden-md hidden-sm hidden-xs">Los pozos de OilCol cuentan con sensores de energía que permiten monitorear el consumo.</p>
                         <ul class="nav navbar-nav navbar-right">
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">Opciones<b class="caret"></b></a>
@@ -49,22 +49,20 @@
                             </ul>
                         </li>
                         </ul>
-
-
                     </div>
                 </div>
             </div>
-            <div class="col-md-3 col-sm-6">
+            <div class="col-md-3 col-sm-3 col-xs-3">
                 <div class="panel panel-default text-center">
                     <div class="panel-heading">
+                        <h4>Caudal</h4>
                         <span class="fa-stack fa-5x">
                             <i class="fa fa-circle fa-stack-2x text-primary"></i>
                             <i class="fa fa-tint fa-stack-1x fa-inverse"></i>
                         </span>
                     </div>
                     <div class="panel-body">
-                        <h4>Caudal</h4>
-                        <p>El caudal de petroleo extraído de cada pozo es monitoreado mediante sensores en cada pozo.</p>
+                        <p class="hidden-md hidden-sm hidden-xs">El caudal de petroleo extraído de cada pozo es monitoreado mediante sensores en cada pozo.</p>
                         <ul class="nav navbar-nav navbar-right">
                             <li class="dropdown">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">Opciones<b class="caret"></b></a>
@@ -84,17 +82,17 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-3 col-sm-6">
+            <div class="col-md-3 col-sm-3 col-xs-3">
                 <div class="panel panel-default text-center">
                     <div class="panel-heading">
+                        <h4>Temperatura</h4>
                         <span class="fa-stack fa-5x">
                             <i class="fa fa-circle fa-stack-2x text-primary"></i>
                             <i class="fa fa-thermometer-quarter fa-stack-1x fa-inverse"></i>
                         </span>
                     </div>
                     <div class="panel-body">
-                        <h4>Temperatura</h4>
-                        <p>Se tiene información sobre la temperatura de los pozos en todo momento gracias a los sensores.</p>
+                        <p class="hidden-md hidden-sm hidden-xs">Se tiene información sobre la temperatura de los pozos en todo momento gracias a los sensores.</p>
                         <ul class="nav navbar-nav navbar-right">
                             <li class="dropdown">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">Opciones<b class="caret"></b></a>
@@ -114,17 +112,17 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-3 col-sm-6">
+            <div class="col-md-3 col-sm-3 col-xs-3">
                 <div class="panel panel-default text-center">
                     <div class="panel-heading">
+                        <h4>Emergencias</h4>
                         <span class="fa-stack fa-5x">
                             <i class="fa fa-circle fa-stack-2x text-primary"></i>
                             <i class="fa fa-exclamation-triangle fa-stack-1x fa-inverse"></i>
                         </span>
                     </div>
                     <div class="panel-body">
-                        <h4>Emergencias</h4>
-                        <p>Se tiene información de todas las emergencias que han sucedido en los pozos.</p>
+                        <p class="hidden-md hidden-sm hidden-xs">Se tiene información de todas las emergencias que han sucedido en los pozos.</p>
                         <ul class="nav navbar-nav navbar-right">
                             <li class="dropdown">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">Opciones<b class="caret"></b></a>
@@ -144,7 +142,133 @@
                     </div>
                 </div>
             </div>
-            <ul class="col-lg-4 col-lg-offset-4 list-inline">
+        </div>
+
+
+        <div class="row hidden-lg">
+            <div class="col-xs-12">
+                <h2 class="page-header">Servicios del pozo @idPozo</h2>
+            </div>
+            <div class="col-sm-3 col-xs-6">
+                <div class="panel panel-default text-center">
+                    <div class="panel-heading">
+                        <h5>Energía</h5>
+                    </div>
+                    <div class="panel-body">
+                        <span class="fa-stack-2x">
+                            <i class="fa fa-circle fa-stack-2x text-primary"></i>
+                            <i class="fa fa-plug fa-stack-1x fa-inverse"></i>
+                        </span><br><br><br>
+                        <ul class="nav navbar-nav navbar-right">
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown"><b class="caret"></b></a>
+                                <ul class="dropdown-menu col-xs-3">
+                                    <li>
+                                        <a href="@routes.MensajeController.energiaPozo(idPozo)"><h6>Ver</h6></a>
+                                    </li>
+                                    <li>
+                                        <a href="@routes.MensajeController.energiaPozoDia(idPozo)"><h6>Diario</h6></a>
+                                    </li>
+                                    <li>
+                                        <a href="@routes.MensajeController.energiaPozoMes(idPozo)"><h6>Mensual</h6></a>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-3 col-xs-6">
+                <div class="panel panel-default text-center">
+                    <div class="panel-heading">
+                        <h5>Caudal</h5>
+                    </div>
+                    <div class="panel-body">
+                        <span class="fa-stack-2x">
+                            <i class="fa fa-circle fa-stack-2x text-primary"></i>
+                            <i class="fa fa-tint fa-stack-1x fa-inverse"></i>
+                        </span><br><br><br>
+                        <ul class="nav navbar-nav navbar-right">
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown"><b class="caret"></b></a>
+                                <ul class="dropdown-menu col-xs-3">
+                                    <li>
+                                        <a href="@routes.MensajeController.caudalPozo(idPozo)"><h6>Ver</h6></a>
+                                    </li>
+                                    <li>
+                                        <a href="@routes.MensajeController.caudalPozoDia(idPozo)"><h6>Diario</h6></a>
+                                    </li>
+                                    <li>
+                                        <a href="@routes.MensajeController.caudalPozoMes(idPozo)"><h6>Mensual</h6></a>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-3 col-xs-6">
+                <div class="panel panel-default text-center">
+                    <div class="panel-heading">
+                        <h5>Temperatura</h5>
+                    </div>
+                    <div class="panel-body">
+                        <span class="fa-stack-2x">
+                            <i class="fa fa-circle fa-stack-2x text-primary"></i>
+                            <i class="fa fa-thermometer fa-stack-1x fa-inverse"></i>
+                        </span><br><br><br>
+                        <ul class="nav navbar-nav navbar-right">
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown"><b class="caret"></b></a>
+                                <ul class="dropdown-menu col-xs-3">
+                                    <li>
+                                        <a href="@routes.MensajeController.temperaturaPozo(idPozo)"><h6>Ver</h6></a>
+                                    </li>
+                                    <li>
+                                        <a href="@routes.MensajeController.temperaturaPozoDia(idPozo)"><h6>Diario</h6></a>
+                                    </li>
+                                    <li>
+                                        <a href="@routes.MensajeController.temperaturaPozoMes(idPozo)"><h6>Mensual</h6></a>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-3 col-xs-6">
+                <div class="panel panel-default text-center">
+                    <div class="panel-heading">
+                        <h5>Emergencias</h5>
+                    </div>
+                    <div class="panel-body">
+                        <span class="fa-stack-2x">
+                            <i class="fa fa-circle fa-stack-2x text-primary"></i>
+                            <i class="fa fa-warning fa-stack-1x fa-inverse"></i>
+                        </span><br><br><br>
+                        <ul class="nav navbar-nav navbar-right">
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown"><b class="caret"></b></a>
+                                <ul class="dropdown-menu col-xs-3">
+                                    <li>
+                                        <a href="@routes.MensajeController.emergenciasPozo(idPozo)"><h6>Ver</h6></a>
+                                    </li>
+                                    <li>
+                                        <a href="@routes.MensajeController.emergenciasPozoDia(idPozo)"><h6>Diario</h6></a>
+                                    </li>
+                                    <li>
+                                        <a href="@routes.MensajeController.emergenciasPozoMes(idPozo)"><h6>Mensual</h6></a>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+            <ul class="col-sm-12 col-lg-4 col-lg-offset-4 list-inline">
                 <li><a  href="@routes.MensajeController.reporteDiario(idPozo)">
                     <button class="btn btn-primary">Reporte diario</button>
                 </a></li>
@@ -152,8 +276,6 @@
                     <button class="btn btn-primary">Reporte mensual</button>
                 </a></li>
             </ul>
-        </div>
-    </div>
         <!-- /.container -->
-
+    </div>
 }
