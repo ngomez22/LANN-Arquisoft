@@ -30,14 +30,30 @@
             @for(pozo<-pozos) {
                 <div class="col-md-6">
                 <li class="list-group-item">
-                    <div>
+                    <div class="row">
+                        <div class="col-md-8">
                         <h3>Pozo número @pozo.getId</h3><br>
                         <p><b>Estado:</b> @pozo.getEstado</p>
                         <p><b>Coordenadas:</b></p>
                         <p>Longitud: @pozo.getLongitud  Latitud: @pozo.getLatitud</p>
+                        </div>
+                        <div class ="col-md-4">
+                            <br>
+                            <br>
+                            <br>
+                            <center><a  href="@routes.MensajeController.reporteDiario(pozo.getId)">
+                                <button class="btn btn-default">Reporte diario</button>
+                            </a>
+                            <br>
+                            <br>
+                            <a  href="@routes.MensajeController.reporteMensual(pozo.getId)">
+                                <button class="btn btn-default">Reporte mensual</button>
+                            </a>
+                            </center>
+                        </div>
                     </div>
                     <ul class="list-inline">
-                        <li><a href="@routes.MensajeController.services(pozo.getId)"><i class="info-btn fa fa-2x fa-info-circle"></i></a>
+                        <li><a href="@routes.MensajeController.services(pozo.getId)"><i class="fa fa-2x fa-database"></i></a>
                         </li>
                         <li><a href="@routes.PozoController.delete(idCampo, pozo.getId)"><i class="fa fa-2x fa-trash" style="color:brown"></i></a>
                         </li>
@@ -65,8 +81,9 @@
                             }
                         }
                     </ul>
-                </li><br>
+                </li>
                 </div>
+
             }
             </ul>
         </div>
