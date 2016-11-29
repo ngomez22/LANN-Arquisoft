@@ -36,8 +36,9 @@
         <div class="row">
             <ul class="list-group">
             @for(campo<-campos) {
+                <div class="col-md-6">
                 <li class="list-group-item">
-                    <div>
+
                         <h3>
                             <i class="fa fa-align-center fa-3x fa-map-pin"></i>
                             Campo de @campo.getLocalidad()
@@ -67,8 +68,8 @@
                                 </li>
                             </ul>
                         }
-                    </div>
                 </li>
+                </div>
             }
             </ul>
         </div>

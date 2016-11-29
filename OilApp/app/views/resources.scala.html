@@ -18,103 +18,121 @@
                 <p><i class="fa fa-map-marker fa-4x"></i>
                 </p>
             </div>
-            <div class="col-md-4">
-                <img src="http://i.imgur.com/RXs54Kw.gif" width="300" alt="">
+            <div class="col-md-6">
+                <img id="1" src="http://i.imgur.com/RXs54Kw.gif" alt="" usemap ="#mapa" class="img-responsive" onmouseout="mouseOut()">
+                <map name="mapa">
+                    <area onmouseover="onMouseP()"shape="rect" coords="0,200,113,501" title ="Region Pacifico" href="/resources/Pacifico/campos">
+                    <area onmouseover="onMouseOr()" shape="rect" coords="294,249,502,385" title ="Region Orinoquia" href="/resources/Orinoquia/campos">
+                    <area onmouseover="onMouseOr()" shape="circle" coords="286,389,50" title ="Region Orinoquia" href="/resources/Orinoquia/campos">
+                    <area onmouseover="onMouseC()"shape="circle" coords="133,100,150" title ="Region Caribe" href="/resources/Caribe/campos">
+                    <area onmouseover="onMouseA()" shape="circle" coords="367,610,200" title ="Region Amazonas" href="/resources/Amazonas/campos">
+                    <area onmouseover="onMouseAn()" shape="circle" coords="212,285,80" title ="Region Andina" href="/resources/Andina/campos">
+                    <area onmouseover="onMouseAn()" shape="rect" coords="119,355,184,491" title ="Region Andina" href="/resources/Andina/campos">
+                </map>
+
             </div>
-            <div class="col-md-7">
-                <h3>
-                    <a href="resources">Región caribe</a>
-                </h3>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
-                <a class="btn btn-primary" href="/resources/Caribe/campos">Ver campos <i class="fa fa-angle-right"></i></a>
+            <div class="col-md-5">
+                <div class="region" id="T1">
+                    <h3>
+                        <a href="resources">Región caribe</a>
+                    </h3>
+                    <p align="justify">La región caribe cuenta con grandes reservas de petróleo, ya que las mismas sólo ascienden a 35 millones de barriles, que equivalen a menos del 2% de las reservas nacionales.</p>
+                    <a class="btn btn-primary" href="/resources/Caribe/campos">Ver campos <i class="fa fa-angle-right"></i></a>
+                </div>
+
+                <div class="region" id="T2">
+                    <h3>
+                        <a href="resources">Región andina</a>
+                    </h3>
+                    <p align="justify">La región andina posee la mayoría de los recursos hídricos del país así como lastierras más productivas para la agricultura. Las principales refinerías de la región Andina se hallan en Barrancabermeja, Tibú, La Dorada y el Guamo</p>
+                    <a class="btn btn-primary" href="/resources/Andina/campos">Ver campos <i class="fa fa-angle-right"></i></a>
+                </div>
+
+                <div class="region" id="T3">
+                    <h3>
+                        <a href="resources">Región pacífico</a>
+                    </h3>
+                    <p align="justify">La extracción de petroleo sigue siendo preliminar dentro de la región Pacífica. Chocó 1 es el primer bloque que se otorga en la región del Pacífico, lo que permitirá obtener mayor información sobre esa cuenca. </p>
+                    <a class="btn btn-primary" href="/resources/Pacifico/campos">Ver campos <i class="fa fa-angle-right"></i></a>
+                </div>
+
+                <div class="region" id="T4">
+                    <h3>
+                        <a href="resources">Región orinoquía</a>
+                    </h3>
+                    <p align="justify">En los llanos de Arauca se encuentra Caño Limón, uno de los principales yacimientos petrolíferos de Colombia. En el departamento del Meta recientemente se han encontrado diversos pozos petrolíferos, y en el pie del monte de Casanare se encuentran los campos de Cusiana. </p>
+                    <a class="btn btn-primary" href="/resources/Orinoquia/campos">Ver campos <i class="fa fa-angle-right"></i></a>
+                </div>
+
+                <div class="region" id="T5">
+                    <h3>
+                        <a href="resources">Región amazonas</a>
+                    </h3>
+                    <p align="justify"> Solo en la cuenca Vaupés - Putumayo se calculan unos recursos prospectivos por 2.340 millones de barriles de petróleo, una cifra que la Agencia Nacional de Hidrocarburos (ANH) califica como muy preliminar.</p>
+                    <a class="btn btn-primary" href="@routes.CampoController.getCamposRegion("Amazonas")">Ver campos <i class="fa fa-angle-right"></i></a>
+                </div>
             </div>
+
         </div>
             <!-- /.row -->
 
-        <hr>
 
-            <!-- Blog Post Row -->
-        <div class="row">
-            <div class="col-md-1 text-center">
-                <p><i class="fa fa-map-marker fa-4x"></i>
-                </p>
-            </div>
-            <div class="col-md-4">
-                <img src="http://i.imgur.com/j1cliSA.gif" width="300" alt="">
-            </div>
-            <div class="col-md-7">
-                <h3>
-                    <a href="resources">Región andina</a>
-                </h3>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
-                <a class="btn btn-primary" href="/resources/Andina/campos">Ver campos <i class="fa fa-angle-right"></i></a>
-            </div>
-        </div>
-            <!-- /.row -->
-
-        <hr>
-
-            <!-- Blog Post Row -->
-        <div class="row">
-            <div class="col-md-1 text-center">
-                <p><i class="fa fa-map-marker fa-4x"></i>
-                </p>
-            </div>
-            <div class="col-md-4">
-                <img src="http://i.imgur.com/vh3JAt3.gif" width="300" alt="">
-            </div>
-            <div class="col-md-7">
-                <h3>
-                    <a href="resources">Región pacífico</a>
-                </h3>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
-                <a class="btn btn-primary" href="/resources/Pacifico/campos">Ver campos <i class="fa fa-angle-right"></i></a>
-            </div>
-        </div>
-            <!-- /.row -->
-
-        <hr>
-
-            <!-- Blog Post Row -->
-        <div class="row">
-            <div class="col-md-1 text-center">
-                <p><i class="fa fa-map-marker fa-4x"></i>
-                </p>
-            </div>
-            <div class="col-md-4">
-                <img src="http://i.imgur.com/LOO7qs3.gif" width="300" alt="">
-            </div>
-            <div class="col-md-7">
-                <h3>
-                    <a href="resources">Región orinoquía</a>
-                </h3>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
-                <a class="btn btn-primary" href="/resources/Orinoquia/campos">Ver campos <i class="fa fa-angle-right"></i></a>
-            </div>
-        </div>
-            <!-- /.row -->
-
-        <hr>
-
-            <!-- Blog Post Row -->
-        <div class="row">
-            <div class="col-md-1 text-center">
-                <p><i class="fa fa-map-marker fa-4x"></i>
-                </p>
-            </div>
-            <div class="col-md-4">
-                <img src="http://i.imgur.com/Jzkxptr.gif" width="300" alt="">
-            </div>
-            <div class="col-md-7">
-                <h3>
-                    <a href="resources">Región amazonas</a>
-                </h3>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
-                <a class="btn btn-primary" href="@routes.CampoController.getCamposRegion("Amazonas")">Ver campos <i class="fa fa-angle-right"></i></a>
-            </div>
-        </div>
-            <!-- /.row -->
 
     </div>
         <!-- /.container -->
+    <script>
+            function onMouseA()
+            {
+                document.getElementById("1").src="http://i.imgur.com/Jzkxptr.gif"
+                document.getElementById("T1").style.backgroundColor="white"
+                document.getElementById("T2").style.backgroundColor="white"
+                document.getElementById("T3").style.backgroundColor="white"
+                document.getElementById("T4").style.backgroundColor="white"
+                document.getElementById("T5").style.backgroundColor="lightgrey"
+            }
+            function onMouseOr()
+            {
+                document.getElementById("1").src="http://i.imgur.com/LOO7qs3.gif"
+                document.getElementById("T1").style.backgroundColor="white"
+                document.getElementById("T2").style.backgroundColor="white"
+                document.getElementById("T3").style.backgroundColor="white"
+                document.getElementById("T4").style.backgroundColor="lightgrey"
+                document.getElementById("T5").style.backgroundColor="white"
+            }
+            function onMouseP()
+            {
+                document.getElementById("1").src="http://i.imgur.com/vh3JAt3.gif"
+                document.getElementById("T1").style.backgroundColor="white"
+                document.getElementById("T2").style.backgroundColor="white"
+                document.getElementById("T3").style.backgroundColor="lightgrey"
+                document.getElementById("T4").style.backgroundColor="white"
+                document.getElementById("T5").style.backgroundColor="white"
+            }
+            function onMouseC()
+            {
+                document.getElementById("1").src="http://i.imgur.com/RXs54Kw.gif"
+                document.getElementById("T1").style.backgroundColor="lightgrey"
+                document.getElementById("T2").style.backgroundColor="white"
+                document.getElementById("T3").style.backgroundColor="white"
+                document.getElementById("T4").style.backgroundColor="white"
+                document.getElementById("T5").style.backgroundColor="white"
+            }
+            function onMouseAn()
+            {
+                document.getElementById("1").src="http://i.imgur.com/j1cliSA.gif"
+                document.getElementById("T1").style.backgroundColor="white"
+                document.getElementById("T2").style.backgroundColor="lightgrey"
+                document.getElementById("T3").style.backgroundColor="white"
+                document.getElementById("T4").style.backgroundColor="white"
+                document.getElementById("T5").style.backgroundColor="white"
+            }
+            function mouseOut()
+            {
+                document.getElementById("T1").style.backgroundColor="white"
+                document.getElementById("T2").style.backgroundColor="white"
+                document.getElementById("T3").style.backgroundColor="white"
+                document.getElementById("T4").style.backgroundColor="white"
+                document.getElementById("T5").style.backgroundColor="white"
+            }
+    </script>
 }

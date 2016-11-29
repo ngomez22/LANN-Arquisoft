@@ -52,6 +52,10 @@ public class Pozo extends Model{
     @ManyToOne
     private Campo campo;
 
+    private Estado estadoP;
+
+
+
     public Pozo(Double latitud, Double longitud, List<MensajeEmergencia> sensorEmergencia, List<MensajeCaudal> sensorCaudal, List<MensajeEnergia> sensorEnergia, List<MensajeTemperatura> sensorTemperatura, EstadoPozo estado, Campo campo) {
         this.latitud = latitud;
         this.longitud = longitud;
@@ -61,13 +65,15 @@ public class Pozo extends Model{
         this.sensorTemperatura = sensorTemperatura;
         this.estado = estado;
         this.campo = campo;
+
     }
 
     public Pozo()
     {
         latitud =-1.0;
         longitud =-1.0;
-        estado = EstadoPozo.ABIERTO;
+        estadoP = new Abierto();
+        estado = estadoP.get();
         this.sensorEmergencia = new ArrayList();
         this.sensorCaudal = new ArrayList();
         this.sensorEnergia = new ArrayList();
@@ -128,29 +134,38 @@ public class Pozo extends Model{
 
     public void clausurarPozo() throws Exception {
         if(this.estado.equals(EstadoPozo.PARADO) || this.estado.equals(EstadoPozo.PRODUCCION))
-            this.estado = EstadoPozo.CLAUSURADO;
+        {
+            estadoP = new Clausurado();
+            this.estado = estadoP.get();
+        }
         else
             throw new Exception("No se puede clausurar el pozo");
     }
 
     public void detenerPozoEmergencia() throws Exception {
-        if(this.estado.equals(EstadoPozo.PRODUCCION))
-            this.estado = EstadoPozo.PARADO;
+        if(this.estado.equals(EstadoPozo.PRODUCCION)) {
+            estadoP = new Detenido();
+            this.estado = estadoP.get();
+        }
         else
             throw new Exception("No se puede para el pozo porque no está en producción");
     }
 
     public void reabrirPozo() throws Exception
     {
-        if(this.estado.equals(EstadoPozo.PARADO))
-            this.estado = EstadoPozo.ABIERTO;
+        if(this.estado.equals(EstadoPozo.PARADO)) {
+            estadoP = new Abierto();
+            this.estado = estadoP.get();
+        }
         else
             throw new Exception("El pozo no se puede reabrir porque no está parado");
     }
 
     public void iniciarProduccionPozo() throws Exception {
-        if(this.estado.equals(EstadoPozo.ABIERTO) || this.estado.equals(EstadoPozo.PARADO))
-            this.estado = EstadoPozo.PRODUCCION;
+        if(this.estado.equals(EstadoPozo.ABIERTO) || this.estado.equals(EstadoPozo.PARADO)) {
+            estadoP = new Produccion();
+            this.estado = estadoP.get();
+        }
         else
             throw new Exception("El pozo está clausurado");
     }
