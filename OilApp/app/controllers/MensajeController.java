@@ -7,10 +7,7 @@ import be.objectify.deadbolt.java.actions.Restrict;
 import be.objectify.deadbolt.java.actions.SubjectNotPresent;
 import com.fasterxml.jackson.databind.JsonNode;
 import dispatchers.AkkaDispatcher;
-import models.MensajeCaudal;
-import models.MensajeEmergencia;
-import models.MensajeEnergia;
-import models.MensajeTemperatura;
+import models.*;
 import org.joda.time.DateTime;
 import play.libs.Json;
 import play.mvc.Controller;
@@ -262,7 +259,10 @@ public class MensajeController extends Controller {
         List<MensajeEnergia> energia = MensajeEnergia.FINDER.where().between("fecha_Envio", fecha2, dt.toDate()).eq("pozo_id", idPozo).order().desc("fecha_Envio").findList();
         List<MensajeTemperatura> temperatura = MensajeTemperatura.FINDER.where().between("fecha_Envio", fecha2, dt.toDate()).eq("pozo_id", idPozo).order().desc("fecha_Envio").findList();
         List<MensajeEmergencia> emergencias = MensajeEmergencia.FINDER.where().between("fecha_Envio", fecha2, dt.toDate()).eq("pozo_id", idPozo).order().desc("fecha_Envio").findList();
-        return ok(report.render("dia", idPozo, caudal, energia, temperatura, emergencias));
+        String caudalReport = ReportHelper.generarReporteCaudal(caudal);
+        String energiaReport = ReportHelper.generarReporteEnergia(energia);
+        String temperaturaReport = ReportHelper.generarReporteTemperatura(temperatura);
+        return ok(report.render("dia", idPozo, caudal, energia, temperatura, emergencias, energiaReport, caudalReport, temperaturaReport));
     }
 
     public Result reporteMensual(Long idPozo) {
@@ -272,6 +272,9 @@ public class MensajeController extends Controller {
         List<MensajeEnergia> energia = MensajeEnergia.FINDER.where().between("fecha_Envio", fecha2, dt.toDate()).eq("pozo_id", idPozo).order().desc("fecha_Envio").findList();
         List<MensajeTemperatura> temperatura = MensajeTemperatura.FINDER.where().between("fecha_Envio", fecha2, dt.toDate()).eq("pozo_id", idPozo).order().desc("fecha_Envio").findList();
         List<MensajeEmergencia> emergencias = MensajeEmergencia.FINDER.where().between("fecha_Envio", fecha2, dt.toDate()).eq("pozo_id", idPozo).order().desc("fecha_Envio").findList();
-        return ok(report.render("mes", idPozo, caudal, energia, temperatura, emergencias));
+        String caudalReport = ReportHelper.generarReporteCaudal(caudal);
+        String energiaReport = ReportHelper.generarReporteEnergia(energia);
+        String temperaturaReport = ReportHelper.generarReporteTemperatura(temperatura);
+        return ok(report.render("mes", idPozo, caudal, energia, temperatura, emergencias, energiaReport, caudalReport, temperaturaReport));
     }
 }

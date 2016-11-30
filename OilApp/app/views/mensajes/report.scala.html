@@ -2,7 +2,7 @@
  * This template takes a single argument, a String containing a
  * message to display.
  *@
-@(tiempo: String)(idPozo:Long)(caudal:List[MensajeCaudal])(energia:List[MensajeEnergia])(temperatura:List[MensajeTemperatura])(emergencia: List[MensajeEmergencia])
+@(tiempo: String)(idPozo:Long)(caudal:List[MensajeCaudal])(energia:List[MensajeEnergia])(temperatura:List[MensajeTemperatura])(emergencia: List[MensajeEmergencia])(reporteEnergia: String)(reporteCaudal: String)(reporteTemperatura: String)
 
 @main("Reporte") {
     <!-- Page Content -->
@@ -18,44 +18,29 @@
     <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
 
         <!-- flot -->
+    <script src="../../../public/javascripts/flot/jquery.js"></script>
     <script src="../../../public/javascripts/flot/jquery.flot.js"></script>
     <script src="../../../public/javascripts/flot/jquery.flot.time.js"></script>
     <script type="text/javascript">
             $(function() {
 
-                function doPlot(position) {
-
-                    var valoresEnergia = [];
-                    //var fechasEnergia = [];
-                    @for(e <- energia){
-                        valoresEnergia.push([@e.getConsumoEnergia, @e.getFechaEnvio]);
-                        //fechasEnergia.push(@e.getFechaEnvio);
-                    }
-
-                    var valoresCaudal = [];
-                    //var fechasCaudal = [];
-                    @for(c <- caudal){
-                        valoresCaudal.push([@c.getCaudal, @c.getFechaEnvio]);
-                        //fechasCaudal.push(@c.getFechaEnvio);
-                    }
-
-                    var valoresTemperatura = [];
-                    //var fechasTemperatura = [];
-                    @for(t <- temperatura){
-                        valoresTemperatura.push([@t.getTemperatura, @t.getFechaEnvio]);
-                        //fechasTemperatura.push(@t.getFechaEnvio);
-                    }
-
-                    $.plot("#placeholder", [valoresEnergia, valoresCaudal, valoresTemperatura]);
+                var d1 = [];
+                for (var i = 0; i < 14; i += 0.5) {
+                    d1.push([i, Math.sin(i)]);
                 }
 
-                doPlot("right");
+                var d2 = [[0, 3], [4, 8], [8, 5], [9, 13]];
 
-                $("button").click(function () {
-                    doPlot($(this).text());
-                });
+                // A null signifies separate line segments
+
+                var d3 = [[0, 12], [7, 12], null, [7, 2.5], [12, 2.5]];
+
+                $.plot("#placeholder", [ d1, d2, d3 ]);
+
+                // Add the Flot version string to the footer
+
+                $("#footer").prepend("Flot " + $.plot.version + " &ndash; ");
             });
-
     </script>
 
 
@@ -70,12 +55,12 @@
             </div>
                 <!-- /.row -->
             <div class="row">
-                <div class="col-lg-3 col-md-6">
+                <div class="col-lg-3 col-md-6 col-sm-6 col-xs-6">
                     <div class="panel panel-primary">
                         <div class="panel-heading">
                             <div class="row">
                                 <div class="col-xs-3">
-                                    <i class="fa fa-plug fa-5x"></i>
+                                    <i class="hidden-sm hidden-xs fa fa-plug fa-5x"></i>
                                 </div>
                                 <div class="col-xs-9 text-right">
                                     <div class="huge">@energia.size()</div>
@@ -96,12 +81,12 @@
                         </a>
                     </div>
                 </div>
-                <div class="col-lg-3 col-md-6">
+                <div class="col-lg-3 col-md-6 col-sm-6 col-xs-6">
                     <div class="panel panel-primary">
                         <div class="panel-heading">
                             <div class="row">
                                 <div class="col-xs-3">
-                                    <i class="fa fa-tint fa-5x"></i>
+                                    <i class="hidden-sm hidden-xs fa fa-tint fa-5x"></i>
                                 </div>
                                 <div class="col-xs-9 text-right">
                                     <div class="huge">@caudal.size()</div>
@@ -122,12 +107,12 @@
                         </a>
                     </div>
                 </div>
-                <div class="col-lg-3 col-md-6">
+                <div class="col-lg-3 col-md-6 col-sm-6 col-xs-6">
                     <div class="panel panel-primary">
                         <div class="panel-heading">
                             <div class="row">
                                 <div class="col-xs-3">
-                                    <i class="fa fa-thermometer-quarter fa-5x"></i>
+                                    <i class="hidden-sm hidden-xs fa fa-thermometer-quarter fa-5x"></i>
                                 </div>
                                 <div class="col-xs-9 text-right">
                                     <div class="huge">@temperatura.size()</div>
@@ -148,12 +133,12 @@
                         </a>
                     </div>
                 </div>
-                <div class="col-lg-3 col-md-6">
+                <div class="col-lg-3 col-md-6 col-sm-6 col-xs-6">
                     <div class="panel panel-primary">
                         <div class="panel-heading">
                             <div class="row">
                                 <div class="col-xs-3">
-                                    <i class="fa fa-exclamation-triangle fa-5x"></i>
+                                    <i class="hidden-sm hidden-xs fa fa-exclamation-triangle fa-5x"></i>
                                 </div>
                                 <div class="col-xs-9 text-right">
                                     <div class="huge">@emergencia.size()</div>
@@ -177,14 +162,62 @@
             </div>
                 <!-- /.row -->
             <div class="row">
-                <div class="col-lg-8">
-                    <div id="placeholder"></div>
-                </div>
-                    <!-- /.col-lg-8 -->
-                <div class="hidden-sm hidden-xs col-lg-4">
+                <div class="col-lg-6 col-xs-12 col-sm-12">
                     <div class="panel panel-default">
                         <div class="panel-heading">
-                            <i class="fa fa-bell fa-fw"></i> Emergencias
+                            <i class="hidden-sm hidden-xs fa fa-bell fa-fw"></i> Energia
+                        </div>
+                            <!-- /.panel-heading -->
+                        <div class="panel-body">
+                            <p>
+                                @reporteEnergia
+                            </p>
+                                <!-- /.list-group -->
+                        </div>
+                            <!-- /.panel-body -->
+                    </div>
+                        <!-- /.panel -->
+                </div>
+
+                <div class="col-lg-6 col-xs-12 col-sm-12">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <i class="hidden-sm hidden-xs fa fa-bell fa-fw"></i> Caudal
+                        </div>
+                            <!-- /.panel-heading -->
+                        <div class="panel-body">
+                            <p>
+                            @reporteCaudal
+                            </p>
+                                <!-- /.list-group -->
+                        </div>
+                            <!-- /.panel-body -->
+                    </div>
+                        <!-- /.panel -->
+                </div>
+
+                <div class="col-lg-6 col-xs-12 col-sm-12">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <i class="hidden-sm hidden-xs fa fa-bell fa-fw"></i> Temperatura
+                        </div>
+                            <!-- /.panel-heading -->
+                        <div class="panel-body">
+                            <p>
+                            @reporteTemperatura
+                            </p>
+                                <!-- /.list-group -->
+                        </div>
+                            <!-- /.panel-body -->
+                    </div>
+                        <!-- /.panel -->
+                </div>
+
+                    <!-- /.col-lg-8 -->
+                <div class="col-lg-6 col-xs-12 col-sm-12">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <i class="hidden-sm hidden-xs fa fa-bell fa-fw"></i> Emergencias
                         </div>
                             <!-- /.panel-heading -->
                         <div class="panel-body">
@@ -204,8 +237,7 @@
                         </div>
                             <!-- /.panel-body -->
                     </div>
-                        <!-- /.panel -->
-                        <!-- /.panel .chat-panel -->
+                    <!-- /.panel -->
                 </div>
                     <!-- /.col-lg-4 -->
             </div>

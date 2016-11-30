@@ -3,7 +3,7 @@ import emums.*;
 
 public interface Estado
 {
-        public void handle();
+        public Estado change(EstadoPozo estado);
         public EstadoPozo get();
 
 }

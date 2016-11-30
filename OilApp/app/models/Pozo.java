@@ -161,12 +161,8 @@ public class Pozo extends Model{
     }
 
     public void iniciarProduccionPozo() throws Exception {
-        if(this.estado.equals(EstadoPozo.ABIERTO) || this.estado.equals(EstadoPozo.PARADO)) {
-            estadoP = new Produccion();
-            this.estado = estadoP.get();
-        }
-        else
-            throw new Exception("El pozo está clausurado");
+        estadoP=this.estadoP.change(EstadoPozo.PRODUCCION);
+        estado = estadoP.get();
     }
 
     public boolean generarReporte() {
