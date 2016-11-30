@@ -11,6 +11,7 @@ import models.Usuario;
 import play.data.Form;
 import play.libs.Json;
 import play.mvc.Controller;
+import play.mvc.Http;
 import play.mvc.Result;
 import views.html.campos.*;
 
@@ -166,6 +167,21 @@ public class CampoController extends Controller{
     public Result getCamposRegion(String r) {
         List<Campo> list = Campo.FINDER.where().eq("region", r).findList();
         return ok(campos.render(list, r));
+    }
+
+    @Restrict({@Group({"jefeCampo"})})
+    public Result getCamposUsuario() {
+        String usuario = Http.Context.current().session().get("user");
+        System.out.println("Iniciado sesión: " + usuario);
+        Usuario u = Usuario.FINDER.where().eq("username", usuario).findUnique();
+        System.out.println(u.toString());
+        List<Campo> list = Campo.FINDER.where().eq("jefe_de_campo_id", u.getId()).findList();
+        Campo campo = Campo.FINDER.where().eq("jefe_de_campo_id", u.getId()).findUnique();
+        if(!list.isEmpty()) {
+            return ok(campos.render(list, campo.getRegion()));
+        } else {
+            return ok(sinCampo.render());
+        }
     }
 
     @Restrict({@Group({"jefeProduccion"}), @Group({"jefeCampo"})})
