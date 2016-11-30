@@ -4,9 +4,16 @@ import emums.*;
 
 public class Abierto implements Estado{
 
-    public void handle()
+    public Estado change(EstadoPozo estado)
     {
-
+        if(estado.equals(EstadoPozo.PRODUCCION))
+        {
+            return new Produccion();
+        }
+        else
+        {
+            return this;
+        }
     }
 
 

@@ -3,9 +3,9 @@ import emums.*;
 
 public class Clausurado implements Estado{
 
-    public void handle()
+    public Estado change(EstadoPozo estado)
     {
-
+        return this;
     }
 
     public EstadoPozo get()
