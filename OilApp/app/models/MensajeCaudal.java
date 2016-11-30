@@ -11,7 +11,7 @@ import java.util.Date;
  */
 @Entity
 @Table(name = "reportes_caudal")
-public class MensajeCaudal extends Model {
+public class MensajeCaudal extends Model implements Mensaje {
 
     public static Finder<Long,MensajeCaudal> FINDER = new Finder<>(MensajeCaudal.class);
 
@@ -46,6 +46,12 @@ public class MensajeCaudal extends Model {
         this.pozo = pozo;
         this.fechaEnvio = fechaEnvio;
         this.caudal = caudal;
+    }
+
+    public MensajeCaudal (Double caudal, Pozo pozo) {
+        super();
+        this.caudal = caudal;
+        this.pozo=pozo;
     }
 
     @PrePersist

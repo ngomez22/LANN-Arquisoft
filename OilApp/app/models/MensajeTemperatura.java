@@ -12,7 +12,7 @@ import java.util.Date;
 
 @Entity
 @Table(name = "reportes_Temperatura")
-public class MensajeTemperatura extends Model{
+public class MensajeTemperatura extends Model implements Mensaje{
 
     public static Model.Finder<Long,MensajeTemperatura> FINDER = new Model.Finder<>(MensajeTemperatura.class);
 
@@ -47,6 +47,12 @@ public class MensajeTemperatura extends Model{
         this.pozo = pozo;
         this.fechaEnvio = fechaEnvio;
         this.temperatura = temperatura;
+    }
+
+    public MensajeTemperatura (Double temperatura, Pozo pozo) {
+        super();
+        this.temperatura = temperatura;
+        this.pozo=pozo;
     }
 
     @PrePersist

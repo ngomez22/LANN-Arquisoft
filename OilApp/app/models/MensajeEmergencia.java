@@ -11,7 +11,7 @@ import java.util.Date;
  */
 @Entity
 @Table(name = "reportes_Emergencia")
-public class MensajeEmergencia extends Model {
+public class MensajeEmergencia extends Model implements Mensaje {
 
     public static Finder<Long,MensajeEmergencia> FINDER = new Finder<>(MensajeEmergencia.class);
 
@@ -46,6 +46,12 @@ public class MensajeEmergencia extends Model {
         this.pozo = pozo;
         this.fechaEnvio = fechaEnvio;
         this.emergencia= emergencia;
+    }
+
+    public MensajeEmergencia (String emergencia, Pozo pozo) {
+        super();
+        this.emergencia = emergencia;
+        this.pozo=pozo;
     }
 
     @PrePersist
