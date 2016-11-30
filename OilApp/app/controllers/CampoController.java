@@ -172,9 +172,7 @@ public class CampoController extends Controller{
     @Restrict({@Group({"jefeCampo"})})
     public Result getCamposUsuario() {
         String usuario = Http.Context.current().session().get("user");
-        System.out.println("Iniciado sesión: " + usuario);
         Usuario u = Usuario.FINDER.where().eq("username", usuario).findUnique();
-        System.out.println(u.toString());
         List<Campo> list = Campo.FINDER.where().eq("jefe_de_campo_id", u.getId()).findList();
         Campo campo = Campo.FINDER.where().eq("jefe_de_campo_id", u.getId()).findUnique();
         if(!list.isEmpty()) {
