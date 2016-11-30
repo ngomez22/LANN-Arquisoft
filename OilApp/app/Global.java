@@ -25,7 +25,7 @@ public class Global extends GlobalSettings
             }
         }
 
-        if (Usuario.FINDER.findRowCount() == 0)
+        if (Usuario.FINDER.where().eq("username", "ngomez").findUnique() == null)
         {
             Usuario user = new Usuario();
             user.setNombre("Nicolás");

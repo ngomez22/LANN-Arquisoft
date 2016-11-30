@@ -122,7 +122,11 @@ public class Usuario extends Model implements Subject {
     }
 
     public void setPassword(String password) {
-        this.password = password;
+        try {
+            this.password = HashHelper.createPassword(password);
+        } catch(Exception e) {
+            e.printStackTrace();
+        }
     }
 
     public String getNombre() {
@@ -203,6 +207,10 @@ public class Usuario extends Model implements Subject {
     }
 
     public static Usuario authenticate(String u, String p) {
-        return FINDER.where().eq("username", u).eq("password", p).findUnique();
+        Usuario user = FINDER.where().eq("username", u).findUnique();
+        if(user != null && HashHelper.checkPassword(p, user.getPassword())) {
+            return user;
+        }
+        return null;
     }
 }
