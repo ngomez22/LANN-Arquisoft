@@ -32,7 +32,6 @@ import static play.libs.Json.toJson;
 public class MensajeController extends Controller {
 
     // ----- Servicios para los mensajes de caudal
-
     public CompletionStage<Result> getMensajesCaudal() {
         MessageDispatcher jdbcDispatcher = AkkaDispatcher.jdbcDispatcher;
         return CompletableFuture.

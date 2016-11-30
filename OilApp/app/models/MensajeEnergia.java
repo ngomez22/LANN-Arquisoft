@@ -11,7 +11,7 @@ import java.util.Date;
  */
 @Entity
 @Table(name = "reportes_Energia")
-public class MensajeEnergia extends Model {
+public class MensajeEnergia extends Model implements Mensaje {
 
     public static Finder<Long,MensajeEnergia> FINDER = new Finder<>(MensajeEnergia.class);
 
@@ -45,7 +45,12 @@ public class MensajeEnergia extends Model {
         this.fechaEnvio = fechaEnvio;
         this.consumoEnergia = consumoEnergia;
         this.pozo=pozo;
+    }
 
+    public MensajeEnergia (Double consumoEnergia, Pozo pozo) {
+        super();
+        this.consumoEnergia = consumoEnergia;
+        this.pozo=pozo;
     }
 
     @PrePersist

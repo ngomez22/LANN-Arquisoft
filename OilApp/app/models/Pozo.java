@@ -55,7 +55,6 @@ public class Pozo extends Model{
     private Estado estadoP;
 
 
-
     public Pozo(Double latitud, Double longitud, List<MensajeEmergencia> sensorEmergencia, List<MensajeCaudal> sensorCaudal, List<MensajeEnergia> sensorEnergia, List<MensajeTemperatura> sensorTemperatura, EstadoPozo estado, Campo campo) {
         this.latitud = latitud;
         this.longitud = longitud;

@@ -8,6 +8,9 @@
 @(title: String)(content: Html)
 
 @import be.objectify.deadbolt.java.views.html.subjectPresentOr
+@import be.objectify.deadbolt.java.views.html.restrict
+@import be.objectify.deadbolt.java.utils.TemplateUtils.allOf
+@import be.objectify.deadbolt.java.utils.TemplateUtils.anyOf
 
 <!DOCTYPE html>
 <html ng-app="mainApp">
@@ -55,6 +58,11 @@
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav navbar-right">
                 <li>
+                @restrict(roles = anyOf(allOf("jefeCampo"))) {
+                    <a href="@routes.CampoController.getCamposUsuario">Mi campo</a>
+                }
+                </li>
+                <li>
                     <a href="/about">Acerca</a>
                 </li>
                 <li>
@@ -89,7 +97,7 @@
     <hr>
 
     <!-- Footer -->
-    <footer>
+    <footer class = "hidden-xs hidden-sm hidden-md">
         <div class="row">
             <div class="col-lg-12">
                 <p>Arquitecutra y diseño de Software 2016-2</p>
