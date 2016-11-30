@@ -3,6 +3,7 @@ import emums.*;
 
 public class Detenido implements Estado{
 
+    public Detenido() {}
     public Estado change(EstadoPozo estado)
     {
         if(estado.equals(EstadoPozo.ABIERTO))

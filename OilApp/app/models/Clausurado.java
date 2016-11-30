@@ -3,6 +3,7 @@ import emums.*;
 
 public class Clausurado implements Estado{
 
+    public Clausurado() {}
     public Estado change(EstadoPozo estado)
     {
         return this;

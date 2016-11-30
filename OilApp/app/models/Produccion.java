@@ -3,20 +3,24 @@ import emums.*;
 
 public class Produccion implements Estado{
 
+    public Produccion() {}
+
     public Estado change(EstadoPozo estado)
     {
+        System.out.println(estado);
         if(estado.equals(EstadoPozo.PARADO))
         {
-            return new Detenido();
+            Estado es =new Detenido();
+            System.out.println(es);
+            return es;
         }
         else if(estado.equals(EstadoPozo.CLAUSURADO))
         {
             return new Clausurado();
         }
-        else
-        {
+
             return this;
-        }
+
 
     }
 
